@@ -1,0 +1,182 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f5f0e9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d4af37;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b8941f;
+}
+
+@layer base {
+  :root {
+    --overlay: linear-gradient(180deg, rgba(0,0,0,0.40) 0%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.25) 100%);
+  }
+
+  body {
+    @apply bg-beige text-coal antialiased;
+  }
+}
+
+@layer components {
+  .btn-luxury {
+    @apply relative inline-flex items-center justify-center rounded-full px-8 py-4 font-semibold transition-all duration-300 ease-in-out overflow-hidden;
+    @apply bg-gradient-to-r from-[#C6A34F] to-[#E3C97F] text-[#1a1a1a];
+    @apply shadow-lg hover:shadow-xl hover:shadow-[#C6A34F]/30;
+    @apply hover:scale-105 active:scale-95;
+  }
+
+  .btn-luxury::before {
+    content: "";
+    @apply absolute inset-0 bg-gradient-to-r from-[#E3C97F] to-[#C6A34F] opacity-0 transition-opacity duration-300;
+    z-index: -1;
+  }
+
+  .btn-luxury:hover::before {
+    @apply opacity-100;
+  }
+  
+  .btn-ghost-luxury {
+    @apply relative inline-flex items-center justify-center rounded-full px-8 py-4 font-semibold transition-all duration-300 ease-in-out overflow-hidden;
+    @apply border-2 border-[#C6A34F] text-[#C6A34F];
+    @apply hover:text-white;
+    @apply hover:scale-105 active:scale-95;
+  }
+
+  .btn-ghost-luxury::after {
+    content: "";
+    @apply absolute left-0 top-0 w-0 h-full bg-[#C6A34F] transition-all duration-300;
+    z-index: -1;
+  }
+
+  .btn-ghost-luxury:hover::after {
+    @apply w-full;
+  }
+
+  .glass-luxury {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10;
+    @apply shadow-2xl;
+  }
+
+  .text-luxury-title {
+    @apply font-playfair text-5xl md:text-6xl lg:text-7xl font-light tracking-tight;
+  }
+
+  .text-luxury-subtitle {
+    @apply font-poppins text-xl md:text-2xl font-light tracking-wide;
+  }
+
+  .text-luxury-body {
+    @apply font-inter text-base md:text-lg font-light leading-relaxed;
+  }
+
+  /* Hover effect for cards */
+  .card-luxury {
+    @apply relative transition-all duration-300;
+  }
+
+  .card-luxury:hover {
+    @apply scale-[1.03] shadow-2xl;
+    box-shadow: 0 8px 24px rgba(198, 163, 79, 0.15);
+  }
+
+  /* Link hover with gold underline */
+  .link-luxury {
+    @apply relative transition-colors duration-300;
+  }
+
+  .link-luxury::after {
+    content: "";
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-[#C6A34F] transition-all duration-300;
+  }
+
+  .link-luxury:hover::after {
+    @apply w-full;
+  }
+}
+
+/* Animation fade-in globale */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+body {
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Animation glow doré */
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 0px #C6A34F;
+  }
+  50% {
+    box-shadow: 0 0 15px #C6A34F;
+  }
+}
+
+.animate-glow {
+  animation: glow 2.5s ease-in-out 1;
+}
+
+/* Animation logo fade-in + slide-down */
+@keyframes logoEnter {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.logo-enter {
+  animation: logoEnter 0.6s ease-out;
+}
+
+/* Animation bounce-in pour badges */
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.bounce-in {
+  animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+

@@ -1,0 +1,336 @@
+[
+  {
+    "id": "accessoires-deco-coussins-et-plaids-pari-dor",
+    "slug": "accessoires-deco-coussins-et-plaids-pari-dor",
+    "title": "Accessoires déco Coussins et plaids Pari Dor",
+    "name": "Accessoires déco Coussins et plaids Pari Dor",
+    "category": "Accessoires",
+    "price": 260,
+    "image": "/images/products/accessoires-deco-coussins-et-plaids-pari-dor_beige.jpg",
+    "images": [
+      "/images/products/accessoires-deco-coussins-et-plaids-pari-dor_beige.jpg",
+      "/images/products/accessoires-deco-coussins-et-plaids-pari-dor_doré.jpg",
+      "/images/products/accessoires-deco-coussins-et-plaids-pari-dor_noir.jpg"
+    ],
+    "colors": [
+      "beige",
+      "doré",
+      "noir"
+    ]
+  },
+  {
+    "id": "banquette-marocain-classique",
+    "slug": "banquette-marocain-classique",
+    "title": "Banquette Marocain Classique",
+    "name": "Banquette Marocain Classique",
+    "category": "Banquettes",
+    "price": 7400,
+    "image": "/images/products/banquette-marocain-classique_beige.jpg",
+    "images": [
+      "/images/products/banquette-marocain-classique_beige.jpg",
+      "/images/products/banquette-marocain-classique_bordeaux.jpg",
+      "/images/products/banquette-marocain-classique_bleu-royal.jpg"
+    ],
+    "colors": [
+      "beige",
+      "bordeaux",
+      "bleu-royal"
+    ]
+  },
+  {
+    "id": "banquette-luxe",
+    "slug": "banquette-luxe",
+    "title": "Banquette Sur Mesure",
+    "category": "Banquettes",
+    "price": 3800,
+    "image": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+    "excerpt": "Finitions soignées pour s'intégrer parfaitement à votre espace.",
+    "description": "Notre Banquette Sur Mesure s'adapte parfaitement à vos dimensions et à votre style. Finitions soignées et confort exceptionnel pour transformer votre espace.",
+    "options": {
+      "longueur": [
+        {
+          "value": "120cm",
+          "label": "120 cm",
+          "price": 0
+        },
+        {
+          "value": "150cm",
+          "label": "150 cm",
+          "price": 300
+        },
+        {
+          "value": "180cm",
+          "label": "180 cm",
+          "price": 600
+        },
+        {
+          "value": "200cm",
+          "label": "200 cm",
+          "price": 800
+        }
+      ],
+      "tissu": [
+        {
+          "value": "velours",
+          "label": "Velours",
+          "price": 0
+        },
+        {
+          "value": "cuir",
+          "label": "Cuir",
+          "price": 1000
+        },
+        {
+          "value": "lin",
+          "label": "Lin",
+          "price": 200
+        }
+      ]
+    }
+  },
+  {
+    "id": "canape-2-places-confort-elegance",
+    "slug": "canape-2-places-confort-elegance",
+    "title": "Canapé 2 places Confort Élégance",
+    "name": "Canapé 2 places Confort Élégance",
+    "category": "Canapés",
+    "price": 5200,
+    "image": "/images/products/canape-2-places-confort-elegance_beige.jpg",
+    "images": [
+      "/images/products/canape-2-places-confort-elegance_beige.jpg",
+      "/images/products/canape-2-places-confort-elegance_noir.jpg",
+      "/images/products/canape-2-places-confort-elegance_vert-olive.jpg"
+    ],
+    "colors": [
+      "beige",
+      "noir",
+      "vert-olive"
+    ]
+  },
+  {
+    "id": "canape-4-places-royal-lounge",
+    "slug": "canape-4-places-royal-lounge",
+    "title": "Canapé 4 places Royal Lounge",
+    "name": "Canapé 4 places Royal Lounge",
+    "category": "Canapés",
+    "price": 8900,
+    "image": "/images/products/canape-4-places-royal-lounge_beige.jpg",
+    "images": [
+      "/images/products/canape-4-places-royal-lounge_beige.jpg",
+      "/images/products/canape-4-places-royal-lounge_camel.jpg",
+      "/images/products/canape-4-places-royal-lounge_bleu-nuit.jpg"
+    ],
+    "colors": [
+      "beige",
+      "camel",
+      "bleu-nuit"
+    ]
+  },
+  {
+    "id": "canape-velours",
+    "slug": "canape-velours",
+    "title": "Canapé Velours Doré",
+    "category": "Canapés",
+    "price": 4500,
+    "image": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+    "excerpt": "Design contemporain et confort premium en velours doré.",
+    "description": "Le Canapé Velours Doré transforme votre salon en un espace de luxe. Son design contemporain et son confort premium en velours doré en font une pièce maîtresse.",
+    "options": {
+      "taille": [
+        {
+          "value": "2-places",
+          "label": "2 places",
+          "price": 0
+        },
+        {
+          "value": "3-places",
+          "label": "3 places",
+          "price": 800
+        },
+        {
+          "value": "4-places",
+          "label": "4 places",
+          "price": 1500
+        }
+      ],
+      "couleur": [
+        {
+          "value": "doré",
+          "label": "Doré",
+          "price": 0
+        },
+        {
+          "value": "champagne",
+          "label": "Champagne",
+          "price": 0
+        },
+        {
+          "value": "crème",
+          "label": "Crème",
+          "price": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "fauteuil-confort-chic",
+    "slug": "fauteuil-confort-chic",
+    "title": "Fauteuil Confort Chic",
+    "name": "Fauteuil Confort Chic",
+    "category": "Fauteuils",
+    "price": 2600,
+    "image": "/images/products/fauteuil-confort-chic_beige.jpg",
+    "images": [
+      "/images/products/fauteuil-confort-chic_beige.jpg",
+      "/images/products/fauteuil-confort-chic_bleu-nuit.jpg",
+      "/images/products/fauteuil-confort-chic_vert-olive.jpg"
+    ],
+    "colors": [
+      "beige",
+      "bleu-nuit",
+      "vert-olive"
+    ]
+  },
+  {
+    "id": "oreiller-soft-dream",
+    "slug": "oreiller-soft-dream",
+    "title": "Oreiller Soft Dream",
+    "name": "Oreiller Soft Dream",
+    "category": "Literie",
+    "price": 180,
+    "image": "/images/products/oreiller-soft-dream_blanc.jpg",
+    "images": [
+      "/images/products/oreiller-soft-dream_blanc.jpg"
+    ],
+    "colors": [
+      "blanc"
+    ]
+  },
+  {
+    "id": "sommier-premium-line",
+    "slug": "sommier-premium-line",
+    "title": "Sommier Premium Line",
+    "name": "Sommier Premium Line",
+    "category": "Literie",
+    "price": 1900,
+    "image": "/images/products/sommier-premium-line_beige.jpg",
+    "images": [
+      "/images/products/sommier-premium-line_beige.jpg",
+      "/images/products/sommier-premium-line_gris.jpg",
+      "/images/products/sommier-premium-line_noir.jpg"
+    ],
+    "colors": [
+      "beige",
+      "gris",
+      "noir"
+    ]
+  },
+  {
+    "id": "matelas-pari-dor",
+    "slug": "matelas-pari-dor",
+    "title": "Matelas Pari Dor",
+    "name": "Matelas Pari Dor",
+    "category": "Matelas",
+    "price": 2900,
+    "image": "/images/products/matelas-pari-dor_beige.jpg",
+    "images": [
+      "/images/products/matelas-pari-dor_beige.jpg",
+      "/images/products/matelas-pari-dor_gris.jpg",
+      "/images/products/matelas-pari-dor_blanc.jpg"
+    ],
+    "colors": [
+      "beige",
+      "gris",
+      "blanc"
+    ]
+  },
+  {
+    "id": "matelas-royal",
+    "slug": "matelas-royal",
+    "title": "Matelas Royal",
+    "category": "Matelas",
+    "price": 2500,
+    "image": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+    "excerpt": "Mousse à mémoire de forme haute densité, confort réparateur.",
+    "description": "Le Matelas Royal allie technologie de pointe et confort exceptionnel. Sa mousse à mémoire de forme haute densité s'adapte parfaitement à votre morphologie pour un sommeil réparateur.",
+    "options": {
+      "taille": [
+        {
+          "value": "90x190",
+          "label": "90x190 cm",
+          "price": 0
+        },
+        {
+          "value": "140x190",
+          "label": "140x190 cm",
+          "price": 500
+        },
+        {
+          "value": "160x200",
+          "label": "160x200 cm",
+          "price": 800
+        },
+        {
+          "value": "180x200",
+          "label": "180x200 cm",
+          "price": 1200
+        }
+      ],
+      "fermeté": [
+        {
+          "value": "souple",
+          "label": "Souple",
+          "price": 0
+        },
+        {
+          "value": "equilibre",
+          "label": "Équilibré",
+          "price": 0
+        },
+        {
+          "value": "ferme",
+          "label": "Ferme",
+          "price": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "pouf-repose-pied-pari-lounge",
+    "slug": "pouf-repose-pied-pari-lounge",
+    "title": "Pouf / Repose-pied Pari Lounge",
+    "name": "Pouf / Repose-pied Pari Lounge",
+    "category": "Poufs",
+    "price": 950,
+    "image": "/images/products/pouf-repose-pied-pari-lounge_beige.jpg",
+    "images": [
+      "/images/products/pouf-repose-pied-pari-lounge_beige.jpg",
+      "/images/products/pouf-repose-pied-pari-lounge_marron.jpg",
+      "/images/products/pouf-repose-pied-pari-lounge_gris.jpg"
+    ],
+    "colors": [
+      "beige",
+      "marron",
+      "gris"
+    ]
+  },
+  {
+    "id": "tete-de-lit-elegance-royale",
+    "slug": "tete-de-lit-elegance-royale",
+    "title": "Tête de lit Élégance Royale",
+    "name": "Tête de lit Élégance Royale",
+    "category": "Têtes de lit",
+    "price": 2100,
+    "image": "/images/products/tete-de-lit-elegance-royale_beige.jpg",
+    "images": [
+      "/images/products/tete-de-lit-elegance-royale_beige.jpg",
+      "/images/products/tete-de-lit-elegance-royale_taupe.jpg",
+      "/images/products/tete-de-lit-elegance-royale_gris-fonce.jpg"
+    ],
+    "colors": [
+      "beige",
+      "taupe",
+      "gris-fonce"
+    ]
+  }
+]
