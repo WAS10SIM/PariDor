@@ -3,8 +3,6 @@ import Stripe from "stripe";
 import { promises as fs } from "fs";
 import path from "path";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: "2024-12-18.acacia" });
-
 export async function POST(req) {
   try {
     console.log('📥 Checkout API: reçu requête POST');
@@ -20,6 +18,12 @@ export async function POST(req) {
       console.error('❌ STRIPE_SECRET_KEY manquante');
       return NextResponse.json({ error: "Configuration Stripe manquante" }, { status: 500 });
     }
+
+    // Initialiser Stripe uniquement si la clé est disponible
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+  apiVersion: "2025-09-30",
+});
+
 
     const host = req.headers.get("host");
     const protocol = host?.includes("localhost") ? "http" : "https";

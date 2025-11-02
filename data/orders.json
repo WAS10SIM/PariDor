@@ -8,7 +8,7 @@
     "customerAddress": "Hhhh",
     "totalAmount": 7120,
     "paymentMethod": "carte",
-    "status": "payée",
+    "status": "en attente",
     "date": "2025-10-30T22:15:44.549Z",
     "articles": [
       {
