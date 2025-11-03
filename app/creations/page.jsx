@@ -56,12 +56,21 @@ export default function CreationsPage() {
                 <div className="relative overflow-hidden rounded-3xl bg-white shadow-lg transition-all duration-500 hover:shadow-2xl hover:shadow-[#C6A34F]/20 h-full flex flex-col">
                   {/* Image Container */}
                   <div className="relative h-80 overflow-hidden flex-shrink-0">
-                    <motion.div key={displayImage} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }} className="absolute inset-0">
+                    <motion.div 
+                      key={displayImage} 
+                      initial={{ opacity: 0, scale: 1.05 }} 
+                      animate={{ opacity: 1, scale: 1 }} 
+                      exit={{ opacity: 0, scale: 0.98 }}
+                      transition={{ duration: 0.5, ease: "easeInOut" }} 
+                      className="absolute inset-0"
+                    >
                       <Image
                         src={displayImage}
                         alt={product.title}
                         fill
                         className="object-cover transition-transform duration-700 group-hover:scale-110"
+                        priority
+                        sizes="(max-width: 768px) 100vw, 33vw"
                       />
                     </motion.div>
                     
@@ -90,7 +99,7 @@ export default function CreationsPage() {
                     </h3>
                     
                     <p className="mb-4 text-sm sm:text-base font-light leading-relaxed text-coal/60 min-h-[3rem] line-clamp-2">
-                      {product.excerpt}
+                      {product.excerpt || "Confectionné avec soin pour allier élégance et confort incomparable."}
                     </p>
                     
                     <div className="mb-5 text-lg sm:text-xl font-medium text-[#C6A34F]">
@@ -100,12 +109,18 @@ export default function CreationsPage() {
                     {product.variants && product.variants.length > 0 && (
                       <div className="mb-5 flex flex-wrap gap-2">
                         {product.variants.map((c) => (
-                          <button
+                          <motion.button
                             key={c.key}
                             onClick={() => setSelectedBySlug((s) => ({ ...s, [product.slug || product.id]: c }))}
                             aria-label={c.name}
                             title={c.name}
-                            className={`h-7 w-7 rounded-full border-2 transition-all ${
+                            whileHover={{ scale: 1.15 }}
+                            whileTap={{ scale: 0.95 }}
+                            animate={{
+                              scale: (variant?.key || '') === c.key ? 1.1 : 1,
+                            }}
+                            transition={{ duration: 0.2 }}
+                            className={`h-8 w-8 rounded-full border-2 transition-all ${
                               (variant?.key || '') === c.key ? 'border-[#C6A34F] ring-2 ring-[#C6A34F]/30' : 'border-white'
                             }`}
                             style={{ backgroundColor: c.code }}

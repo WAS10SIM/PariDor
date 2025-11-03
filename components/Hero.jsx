@@ -26,21 +26,24 @@ function Hero() {
           priority
         />
         {/* Gradient Overlay - Plus foncé pour meilleur contraste */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/30" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/50" />
       </motion.div>
 
       {/* Content */}
-      <div className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto">
+      <div className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto pt-24 md:pt-32">
+        {/* Dark overlay behind text for better readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-transparent blur-2xl -z-10" />
+        
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="mb-6 sm:mb-8"
+          className="mb-6 sm:mb-8 relative"
         >
-          <h1 className="text-4xl sm:text-5xl md:text-8xl font-playfair font-bold text-white mb-3 sm:mb-4 drop-shadow-2xl tracking-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-playfair font-bold text-white mb-2 sm:mb-4 drop-shadow-2xl tracking-tight">
             PARI DOR
           </h1>
-          <p className="text-base sm:text-lg md:text-2xl text-white/90 font-light drop-shadow-lg tracking-wide">
+          <p className="text-sm sm:text-base md:text-lg lg:text-2xl text-white/90 font-light drop-shadow-lg tracking-wide">
             L'art du confort sur mesure
           </p>
         </motion.div>
@@ -49,9 +52,9 @@ function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="text-[15px] sm:text-base md:text-xl text-white/90 mb-8 sm:mb-12 max-w-2xl mx-auto leading-relaxed drop-shadow-md px-2"
+          className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 mb-8 sm:mb-12 max-w-2xl mx-auto leading-relaxed drop-shadow-md px-2"
         >
-          Découvrez l'alliance parfaite entre <span className="text-[#C6A34F] font-semibold">design</span>, <span className="text-[#C6A34F] font-semibold">artisanat marocain</span> et <span className="text-[#C6A34F] font-semibold">innovation</span>.
+          Découvrez l'alliance parfaite entre <span className="text-[#C7A451] font-semibold">design</span>, <span className="text-[#C7A451] font-semibold">artisanat marocain</span> et <span className="text-[#C7A451] font-semibold">innovation</span>.
           <br className="hidden sm:block" />
           Chez Pari Dor, chaque création reflète votre style et sublime votre espace.
         </motion.p>
@@ -60,13 +63,13 @@ function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-2"
+          className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center px-4"
         >
           <Link
             href="/creations"
-            className="group relative inline-flex items-center justify-center w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-[#C6A34F] to-[#E3C97F] text-[#1a1a1a] font-semibold rounded-full shadow-lg transition-all duration-300 hover:shadow-[0_0_20px_#C6A34F] hover:scale-105"
+            className="group relative inline-flex items-center justify-center w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-[#C7A451] to-[#D4B975] text-[#111] font-semibold rounded-full shadow-xl transition-all duration-300 hover:shadow-[0_0_30px_rgba(199,164,81,0.6)] hover:scale-105 text-sm sm:text-base"
           >
-            <span className="text-sm sm:text-base">Découvrir nos créations</span>
+            <span>Découvrir nos créations</span>
             <motion.span
               className="ml-2"
               animate={{ x: [0, 5, 0] }}
@@ -78,9 +81,9 @@ function Hero() {
 
           <Link
             href="/produits"
-            className="group relative inline-flex items-center justify-center w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 border-2 border-white text-white font-semibold rounded-full transition-all duration-300 hover:bg-white/10 hover:border-[#C6A34F] hover:text-white hover:shadow-[0_0_20px_rgba(198,163,79,0.5)] hover:scale-105 backdrop-blur-sm"
+            className="group relative inline-flex items-center justify-center w-full sm:w-auto px-8 py-4 border-2 border-white/90 text-white font-semibold rounded-full transition-all duration-300 hover:bg-white/10 hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:scale-105 backdrop-blur-sm text-sm sm:text-base"
           >
-            <span className="text-sm sm:text-base">Catalogue sur mesure</span>
+            <span>Catalogue sur mesure</span>
           </Link>
         </motion.div>
       </div>

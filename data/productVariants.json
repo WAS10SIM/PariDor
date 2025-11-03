@@ -54,9 +54,9 @@
     "colors": [
       { "name": "Beige", "key": "beige", "code": "#d9c7a6", "price": 2400, "image": "/assets/fauteuil-confort-chic_beige.png" },
       { "name": "Bleu royal", "key": "bleu-royal", "code": "#274b9f", "price": 2550, "image": "/assets/fauteuil-confort-chic_bleu-royal.png" },
-      { "name": "Doré doux", "key": "dore-doux", "code": "#d4af37", "price": 2580, "image": "/assets/fauteuil-confort-chic_doré-doux.png" },
-      { "name": "Gris foncé", "key": "gris-fonce", "code": "#595959", "price": 2500, "image": "/assets/fauteuil-confort-chic_gris-foncé.png" },
-      { "name": "Vert émeraude", "key": "vert-emeraude", "code": "#0f766e", "price": 2560, "image": "/assets/fauteuil-confort-chic_vert-émeraude.png" }
+      { "name": "Doré doux", "key": "dore-doux", "code": "#d4af37", "price": 2580, "image": "/assets/fauteuil-confort-chic_dore-doux.png" },
+      { "name": "Gris foncé", "key": "gris-fonce", "code": "#595959", "price": 2500, "image": "/assets/fauteuil-confort-chic_gris-fonce.png" },
+      { "name": "Vert émeraude", "key": "vert-emeraude", "code": "#0f766e", "price": 2560, "image": "/assets/fauteuil-confort-chic_vert-emeraude.png" }
     ]
   },
   {
@@ -64,9 +64,9 @@
     "basePrice": 800,
     "colors": [
       { "name": "Beige", "key": "beige", "code": "#d9c7a6", "price": 800, "image": "/assets/pouf-repose-pied-pari-lounge_beige.png" },
-      { "name": "Doré clair", "key": "dore-clair", "code": "#e5c765", "price": 830, "image": "/assets/pouf-repose-pied-pari-lounge_doré-clair.png" },
+      { "name": "Doré clair", "key": "dore-clair", "code": "#e5c765", "price": 830, "image": "/assets/pouf-repose-pied-pari-lounge_dore-clair.png" },
       { "name": "Gris", "key": "gris", "code": "#9d9d9d", "price": 820, "image": "/assets/pouf-repose-pied-pari-lounge_gris.png" },
-      { "name": "Marron café", "key": "marron-cafe", "code": "#6b4b3e", "price": 840, "image": "/assets/pouf-repose-pied-pari-lounge_marron-café.png" },
+      { "name": "Marron café", "key": "marron-cafe", "code": "#6b4b3e", "price": 840, "image": "/assets/pouf-repose-pied-pari-lounge_marron-cafe.png" },
       { "name": "Vert olive", "key": "vert-olive", "code": "#7c8752", "price": 820, "image": "/assets/pouf-repose-pied-pari-lounge_vert-olive.png" }
     ]
   },
@@ -85,8 +85,8 @@
     "basePrice": 150,
     "colors": [
       { "name": "Blanc", "key": "blanc", "code": "#ffffff", "price": 150, "image": "/assets/oreiller-soft-dream_blanc.png" },
-      { "name": "Blanc cassé", "key": "blanc-casse", "code": "#f1efe8", "price": 155, "image": "/assets/oreiller-soft-dream_blanc-cassé.png" },
-      { "name": "Doré pâle", "key": "dore-pale", "code": "#e4d09a", "price": 160, "image": "/assets/oreiller-soft-dream_doré-pale.png" },
+      { "name": "Blanc cassé", "key": "blanc-casse", "code": "#f1efe8", "price": 155, "image": "/assets/oreiller-soft-dream_blanc-casse.png" },
+      { "name": "Doré pâle", "key": "dore-pale", "code": "#e4d09a", "price": 160, "image": "/assets/oreiller-soft-dream_dore-pale.png" },
       { "name": "Gris clair", "key": "gris-clair", "code": "#cfcfcf", "price": 155, "image": "/assets/oreiller-soft-dream_gris-clair.png" }
     ]
   },
@@ -96,7 +96,7 @@
     "colors": [
       { "name": "Beige", "key": "beige", "code": "#d9c7a6", "price": 220, "image": "/assets/accessoires-deco-coussins-et-plaids-pari-dor_beige.png" },
       { "name": "Bleu marine", "key": "bleu-marine", "code": "#1c3a6c", "price": 235, "image": "/assets/accessoires-deco-coussins-et-plaids-pari-dor_bleu-marine.png" },
-      { "name": "Doré", "key": "dore", "code": "#cba74a", "price": 240, "image": "/assets/accessoires-deco-coussins-et-plaids-pari-dor_doré.png" },
+      { "name": "Doré", "key": "dore", "code": "#cba74a", "price": 240, "image": "/assets/accessoires-deco-coussins-et-plaids-pari-dor_dore.png" },
       { "name": "Vert", "key": "vert", "code": "#7c8752", "price": 225, "image": "/assets/accessoires-deco-coussins-et-plaids-pari-dor_vert.png" }
     ]
   }

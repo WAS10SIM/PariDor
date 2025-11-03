@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import Link from "next/link";
 
 export default function OurStory() {
   const ref = useRef(null);
@@ -71,48 +72,31 @@ export default function OurStory() {
 
             <motion.p
               variants={itemVariants}
-              className="font-inter text-[15px] sm:text-base md:text-lg lg:text-xl text-[#1a1a1a]/80 leading-relaxed"
+              className="font-inter text-base sm:text-lg md:text-xl text-[#1a1a1a]/80 leading-relaxed"
             >
-              Depuis plus de <span className="font-semibold text-[#C6A34F]">deux décennies</span>, Pari Dor façonne l'art du confort sur mesure à travers des créations de{" "}
-              <span className="font-medium text-[#C6A34F]">matelas</span>,{" "}
-              <span className="font-medium text-[#C6A34F]">canapés</span>,{" "}
-              <span className="font-medium text-[#C6A34F]">banquettes</span> et{" "}
-              <span className="font-medium text-[#C6A34F]">têtes de lit</span> de haute qualité.
+              Depuis plus de <span className="font-semibold text-[#C7A451]">10 ans</span>, Pari Dor façonne l'art du confort sur mesure à travers des créations de{" "}
+              <span className="font-medium text-[#C7A451]">matelas</span>,{" "}
+              <span className="font-medium text-[#C7A451]">canapés</span>,{" "}
+              <span className="font-medium text-[#C7A451]">banquettes</span> et{" "}
+              <span className="font-medium text-[#C7A451]">têtes de lit</span> de haute qualité, alliant tradition artisanale marocaine et innovation moderne.
             </motion.p>
 
             <motion.p
               variants={itemVariants}
-              className="font-inter text-lg md:text-xl text-[#1a1a1a]/80 leading-relaxed"
+              className="font-inter text-base sm:text-lg md:text-xl text-[#1a1a1a]/90 leading-relaxed font-medium italic"
             >
-              Située au cœur du <span className="font-semibold text-[#C6A34F]">Maroc</span>, notre entreprise combine{" "}
-              <span className="font-medium text-[#C6A34F]">tradition artisanale marocaine</span> et{" "}
-              <span className="font-medium text-[#C6A34F]">innovation moderne</span> pour offrir des produits uniques alliant élégance, durabilité et bien-être.
+              <span className="inline-block w-1 h-6 bg-[#C7A451] mr-4 align-middle"></span>
+              Nous croyons que chaque espace mérite une touche d'<span className="text-[#C7A451] font-semibold not-italic">élégance personnalisée</span>, adaptée au style et au confort de chacun.
             </motion.p>
 
-            <motion.p
-              variants={itemVariants}
-              className="font-inter text-lg md:text-xl text-[#1a1a1a]/80 leading-relaxed"
-            >
-              Chaque pièce que nous réalisons est conçue à partir de{" "}
-              <span className="font-semibold text-[#C6A34F]">mousses premium</span>,{" "}
-              <span className="font-semibold text-[#C6A34F]">tissus haut de gamme</span>, et d'un{" "}
-              <span className="font-semibold text-[#C6A34F]">savoir-faire artisanal</span> qui reflète la passion de nos maîtres artisans.
-            </motion.p>
-
-            <motion.p
-              variants={itemVariants}
-              className="font-inter text-lg md:text-xl text-[#1a1a1a]/90 leading-relaxed font-medium italic"
-            >
-              Nous croyons que chaque espace mérite une touche d'<span className="text-[#C6A34F] font-semibold not-italic">élégance personnalisée</span>, adaptée au style et au confort de chacun.
-            </motion.p>
-
-            <motion.div variants={itemVariants} className="pt-4">
-              <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#C6A34F] to-[#E3C97F] rounded-full shadow-lg">
-                <span className="text-[#1a1a1a] font-bold text-2xl">10+</span>
-                <span className="text-[#1a1a1a]/80 text-sm font-medium">
-                  années d'excellence
-                </span>
-              </div>
+            <motion.div variants={itemVariants} className="pt-6">
+              <Link
+                href="/notre-histoire"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#C7A451] to-[#D4B975] text-[#111] font-semibold rounded-full shadow-xl transition-all duration-300 hover:shadow-[0_0_30px_rgba(199,164,81,0.5)] hover:scale-105"
+              >
+                <span>Découvrir notre histoire</span>
+                <span>→</span>
+              </Link>
             </motion.div>
           </div>
 

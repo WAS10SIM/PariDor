@@ -313,3 +313,5 @@ Tous les logs sont visibles dans la console du serveur :
 **Projet :** Pari D'Or - E-commerce Luxe Marocain
 
 
+
+

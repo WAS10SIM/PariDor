@@ -71,18 +71,27 @@ export default function ProduitsPage() {
               className="rounded-3xl bg-white p-6 shadow-lg"
             >
               <div className="relative h-64 w-full overflow-hidden rounded-2xl mb-4">
-                <motion.div key={displayImage} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }} className="absolute inset-0">
+                <motion.div 
+                  key={displayImage} 
+                  initial={{ opacity: 0, scale: 1.05 }} 
+                  animate={{ opacity: 1, scale: 1 }} 
+                  exit={{ opacity: 0, scale: 0.98 }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }} 
+                  className="absolute inset-0"
+                >
                   <Image
                     src={displayImage}
                     alt={product.title}
                     fill
                     className="object-cover"
+                    priority
+                    sizes="(max-width: 768px) 100vw, 33vw"
                   />
                 </motion.div>
               </div>
 
               <h3 className="mb-2 text-2xl font-light text-coal">{product.title}</h3>
-              <p className="mb-4 text-sm text-coal/60">{product.excerpt}</p>
+              <p className="mb-4 text-sm text-coal/60">{product.excerpt || "Confectionné avec soin pour allier élégance et confort incomparable."}</p>
 
               <div className="mb-6 flex items-center justify-between">
                 <span className="text-2xl font-bold text-gold">{displayPrice} MAD</span>
@@ -91,11 +100,17 @@ export default function ProduitsPage() {
               {product.variants && (
                 <div className="mb-5 flex flex-wrap gap-2">
                   {product.variants.map((c) => (
-                    <button
+                    <motion.button
                       key={c.key}
                       onClick={() => setSelectedBySlug((s) => ({ ...s, [product.slug || product.id]: c }))}
                       aria-label={c.name}
                       title={c.name}
+                      whileHover={{ scale: 1.15 }}
+                      whileTap={{ scale: 0.95 }}
+                      animate={{
+                        scale: (variant?.key || '') === c.key ? 1.1 : 1,
+                      }}
+                      transition={{ duration: 0.2 }}
                       className={`h-8 w-8 rounded-full border-2 transition-all ${
                         (variant?.key || '') === c.key ? 'border-gold ring-2 ring-gold/30' : 'border-white'
                       }`}

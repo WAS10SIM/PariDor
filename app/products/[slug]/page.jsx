@@ -63,7 +63,14 @@ export default function ProductPage({ params }) {
     <div className="min-h-screen bg-bone">
       {/* Hero Product */}
       <section className="relative h-[60vh] overflow-hidden">
-        <motion.div key={displayImage} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }} className="absolute inset-0">
+        <motion.div 
+          key={displayImage} 
+          initial={{ opacity: 0, scale: 1.05 }} 
+          animate={{ opacity: 1, scale: 1 }} 
+          exit={{ opacity: 0, scale: 0.98 }}
+          transition={{ duration: 0.6, ease: "easeInOut" }} 
+          className="absolute inset-0"
+        >
           <Image
             src={displayImage}
             alt={product.title}
@@ -107,12 +114,21 @@ export default function ProductPage({ params }) {
               transition={{ duration: 0.8 }}
               className="relative h-96 overflow-hidden rounded-3xl"
             >
-              <motion.div key={displayImage} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }} className="absolute inset-0">
+              <motion.div 
+                key={displayImage} 
+                initial={{ opacity: 0, scale: 1.05 }} 
+                animate={{ opacity: 1, scale: 1 }} 
+                exit={{ opacity: 0, scale: 0.98 }}
+                transition={{ duration: 0.6, ease: "easeInOut" }} 
+                className="absolute inset-0"
+              >
                 <Image
                   src={displayImage}
                   alt={product.title}
                   fill
                   className="object-cover"
+                  priority
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </motion.div>
             </motion.div>
@@ -137,9 +153,15 @@ export default function ProductPage({ params }) {
                   </label>
                   <div className="flex flex-wrap gap-3">
                     {product.variants.map((v) => (
-                      <button
+                      <motion.button
                         key={v.key}
                         onClick={() => setSelectedVariant(v)}
+                        whileHover={{ scale: 1.15 }}
+                        whileTap={{ scale: 0.95 }}
+                        animate={{
+                          scale: selectedVariant?.key === v.key ? 1.1 : 1,
+                        }}
+                        transition={{ duration: 0.2 }}
                         className={`h-12 w-12 rounded-full border-2 transition-all ${
                           selectedVariant?.key === v.key ? 'border-gold ring-2 ring-gold/30' : 'border-coal/20'
                         }`}

@@ -47,12 +47,8 @@ export default function CheckoutPage() {
 
   const handleWhatsAppOrder = () => {
     setIsWhatsAppLoading(true);
-    console.log('🔍 Début du processus de commande WhatsApp');
-    console.log('📦 Items dans le panier:', items);
-    console.log('👤 Données client:', customer);
 
     if (!customer.fullName || !customer.phone) {
-      console.error('❌ Nom complet et téléphone requis pour WhatsApp');
       toast.error("Veuillez remplir au minimum le nom complet et le téléphone pour la commande WhatsApp.");
       setIsWhatsAppLoading(false);
       return;
@@ -84,23 +80,15 @@ Merci de me contacter pour finaliser la commande.`;
     try {
       setIsStripeLoading(true);
       
-      console.log('🔍 Début du processus de paiement Stripe');
-      console.log('📦 Items dans le panier:', items);
-      console.log('👤 Données client:', customer);
-      
       // Validation minimale client
       if (!customer.fullName || !customer.email || !customer.phone || !customer.address || !customer.city) {
-        console.error('❌ Informations client incomplètes');
         toast.error("Veuillez compléter vos informations.");
         return;
       }
       if (!items || items.length === 0) {
-        console.error('❌ Panier vide');
         toast.error("Votre panier est vide.");
         return;
       }
-
-      console.log('✅ Validation client OK, appel API...');
 
       const res = await fetch("/api/checkout", {
         method: "POST",
@@ -116,26 +104,19 @@ Merci de me contacter pour finaliser la commande.`;
         }),
       });
       
-      console.log('📡 Réponse API:', res.status, res.statusText);
-      
       if (!res.ok) {
         const error = await res.json();
-        console.error('❌ Erreur API:', error);
         throw new Error(error.error || `HTTP ${res.status}`);
       }
       
       const data = await res.json();
-      console.log('✅ Données reçues:', data);
       
       if (data?.url) {
-        console.log('🔗 Redirection vers Stripe:', data.url);
         window.location.assign(data.url);
       } else {
-        console.error('❌ URL de paiement manquante');
         toast.error("Impossible d'ouvrir le paiement.");
       }
     } catch (e) {
-      console.error("STRIPE CHECKOUT ERROR:", e);
       toast.error(`Erreur paiement: ${e.message}. Réessayez.`);
     } finally {
       setIsStripeLoading(false);
@@ -163,7 +144,7 @@ Merci de me contacter pour finaliser la commande.`;
             className="rounded-3xl bg-white p-8 shadow-lg"
           >
             <h2 className="mb-6 text-3xl font-light text-coal">Vos coordonnées</h2>
-            <form className="space-y-6">
+            <form className="space-y-8">
               <div>
                 <label htmlFor="fullName" className="block text-sm font-medium text-coal/70 mb-2">Nom complet*</label>
                 <input
@@ -173,6 +154,7 @@ Merci de me contacter pour finaliser la commande.`;
                   value={customer.fullName}
                   onChange={handleInputChange}
                   required
+                  autoComplete="name"
                   className="w-full rounded-lg border border-coal/20 bg-bone px-4 py-3 text-coal focus:border-gold focus:ring-1 focus:ring-gold outline-none transition-colors"
                   aria-label="Nom complet"
                 />
@@ -186,6 +168,7 @@ Merci de me contacter pour finaliser la commande.`;
                   value={customer.email}
                   onChange={handleInputChange}
                   required
+                  autoComplete="email"
                   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                   className="w-full rounded-lg border border-coal/20 bg-bone px-4 py-3 text-coal focus:border-gold focus:ring-1 focus:ring-gold outline-none transition-colors"
                   aria-label="Email"
@@ -197,6 +180,7 @@ Merci de me contacter pour finaliser la commande.`;
                   type="tel"
                   id="phone"
                   name="phone"
+                  autoComplete="tel"
                   value={customer.phone}
                   onChange={handleInputChange}
                   required
@@ -212,6 +196,7 @@ Merci de me contacter pour finaliser la commande.`;
                   name="address"
                   value={customer.address}
                   onChange={handleInputChange}
+                  autoComplete="street-address"
                   className="w-full rounded-lg border border-coal/20 bg-bone px-4 py-3 text-coal focus:border-gold focus:ring-1 focus:ring-gold outline-none transition-colors"
                   aria-label="Adresse de livraison"
                 />
@@ -224,6 +209,7 @@ Merci de me contacter pour finaliser la commande.`;
                   name="city"
                   value={customer.city}
                   onChange={handleInputChange}
+                  autoComplete="address-level2"
                   className="w-full rounded-lg border border-coal/20 bg-bone px-4 py-3 text-coal focus:border-gold focus:ring-1 focus:ring-gold outline-none transition-colors"
                   aria-label="Ville"
                 />
