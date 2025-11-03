@@ -234,9 +234,9 @@ Merci de me contacter pour finaliser la commande.`;
                 const itemKey = `${item.id}_${optionsStr}`;
                 
                 return (
-                  <div key={itemKey} className="flex items-center gap-4">
+                  <div key={itemKey} className="flex items-start sm:items-center gap-3 sm:gap-4">
                     {item.image ? (
-                      <div className="relative h-16 w-16 rounded-md overflow-hidden flex-shrink-0">
+                      <div className="relative h-14 w-14 sm:h-16 sm:w-16 rounded-md overflow-hidden flex-shrink-0">
                         <img 
                           src={item.image} 
                           alt={item.name}
@@ -244,25 +244,41 @@ Merci de me contacter pour finaliser la commande.`;
                         />
                       </div>
                     ) : (
-                      <div className="h-16 w-16 rounded-lg bg-bone flex items-center justify-center">
-                        <span className="text-2xl">🛋️</span>
+                      <div className="h-14 w-14 sm:h-16 sm:w-16 rounded-lg bg-bone flex items-center justify-center flex-shrink-0">
+                        <span className="text-xl sm:text-2xl">🛋️</span>
                       </div>
                     )}
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-medium text-coal truncate">{item.name}</h3>
-                      <p className="text-sm text-coal/60">Quantité: {item.quantity}</p>
+                    <div className="flex-1 min-w-0 pr-2">
+                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 sm:gap-4 mb-1">
+                        <h3 className="text-sm sm:text-base font-medium text-coal truncate flex-1">{item.name}</h3>
+                        <div className="text-base sm:text-lg font-semibold text-[#C7A451] flex-shrink-0">
+                          {(item.price * item.quantity).toLocaleString("fr-MA")} MAD
+                        </div>
+                      </div>
+                      <p className="text-sm text-coal/60 mb-1">Quantité: {item.quantity}</p>
                       {item.options && Object.entries(item.options).length > 0 && (
-                        <div className="text-xs text-coal/50 mt-1">
-                          {Object.entries(item.options).map(([key, value]) => (
-                            <span key={key} className="mr-2">
-                              {key}: {value}
-                            </span>
-                          ))}
+                        <div className="flex items-center gap-2 flex-wrap mt-1">
+                          {item.options.color && (
+                            <div className="flex items-center gap-1.5">
+                              <span className="text-xs text-coal/60">Couleur:</span>
+                              <div 
+                                className="h-4 w-4 rounded-full border border-white shadow-sm" 
+                                style={{ backgroundColor: item.options.colorCode || item.options.colorKey || item.options.color }}
+                                title={item.options.color}
+                                aria-label={`Couleur ${item.options.color}`}
+                              />
+                              <span className="text-xs text-coal/70 font-medium">{item.options.color}</span>
+                            </div>
+                          )}
+                          {Object.entries(item.options)
+                            .filter(([key]) => key !== 'color' && key !== 'colorCode' && key !== 'colorKey')
+                            .map(([key, value]) => (
+                              <span key={key} className="text-xs text-coal/60">
+                                {key}: {value}
+                              </span>
+                            ))}
                         </div>
                       )}
-                    </div>
-                    <div className="text-lg font-medium text-gold flex-shrink-0">
-                      {(item.price * item.quantity).toLocaleString("fr-MA")} MAD
                     </div>
                   </div>
                 );
@@ -270,18 +286,18 @@ Merci de me contacter pour finaliser la commande.`;
             </div>
             
             {/* Totaux */}
-            <div className="border-t border-coal/10 pt-6 mb-8">
+            <div className="border-t border-[#C7A451]/30 pt-6 mb-8">
               <div className="flex justify-between text-lg text-coal/80 mb-2">
                 <span>Sous-total:</span>
-                <span>{formatMAD(subtotal)}</span>
+                <span className="pr-2">{formatMAD(subtotal)}</span>
               </div>
               <div className="flex justify-between text-lg text-coal/80 mb-4">
                 <span>Frais de livraison:</span>
-                <span>Gratuit</span>
+                <span className="pr-2">Gratuit</span>
               </div>
-              <div className="flex justify-between text-2xl font-bold text-gold">
-                <span>Total:</span>
-                <span>{formatMAD(subtotal)}</span>
+              <div className="flex justify-between items-center pt-4 border-t border-coal/10">
+                <span className="text-lg sm:text-xl font-semibold text-coal">Total:</span>
+                <span className="text-2xl sm:text-3xl font-bold text-[#C7A451] pr-2">{formatMAD(subtotal)}</span>
               </div>
             </div>
             

@@ -34,7 +34,7 @@ export default function MobileDrawer({ isOpen, onClose, active }) {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="fixed right-0 top-0 bottom-0 z-[70] w-[85%] max-w-sm bg-[#FAF8F5] shadow-2xl md:hidden overflow-y-auto"
+            className="fixed right-0 top-0 bottom-0 z-[70] w-[85%] max-w-sm bg-[#FAF7F3] shadow-2xl md:hidden overflow-y-auto"
           >
             {/* Header */}
             <div className="flex items-center justify-between p-6 border-b border-[#C6A34F]/20">

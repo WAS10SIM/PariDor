@@ -66,9 +66,9 @@ export default function PanierPage() {
                   initial={{ opacity: 0, x: -40 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="flex items-center gap-6 rounded-3xl bg-white p-6 shadow-lg"
+                  className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 rounded-3xl bg-white p-4 sm:p-6 shadow-lg"
                 >
-                  <div className="relative h-24 w-24 overflow-hidden rounded-2xl">
+                  <div className="relative h-20 w-20 sm:h-24 sm:w-24 overflow-hidden rounded-2xl flex-shrink-0">
                     <Image
                       src={item.image}
                       alt={item.name || "Produit"}
@@ -77,41 +77,61 @@ export default function PanierPage() {
                     />
                   </div>
                   
-                  <div className="flex-1">
-                    <h3 className="text-xl font-medium text-coal">{item.name}</h3>
-                    <div className="mt-1 text-sm text-coal/60">
-                      {item.options && Object.entries(item.options).map(([key, value]) => (
-                        <span key={key} className="mr-2">
-                          {key}: {value}
-                        </span>
-                      ))}
+                  <div className="flex-1 min-w-0 pr-2 w-full sm:w-auto">
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-4 mb-2">
+                      <h3 className="text-lg sm:text-xl font-medium text-coal flex-1">{item.name}</h3>
+                      <div className="text-lg sm:text-xl font-semibold text-[#C7A451] flex-shrink-0">
+                        {(item.price * item.quantity).toLocaleString("fr-MA")} MAD
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3 flex-wrap">
+                      {item.options?.color && (
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm text-coal/60">Couleur:</span>
+                          <div className="flex items-center gap-1.5">
+                            <div 
+                              className="h-5 w-5 rounded-full border-2 border-white shadow-sm" 
+                              style={{ backgroundColor: item.options.colorCode || item.options.colorKey || item.options.color }}
+                              title={item.options.color}
+                              aria-label={`Couleur ${item.options.color}`}
+                            />
+                            <span className="text-sm text-coal/70 font-medium">{item.options.color}</span>
+                          </div>
+                        </div>
+                      )}
+                      {item.options && Object.entries(item.options)
+                        .filter(([key]) => key !== 'color' && key !== 'colorCode' && key !== 'colorKey')
+                        .map(([key, value]) => (
+                          <span key={key} className="text-sm text-coal/60">
+                            {key}: {value}
+                          </span>
+                        ))}
                     </div>
                   </div>
                   
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-4 flex-shrink-0">
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => updateQty(itemKey, item.quantity - 1)}
-                        className="flex h-8 w-8 items-center justify-center rounded-full border border-coal/20 bg-white text-coal transition-colors hover:border-gold"
+                        className="flex h-8 w-8 items-center justify-center rounded-full border border-coal/20 bg-white text-coal transition-colors hover:border-[#C7A451]"
+                        aria-label="Diminuer la quantité"
                       >
                         -
                       </button>
                       <span className="w-8 text-center font-medium">{item.quantity}</span>
                       <button
                         onClick={() => updateQty(itemKey, item.quantity + 1)}
-                        className="flex h-8 w-8 items-center justify-center rounded-full border border-coal/20 bg-white text-coal transition-colors hover:border-gold"
+                        className="flex h-8 w-8 items-center justify-center rounded-full border border-coal/20 bg-white text-coal transition-colors hover:border-[#C7A451]"
+                        aria-label="Augmenter la quantité"
                       >
                         +
                       </button>
                     </div>
                     
-                    <div className="text-xl font-medium text-gold">
-                      {(item.price * item.quantity).toLocaleString("fr-MA")} MAD
-                    </div>
-                    
                     <button
                       onClick={() => removeItem(itemKey)}
-                      className="text-coal/60 transition-colors hover:text-coal"
+                      className="text-coal/60 transition-colors hover:text-coal p-1"
+                      aria-label="Supprimer l'article"
                     >
                       ✕
                     </button>
@@ -125,29 +145,42 @@ export default function PanierPage() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="mt-8 rounded-3xl bg-white p-8 shadow-lg"
+            className="mt-8 rounded-3xl bg-[#FAF7F3] p-8 shadow-md"
           >
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-medium text-coal">Total</h2>
-              <div className="text-3xl font-bold text-gold">
+              <div>
+                <h2 className="text-2xl font-medium text-coal mb-1">Total TTC</h2>
+                <p className="text-sm text-coal/60">Toutes taxes comprises</p>
+              </div>
+              <div className="text-3xl font-bold text-[#C7A451]">
                 {subtotal.toLocaleString("fr-MA")} MAD
               </div>
             </div>
             
             <div className="flex gap-4">
-              <button
+              <motion.button
                 onClick={clear}
-                className="flex-1 rounded-full border-2 border-coal/20 px-6 py-3 font-medium text-coal transition-all duration-300 hover:border-gold hover:bg-coal/5"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="flex-1 rounded-full border-2 border-[#C7A451] px-6 py-3 font-medium text-[#C7A451] transition-all duration-300 hover:bg-[#C7A451]/10 hover:shadow-md"
+                style={{ letterSpacing: "0.3px" }}
               >
                 Vider le panier
-              </button>
+              </motion.button>
               
-              <Link
-                href="/checkout"
-                className="flex-1 rounded-full bg-gradient-to-r from-gold to-lightGold px-6 py-3 text-center font-medium text-coal shadow-lg transition-all duration-300 hover:shadow-xl hover:bg-opacity-90"
+              <motion.div
+                className="flex-1"
+                animate={items.length > 0 ? { scale: [1, 1.02, 1] } : {}}
+                transition={{ duration: 2, repeat: Infinity }}
               >
-                Passer à la commande
-              </Link>
+                <Link
+                  href="/checkout"
+                  className="block rounded-full bg-gradient-to-r from-[#C7A451] to-[#D4B975] px-6 py-3 text-center font-semibold text-[#111] shadow-md transition-all duration-300 hover:shadow-lg hover:shadow-[#C7A451]/40 hover:scale-105"
+                  style={{ letterSpacing: "0.3px" }}
+                >
+                  Passer à la commande
+                </Link>
+              </motion.div>
             </div>
           </motion.div>
         </motion.div>

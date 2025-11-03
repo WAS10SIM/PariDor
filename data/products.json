@@ -6,11 +6,11 @@
     "name": "Accessoires déco Coussins et plaids Pari Dor",
     "category": "Accessoires",
     "price": 260,
-    "image": "/images/products/accessoires-deco-coussins-et-plaids-pari-dor_beige.jpg",
+    "image": "/assets/accessoires-deco-coussins-et-plaids-pari-dor_beige.jpg",
     "images": [
-      "/images/products/accessoires-deco-coussins-et-plaids-pari-dor_beige.jpg",
-      "/images/products/accessoires-deco-coussins-et-plaids-pari-dor_doré.jpg",
-      "/images/products/accessoires-deco-coussins-et-plaids-pari-dor_noir.jpg"
+      "/assets/accessoires-deco-coussins-et-plaids-pari-dor_beige.jpg",
+      "/assets/accessoires-deco-coussins-et-plaids-pari-dor_dore.jpg",
+      "/assets/accessoires-deco-coussins-et-plaids-pari-dor_vert.jpg"
     ],
     "colors": [
       "beige",
@@ -25,11 +25,11 @@
     "name": "Banquette Marocain Classique",
     "category": "Banquettes",
     "price": 7400,
-    "image": "/images/products/banquette-marocain-classique_beige.jpg",
+    "image": "/assets/banquette-marocain-classique_beige.jpg",
     "images": [
-      "/images/products/banquette-marocain-classique_beige.jpg",
-      "/images/products/banquette-marocain-classique_bordeaux.jpg",
-      "/images/products/banquette-marocain-classique_bleu-royal.jpg"
+      "/assets/banquette-marocain-classique_beige.jpg",
+      "/assets/banquette-marocain-classique_bleu-roi.jpg",
+      "/assets/banquette-marocain-classique_vert-jade.jpg"
     ],
     "colors": [
       "beige",
@@ -95,11 +95,11 @@
     "name": "Canapé 2 places Confort Élégance",
     "category": "Canapés",
     "price": 5200,
-    "image": "/images/products/canape-2-places-confort-elegance_beige.jpg",
+    "image": "/assets/canape-2-places-confort-elegance_beige.jpg",
     "images": [
-      "/images/products/canape-2-places-confort-elegance_beige.jpg",
-      "/images/products/canape-2-places-confort-elegance_noir.jpg",
-      "/images/products/canape-2-places-confort-elegance_vert-olive.jpg"
+      "/assets/canape-2-places-confort-elegance_beige.jpg",
+      "/assets/canape-2-places-confort-elegance_bleu-nuit.jpg",
+      "/assets/canape-2-places-confort-elegance_vert-olive.jpg"
     ],
     "colors": [
       "beige",
@@ -114,11 +114,11 @@
     "name": "Canapé 4 places Royal Lounge",
     "category": "Canapés",
     "price": 8900,
-    "image": "/images/products/canape-4-places-royal-lounge_beige.jpg",
+    "image": "/assets/canape-4-places-royal-lounge_beige.jpg",
     "images": [
-      "/images/products/canape-4-places-royal-lounge_beige.jpg",
-      "/images/products/canape-4-places-royal-lounge_camel.jpg",
-      "/images/products/canape-4-places-royal-lounge_bleu-nuit.jpg"
+      "/assets/canape-4-places-royal-lounge_beige.jpg",
+      "/assets/canape-4-places-royal-lounge_anthracite.jpg",
+      "/assets/canape-4-places-royal-lounge_vert-sauge.jpg"
     ],
     "colors": [
       "beige",
@@ -179,11 +179,11 @@
     "name": "Fauteuil Confort Chic",
     "category": "Fauteuils",
     "price": 2600,
-    "image": "/images/products/fauteuil-confort-chic_beige.jpg",
+    "image": "/assets/fauteuil-confort-chic_beige.jpg",
     "images": [
-      "/images/products/fauteuil-confort-chic_beige.jpg",
-      "/images/products/fauteuil-confort-chic_bleu-nuit.jpg",
-      "/images/products/fauteuil-confort-chic_vert-olive.jpg"
+      "/assets/fauteuil-confort-chic_beige.jpg",
+      "/assets/fauteuil-confort-chic_bleu-royal.jpg",
+      "/assets/fauteuil-confort-chic_vert-emeraude.jpg"
     ],
     "colors": [
       "beige",
@@ -198,9 +198,9 @@
     "name": "Oreiller Soft Dream",
     "category": "Literie",
     "price": 180,
-    "image": "/images/products/oreiller-soft-dream_blanc.jpg",
+    "image": "/assets/oreiller-soft-dream_blanc.jpg",
     "images": [
-      "/images/products/oreiller-soft-dream_blanc.jpg"
+      "/assets/oreiller-soft-dream_blanc.jpg"
     ],
     "colors": [
       "blanc"
@@ -213,11 +213,11 @@
     "name": "Sommier Premium Line",
     "category": "Literie",
     "price": 1900,
-    "image": "/images/products/sommier-premium-line_beige.jpg",
+    "image": "/assets/sommier-premium-line_beige.jpg",
     "images": [
-      "/images/products/sommier-premium-line_beige.jpg",
-      "/images/products/sommier-premium-line_gris.jpg",
-      "/images/products/sommier-premium-line_noir.jpg"
+      "/assets/sommier-premium-line_beige.jpg",
+      "/assets/sommier-premium-line_gris-clair.jpg",
+      "/assets/sommier-premium-line_marron.jpg"
     ],
     "colors": [
       "beige",
@@ -232,11 +232,11 @@
     "name": "Matelas Pari Dor",
     "category": "Matelas",
     "price": 2900,
-    "image": "/images/products/matelas-pari-dor_beige.jpg",
+    "image": "/assets/matelas-pari-dor_beige.jpg",
     "images": [
-      "/images/products/matelas-pari-dor_beige.jpg",
-      "/images/products/matelas-pari-dor_gris.jpg",
-      "/images/products/matelas-pari-dor_blanc.jpg"
+      "/assets/matelas-pari-dor_beige.jpg",
+      "/assets/matelas-pari-dor_gris.jpg",
+      "/assets/matelas-pari-dor_blanc.jpg"
     ],
     "colors": [
       "beige",
@@ -302,11 +302,11 @@
     "name": "Pouf / Repose-pied Pari Lounge",
     "category": "Poufs",
     "price": 950,
-    "image": "/images/products/pouf-repose-pied-pari-lounge_beige.jpg",
+    "image": "/assets/pouf-repose-pied-pari-lounge_beige.jpg",
     "images": [
-      "/images/products/pouf-repose-pied-pari-lounge_beige.jpg",
-      "/images/products/pouf-repose-pied-pari-lounge_marron.jpg",
-      "/images/products/pouf-repose-pied-pari-lounge_gris.jpg"
+      "/assets/pouf-repose-pied-pari-lounge_beige.jpg",
+      "/assets/pouf-repose-pied-pari-lounge_marron-cafe.jpg",
+      "/assets/pouf-repose-pied-pari-lounge_gris.jpg"
     ],
     "colors": [
       "beige",
@@ -321,11 +321,11 @@
     "name": "Tête de lit Élégance Royale",
     "category": "Têtes de lit",
     "price": 2100,
-    "image": "/images/products/tete-de-lit-elegance-royale_beige.jpg",
+    "image": "/assets/tete-de-lit-elegance-royale_beige.jpg",
     "images": [
-      "/images/products/tete-de-lit-elegance-royale_beige.jpg",
-      "/images/products/tete-de-lit-elegance-royale_taupe.jpg",
-      "/images/products/tete-de-lit-elegance-royale_gris-fonce.jpg"
+      "/assets/tete-de-lit-elegance-royale_beige.jpg",
+      "/assets/tete-de-lit-elegance-royale_gris.jpg",
+      "/assets/tete-de-lit-elegance-royale_vert-sauge.jpg"
     ],
     "colors": [
       "beige",
@@ -334,4 +334,5 @@
     ]
   }
 ]
+
 

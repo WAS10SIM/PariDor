@@ -3,101 +3,101 @@
     "slug": "matelas-pari-dor",
     "basePrice": 2900,
     "colors": [
-      { "name": "Beige", "key": "beige", "code": "#d9c7a6", "price": 2900, "image": "/assets/matelas-pari-dor_beige.png" },
-      { "name": "Blanc", "key": "blanc", "code": "#f5f5f5", "price": 2900, "image": "/assets/matelas-pari-dor_blanc.png" },
-      { "name": "Bleu", "key": "bleu", "code": "#1e3a8a", "price": 3000, "image": "/assets/matelas-pari-dor_bleu.png" },
-      { "name": "Gris", "key": "gris", "code": "#9d9d9d", "price": 3000, "image": "/assets/matelas-pari-dor_gris.png" }
+      { "name": "Beige", "key": "beige", "code": "#d9c7a6", "price": 2900, "image": "/assets/matelas-pari-dor_beige.jpg" },
+      { "name": "Blanc", "key": "blanc", "code": "#f5f5f5", "price": 2900, "image": "/assets/matelas-pari-dor_blanc.jpg" },
+      { "name": "Bleu", "key": "bleu", "code": "#1e3a8a", "price": 3000, "image": "/assets/matelas-pari-dor_bleu.jpg" },
+      { "name": "Gris", "key": "gris", "code": "#9d9d9d", "price": 3000, "image": "/assets/matelas-pari-dor_gris.jpg" }
     ]
   },
   {
     "slug": "canape-2-places-confort-elegance",
     "basePrice": 3500,
     "colors": [
-      { "name": "Beige", "key": "beige", "code": "#d9c7a6", "price": 3500, "image": "/assets/canape-2-places-confort-elegance_beige.png" },
-      { "name": "Bleu nuit", "key": "bleu-nuit", "code": "#1c2d5a", "price": 3700, "image": "/assets/canape-2-places-confort-elegance_bleu-nuit.png" },
-      { "name": "Doré miel", "key": "dore-miel", "code": "#cba74a", "price": 3800, "image": "/assets/canape-2-places-confort-elegance_dore-miel.png" },
-      { "name": "Vert olive", "key": "vert-olive", "code": "#7c8752", "price": 3650, "image": "/assets/canape-2-places-confort-elegance_vert-olive.png" },
-      { "name": "Gris", "key": "gris", "code": "#9d9d9d", "price": 3600, "image": "/assets/canape-2-places-confort-elegance_gris.png" }
+      { "name": "Beige", "key": "beige", "code": "#d9c7a6", "price": 3500, "image": "/assets/canape-2-places-confort-elegance_beige.jpg" },
+      { "name": "Bleu nuit", "key": "bleu-nuit", "code": "#1c2d5a", "price": 3700, "image": "/assets/canape-2-places-confort-elegance_bleu-nuit.jpg" },
+      { "name": "Doré miel", "key": "dore-miel", "code": "#cba74a", "price": 3800, "image": "/assets/canape-2-places-confort-elegance_dore-miel.jpg" },
+      { "name": "Vert olive", "key": "vert-olive", "code": "#7c8752", "price": 3650, "image": "/assets/canape-2-places-confort-elegance_vert-olive.jpg" },
+      { "name": "Gris", "key": "gris", "code": "#9d9d9d", "price": 3600, "image": "/assets/canape-2-places-confort-elegance_gris.jpg" }
     ]
   },
   {
     "slug": "canape-4-places-royal-lounge",
     "basePrice": 7800,
     "colors": [
-      { "name": "Anthracite", "key": "anthracite", "code": "#2f2f2f", "price": 8000, "image": "/assets/canape-4-places-royal-lounge_anthracite.png" },
-      { "name": "Beige", "key": "beige", "code": "#d9c7a6", "price": 7800, "image": "/assets/canape-4-places-royal-lounge_beige.png" },
-      { "name": "Vert sauge", "key": "vert-sauge", "code": "#8aa282", "price": 8050, "image": "/assets/canape-4-places-royal-lounge_vert-sauge.png" }
+      { "name": "Anthracite", "key": "anthracite", "code": "#2f2f2f", "price": 8000, "image": "/assets/canape-4-places-royal-lounge_anthracite.jpg" },
+      { "name": "Beige", "key": "beige", "code": "#d9c7a6", "price": 7800, "image": "/assets/canape-4-places-royal-lounge_beige.jpg" },
+      { "name": "Vert sauge", "key": "vert-sauge", "code": "#8aa282", "price": 8050, "image": "/assets/canape-4-places-royal-lounge_vert-sauge.jpg" }
     ]
   },
   {
     "slug": "banquette-marocain-classique",
     "basePrice": 6900,
     "colors": [
-      { "name": "Beige", "key": "beige", "code": "#d9c7a6", "price": 6900, "image": "/assets/banquette-marocain-classique_beige.png" },
-      { "name": "Bleu roi", "key": "bleu-roi", "code": "#1f3ea3", "price": 7050, "image": "/assets/banquette-marocain-classique_bleu-roi.png" },
-      { "name": "Gris", "key": "gris", "code": "#9d9d9d", "price": 7000, "image": "/assets/banquette-marocain-classique_gris.png" },
-      { "name": "Vert jade", "key": "vert-jade", "code": "#2f8f83", "price": 7050, "image": "/assets/banquette-marocain-classique_vert-jade.png" }
+      { "name": "Beige", "key": "beige", "code": "#d9c7a6", "price": 6900, "image": "/assets/banquette-marocain-classique_beige.jpg" },
+      { "name": "Bleu roi", "key": "bleu-roi", "code": "#1f3ea3", "price": 7050, "image": "/assets/banquette-marocain-classique_bleu-roi.jpg" },
+      { "name": "Gris", "key": "gris", "code": "#9d9d9d", "price": 7000, "image": "/assets/banquette-marocain-classique_gris.jpg" },
+      { "name": "Vert jade", "key": "vert-jade", "code": "#2f8f83", "price": 7050, "image": "/assets/banquette-marocain-classique_vert-jade.jpg" }
     ]
   },
   {
     "slug": "tete-de-lit-elegance-royale",
     "basePrice": 2100,
     "colors": [
-      { "name": "Beige", "key": "beige", "code": "#d9c7a6", "price": 2100, "image": "/assets/tete-de-lit-elegance-royale_beige.png" },
-      { "name": "Gris", "key": "gris", "code": "#9d9d9d", "price": 2200, "image": "/assets/tete-de-lit-elegance-royale_gris.png" },
-      { "name": "Vert sauge", "key": "vert-sauge", "code": "#8aa282", "price": 2200, "image": "/assets/tete-de-lit-elegance-royale_vert-sauge.png" }
+      { "name": "Beige", "key": "beige", "code": "#d9c7a6", "price": 2100, "image": "/assets/tete-de-lit-elegance-royale_beige.jpg" },
+      { "name": "Gris", "key": "gris", "code": "#9d9d9d", "price": 2200, "image": "/assets/tete-de-lit-elegance-royale_gris.jpg" },
+      { "name": "Vert sauge", "key": "vert-sauge", "code": "#8aa282", "price": 2200, "image": "/assets/tete-de-lit-elegance-royale_vert-sauge.jpg" }
     ]
   },
   {
     "slug": "fauteuil-confort-chic",
     "basePrice": 2400,
     "colors": [
-      { "name": "Beige", "key": "beige", "code": "#d9c7a6", "price": 2400, "image": "/assets/fauteuil-confort-chic_beige.png" },
-      { "name": "Bleu royal", "key": "bleu-royal", "code": "#274b9f", "price": 2550, "image": "/assets/fauteuil-confort-chic_bleu-royal.png" },
-      { "name": "Doré doux", "key": "dore-doux", "code": "#d4af37", "price": 2580, "image": "/assets/fauteuil-confort-chic_dore-doux.png" },
-      { "name": "Gris foncé", "key": "gris-fonce", "code": "#595959", "price": 2500, "image": "/assets/fauteuil-confort-chic_gris-fonce.png" },
-      { "name": "Vert émeraude", "key": "vert-emeraude", "code": "#0f766e", "price": 2560, "image": "/assets/fauteuil-confort-chic_vert-emeraude.png" }
+      { "name": "Beige", "key": "beige", "code": "#d9c7a6", "price": 2400, "image": "/assets/fauteuil-confort-chic_beige.jpg" },
+      { "name": "Bleu royal", "key": "bleu-royal", "code": "#274b9f", "price": 2550, "image": "/assets/fauteuil-confort-chic_bleu-royal.jpg" },
+      { "name": "Doré doux", "key": "dore-doux", "code": "#d4af37", "price": 2580, "image": "/assets/fauteuil-confort-chic_dore-doux.jpg" },
+      { "name": "Gris foncé", "key": "gris-fonce", "code": "#595959", "price": 2500, "image": "/assets/fauteuil-confort-chic_gris-fonce.jpg" },
+      { "name": "Vert émeraude", "key": "vert-emeraude", "code": "#0f766e", "price": 2560, "image": "/assets/fauteuil-confort-chic_vert-emeraude.jpg" }
     ]
   },
   {
     "slug": "pouf-repose-pied-pari-lounge",
     "basePrice": 800,
     "colors": [
-      { "name": "Beige", "key": "beige", "code": "#d9c7a6", "price": 800, "image": "/assets/pouf-repose-pied-pari-lounge_beige.png" },
-      { "name": "Doré clair", "key": "dore-clair", "code": "#e5c765", "price": 830, "image": "/assets/pouf-repose-pied-pari-lounge_dore-clair.png" },
-      { "name": "Gris", "key": "gris", "code": "#9d9d9d", "price": 820, "image": "/assets/pouf-repose-pied-pari-lounge_gris.png" },
-      { "name": "Marron café", "key": "marron-cafe", "code": "#6b4b3e", "price": 840, "image": "/assets/pouf-repose-pied-pari-lounge_marron-cafe.png" },
-      { "name": "Vert olive", "key": "vert-olive", "code": "#7c8752", "price": 820, "image": "/assets/pouf-repose-pied-pari-lounge_vert-olive.png" }
+      { "name": "Beige", "key": "beige", "code": "#d9c7a6", "price": 800, "image": "/assets/pouf-repose-pied-pari-lounge_beige.jpg" },
+      { "name": "Doré clair", "key": "dore-clair", "code": "#e5c765", "price": 830, "image": "/assets/pouf-repose-pied-pari-lounge_dore-clair.jpg" },
+      { "name": "Gris", "key": "gris", "code": "#9d9d9d", "price": 820, "image": "/assets/pouf-repose-pied-pari-lounge_gris.jpg" },
+      { "name": "Marron café", "key": "marron-cafe", "code": "#6b4b3e", "price": 840, "image": "/assets/pouf-repose-pied-pari-lounge_marron-cafe.jpg" },
+      { "name": "Vert olive", "key": "vert-olive", "code": "#7c8752", "price": 820, "image": "/assets/pouf-repose-pied-pari-lounge_vert-olive.jpg" }
     ]
   },
   {
     "slug": "sommier-premium-line",
     "basePrice": 1700,
     "colors": [
-      { "name": "Beige", "key": "beige", "code": "#d9c7a6", "price": 1700, "image": "/assets/sommier-premium-line_beige.png" },
-      { "name": "Bleu nuit", "key": "bleu-nuit", "code": "#1c2d5a", "price": 1750, "image": "/assets/sommier-premium-line_bleu-nuit.png" },
-      { "name": "Gris clair", "key": "gris-clair", "code": "#cfcfcf", "price": 1720, "image": "/assets/sommier-premium-line_gris-clair.png" },
-      { "name": "Marron", "key": "marron", "code": "#6b4b3e", "price": 1750, "image": "/assets/sommier-premium-line_marron.png" }
+      { "name": "Beige", "key": "beige", "code": "#d9c7a6", "price": 1700, "image": "/assets/sommier-premium-line_beige.jpg" },
+      { "name": "Bleu nuit", "key": "bleu-nuit", "code": "#1c2d5a", "price": 1750, "image": "/assets/sommier-premium-line_bleu-nuit.jpg" },
+      { "name": "Gris clair", "key": "gris-clair", "code": "#cfcfcf", "price": 1720, "image": "/assets/sommier-premium-line_gris-clair.jpg" },
+      { "name": "Marron", "key": "marron", "code": "#6b4b3e", "price": 1750, "image": "/assets/sommier-premium-line_marron.jpg" }
     ]
   },
   {
     "slug": "oreiller-soft-dream",
     "basePrice": 150,
     "colors": [
-      { "name": "Blanc", "key": "blanc", "code": "#ffffff", "price": 150, "image": "/assets/oreiller-soft-dream_blanc.png" },
-      { "name": "Blanc cassé", "key": "blanc-casse", "code": "#f1efe8", "price": 155, "image": "/assets/oreiller-soft-dream_blanc-casse.png" },
-      { "name": "Doré pâle", "key": "dore-pale", "code": "#e4d09a", "price": 160, "image": "/assets/oreiller-soft-dream_dore-pale.png" },
-      { "name": "Gris clair", "key": "gris-clair", "code": "#cfcfcf", "price": 155, "image": "/assets/oreiller-soft-dream_gris-clair.png" }
+      { "name": "Blanc", "key": "blanc", "code": "#ffffff", "price": 150, "image": "/assets/oreiller-soft-dream_blanc.jpg" },
+      { "name": "Blanc cassé", "key": "blanc-casse", "code": "#f1efe8", "price": 155, "image": "/assets/oreiller-soft-dream_blanc-casse.jpg" },
+      { "name": "Doré pâle", "key": "dore-pale", "code": "#e4d09a", "price": 160, "image": "/assets/oreiller-soft-dream_dore-pale.jpg" },
+      { "name": "Gris clair", "key": "gris-clair", "code": "#cfcfcf", "price": 155, "image": "/assets/oreiller-soft-dream_gris-clair.jpg" }
     ]
   },
   {
     "slug": "accessoires-deco-coussins-et-plaids-pari-dor",
     "basePrice": 220,
     "colors": [
-      { "name": "Beige", "key": "beige", "code": "#d9c7a6", "price": 220, "image": "/assets/accessoires-deco-coussins-et-plaids-pari-dor_beige.png" },
-      { "name": "Bleu marine", "key": "bleu-marine", "code": "#1c3a6c", "price": 235, "image": "/assets/accessoires-deco-coussins-et-plaids-pari-dor_bleu-marine.png" },
-      { "name": "Doré", "key": "dore", "code": "#cba74a", "price": 240, "image": "/assets/accessoires-deco-coussins-et-plaids-pari-dor_dore.png" },
-      { "name": "Vert", "key": "vert", "code": "#7c8752", "price": 225, "image": "/assets/accessoires-deco-coussins-et-plaids-pari-dor_vert.png" }
+      { "name": "Beige", "key": "beige", "code": "#d9c7a6", "price": 220, "image": "/assets/accessoires-deco-coussins-et-plaids-pari-dor_beige.jpg" },
+      { "name": "Bleu marine", "key": "bleu-marine", "code": "#1c3a6c", "price": 235, "image": "/assets/accessoires-deco-coussins-et-plaids-pari-dor_bleu-marine.jpg" },
+      { "name": "Doré", "key": "dore", "code": "#cba74a", "price": 240, "image": "/assets/accessoires-deco-coussins-et-plaids-pari-dor_dore.jpg" },
+      { "name": "Vert", "key": "vert", "code": "#7c8752", "price": 225, "image": "/assets/accessoires-deco-coussins-et-plaids-pari-dor_vert.jpg" }
     ]
   }
 ]

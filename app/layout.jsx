@@ -11,6 +11,14 @@ export const metadata = {
     type: "website",
     locale: "fr_FR",
     siteName: "Pari Dor",
+    images: [
+      {
+        url: "/logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Pari Dor - Meubles haut de gamme marocains",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",

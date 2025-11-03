@@ -122,7 +122,8 @@ function NavbarPublic() {
 
             <Link
               href="/produits"
-              className="px-6 py-2.5 rounded-full bg-gradient-to-r from-[#C6A34F] to-[#E3C97F] text-white font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+              className="px-6 py-2.5 rounded-full bg-gradient-to-r from-[#C7A451] to-[#D4B975] text-[#111] font-semibold shadow-md hover:shadow-lg hover:shadow-[#C7A451]/40 hover:scale-105 transition-all duration-300"
+              style={{ letterSpacing: "0.3px" }}
             >
               Catalogue
             </Link>
@@ -138,58 +139,109 @@ function NavbarPublic() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="lg:hidden bg-[#FAF8F5] border-t border-[#C6A34F]/20"
-          >
-            <div className="px-4 py-6 space-y-4">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className="block text-[#1a1a1a] font-medium hover:text-[#C6A34F] transition-colors py-2 border-b border-[#1a1a1a]/10 last:border-0"
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              onClick={() => setIsOpen(false)}
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden"
+            />
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="fixed top-0 right-0 bottom-0 w-80 max-w-[85vw] bg-[#FAF7F3]/95 backdrop-blur-xl z-50 lg:hidden shadow-2xl border-l border-[#C7A451]/20 overflow-y-auto"
+            >
+              <div className="px-6 py-8 space-y-6">
+                {/* Close Button */}
+                <div className="flex justify-end mb-4">
+                  <button
+                    onClick={() => setIsOpen(false)}
+                    className="p-2 rounded-full hover:bg-black/10 transition-colors"
+                    aria-label="Fermer le menu"
+                  >
+                    <X className="h-6 w-6 text-[#1a1a1a]" />
+                  </button>
+                </div>
+
+                {/* Navigation Links */}
+                {navLinks.map((link, index) => (
+                  <motion.div
+                    key={link.href}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    <Link
+                      href={link.href}
+                      onClick={() => setIsOpen(false)}
+                      className="block text-[#1a1a1a] font-medium hover:text-[#C7A451] transition-colors py-3 border-b border-[#1a1a1a]/10 text-lg"
+                      style={{ letterSpacing: "0.3px" }}
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.div>
+                ))}
+
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: navLinks.length * 0.1 }}
                 >
-                  {link.label}
-                </Link>
-              ))}
+                  <Link
+                    href="/mes-commandes"
+                    onClick={() => setIsOpen(false)}
+                    className="block text-[#1a1a1a] font-medium hover:text-[#C7A451] transition-colors py-3 border-b border-[#1a1a1a]/10 text-lg"
+                    style={{ letterSpacing: "0.3px" }}
+                  >
+                    Mes commandes
+                  </Link>
+                </motion.div>
 
-              <Link
-                href="/mes-commandes"
-                onClick={() => setIsOpen(false)}
-                className="block text-[#1a1a1a] font-medium hover:text-[#C6A34F] transition-colors py-2 border-b border-[#1a1a1a]/10"
-              >
-                Mes commandes
-              </Link>
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: (navLinks.length + 1) * 0.1 }}
+                >
+                  <Link
+                    href="/panier"
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center justify-between text-[#1a1a1a] font-medium hover:text-[#C7A451] transition-colors py-3 border-b border-[#1a1a1a]/10 text-lg"
+                    style={{ letterSpacing: "0.3px" }}
+                  >
+                    <span>Panier</span>
+                    {totalItems > 0 && (
+                      <span className="bg-[#C7A451] text-white text-xs font-bold rounded-full h-6 w-6 flex items-center justify-center">
+                        {totalItems}
+                      </span>
+                    )}
+                  </Link>
+                </motion.div>
 
-              <Link
-                href="/panier"
-                onClick={() => setIsOpen(false)}
-                className="flex items-center justify-between text-[#1a1a1a] font-medium hover:text-[#C6A34F] transition-colors py-2 border-b border-[#1a1a1a]/10"
-              >
-                <span>Panier</span>
-                {totalItems > 0 && (
-                  <span className="bg-[#C6A34F] text-white text-xs font-bold rounded-full h-6 w-6 flex items-center justify-center">
-                    {totalItems}
-                  </span>
-                )}
-              </Link>
-
-              <Link
-                href="/produits"
-                onClick={() => setIsOpen(false)}
-                className="block w-full text-center px-6 py-3 rounded-full bg-gradient-to-r from-[#C6A34F] to-[#E3C97F] text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                Catalogue
-              </Link>
-            </div>
-          </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: (navLinks.length + 2) * 0.1 }}
+                  className="pt-4"
+                >
+                  <Link
+                    href="/produits"
+                    onClick={() => setIsOpen(false)}
+                    className="block w-full text-center px-6 py-4 rounded-full bg-gradient-to-r from-[#C7A451] to-[#D4B975] text-[#111] font-semibold shadow-md hover:shadow-lg hover:shadow-[#C7A451]/40 transition-all duration-300"
+                    style={{ letterSpacing: "0.3px" }}
+                  >
+                    Catalogue
+                  </Link>
+                </motion.div>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </nav>

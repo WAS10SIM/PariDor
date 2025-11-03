@@ -35,16 +35,18 @@ body {
   }
 
   body {
-    @apply bg-beige text-coal antialiased;
+    @apply bg-[#FAF7F3] text-coal antialiased;
+    letter-spacing: 0.3px;
   }
 }
 
 @layer components {
   .btn-luxury {
     @apply relative inline-flex items-center justify-center rounded-full px-8 py-4 font-semibold transition-all duration-300 ease-in-out overflow-hidden;
-    @apply bg-gradient-to-r from-[#C6A34F] to-[#E3C97F] text-[#1a1a1a];
-    @apply shadow-lg hover:shadow-xl hover:shadow-[#C6A34F]/30;
+    @apply bg-gradient-to-r from-[#C7A451] to-[#D4B975] text-[#111];
+    @apply shadow-md hover:shadow-lg hover:shadow-[#C7A451]/40;
     @apply hover:scale-105 active:scale-95;
+    letter-spacing: 0.3px;
   }
 
   .btn-luxury::before {
@@ -97,8 +99,8 @@ body {
   }
 
   .card-luxury:hover {
-    @apply scale-[1.03] shadow-2xl;
-    box-shadow: 0 8px 24px rgba(198, 163, 79, 0.15);
+    @apply scale-[1.03] shadow-lg;
+    box-shadow: 0 4px 12px rgba(199, 164, 81, 0.12);
   }
 
   /* Link hover with gold underline */

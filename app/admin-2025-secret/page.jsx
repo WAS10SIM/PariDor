@@ -379,8 +379,8 @@ export default function AdminSecretPage() {
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: index * 0.05 }}
-                        className={`border-b border-[#1a1a1a]/5 hover:bg-[#FAF8F5] transition-colors ${
-                          index % 2 === 0 ? "bg-white" : "bg-[#FAF8F5]"
+                        className={`border-b border-[#1a1a1a]/5 hover:bg-[#FAF7F3] transition-colors ${
+                          index % 2 === 0 ? "bg-white" : "bg-[#FAF7F3]"
                         }`}
                       >
                         <td className="px-6 py-4">
@@ -462,7 +462,7 @@ export default function AdminSecretPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.05 }}
-                  className="bg-[#FAF8F5] rounded-2xl p-4 space-y-3"
+                  className="bg-[#FAF7F3] rounded-2xl p-4 space-y-3"
                 >
                   <div className="flex justify-between items-start gap-2">
                     <div className="flex-1">

@@ -7,11 +7,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        beige: "#F5F0E9",
+        beige: "#FAF7F3",
         coal: "#1E1E1E",
         gold: "#D4AF37",
         lightGold: "#F5E7B2",
-        bone: "#F8F5F0",
+        bone: "#FAF7F3",
       },
       fontFamily: {
         inter: ["Inter", "sans-serif"],

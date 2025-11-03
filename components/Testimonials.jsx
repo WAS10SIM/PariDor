@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 
 const testimonials = [
   {
@@ -72,12 +73,15 @@ function Testimonials() {
           className="mb-12 sm:mb-16 text-center"
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-coal mb-4">
-            Ce que disent nos <span className="text-[#C6A34F]">clients</span>
+            Ce que disent nos <span className="text-[#C7A451]">clients</span>
           </h2>
-          <div className="h-1 w-24 bg-[#C6A34F] mx-auto rounded-full mb-6" />
-          <p className="mx-auto max-w-3xl text-base sm:text-lg leading-relaxed text-coal/70">
+          <div className="h-1 w-24 bg-[#C7A451] mx-auto rounded-full mb-4" />
+          <p className="mx-auto max-w-3xl text-base sm:text-lg leading-relaxed text-coal/70 mb-2" style={{ letterSpacing: "0.3px" }}>
             Des centaines de clients satisfaits nous font confiance pour transformer leur intérieur. 
-            Découvrez leurs expériences avec <span className="font-semibold text-[#C6A34F]">Pari Dor</span>.
+            Découvrez leurs expériences avec <span className="font-semibold text-[#C7A451]">Pari Dor</span>.
+          </p>
+          <p className="text-sm text-[#C7A451] font-medium mt-2" style={{ letterSpacing: "0.3px" }}>
+            +500 clients satisfaits à travers le Maroc
           </p>
         </motion.div>
 
@@ -96,56 +100,81 @@ function Testimonials() {
           aria-roledescription="carousel"
           aria-live="polite"
         >
+          {/* Navigation Arrows */}
+          <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 hidden md:block">
+            <motion.button
+              onClick={() => setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className="rounded-full bg-white/90 backdrop-blur-sm p-2 shadow-md hover:bg-white transition-colors border border-[#C7A451]/20"
+              aria-label="Témoignage précédent"
+            >
+              <ChevronLeft className="h-5 w-5 text-[#C7A451]" />
+            </motion.button>
+          </div>
+          <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 hidden md:block">
+            <motion.button
+              onClick={() => setCurrentIndex((prev) => (prev + 1) % testimonials.length)}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className="rounded-full bg-white/90 backdrop-blur-sm p-2 shadow-md hover:bg-white transition-colors border border-[#C7A451]/20"
+              aria-label="Témoignage suivant"
+            >
+              <ChevronRight className="h-5 w-5 text-[#C7A451]" />
+            </motion.button>
+          </div>
+
           <AnimatePresence mode="wait">
             <motion.div
               key={currentIndex}
               initial={{ 
                 opacity: 0, 
-                clipPath: "ellipse(0% 0% at 50% 50%)",
-                filter: "blur(10px)"
+                x: 50,
+                scale: 0.95
               }}
               animate={{ 
                 opacity: 1, 
-                clipPath: "ellipse(100% 100% at 50% 50%)",
-                filter: "blur(0px)"
+                x: 0,
+                scale: 1
               }}
               exit={{ 
                 opacity: 0, 
-                clipPath: "ellipse(0% 0% at 50% 50%)",
-                filter: "blur(10px)"
+                x: -50,
+                scale: 0.95
               }}
               transition={{ 
-                duration: 0.8, 
+                duration: 0.6, 
                 ease: "easeInOut" 
               }}
-              className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white to-bone p-12 shadow-2xl"
+              className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white to-[#FAF7F3] p-12 shadow-md"
             >
               {/* Stars */}
               <motion.div 
-                className="mb-6 flex justify-center"
+                className="mb-6 flex justify-center gap-1"
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                transition={{ delay: 0.3, type: "spring", damping: 18, stiffness: 160 }}
+                transition={{ delay: 0.2, type: "spring", damping: 18, stiffness: 160 }}
               >
-                {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
-                  <motion.span 
+                {[...Array(5)].map((_, i) => (
+                  <Star
                     key={i}
-                    className="text-2xl text-[#C6A34F]"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4 + i * 0.1 }}
-                  >
-                    ★
-                  </motion.span>
+                    className={`h-5 w-5 ${
+                      i < testimonials[currentIndex].rating 
+                        ? "fill-[#C7A451] text-[#C7A451]" 
+                        : "fill-none text-coal/20"
+                    }`}
+                    strokeWidth={1.5}
+                  />
                 ))}
               </motion.div>
 
               {/* Quote */}
               <motion.blockquote 
-                className="mb-8 text-2xl font-light italic text-coal leading-relaxed"
+                className="mb-8 text-xl md:text-2xl font-light italic text-coal leading-relaxed"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
+                transition={{ delay: 0.3 }}
+                style={{ letterSpacing: "0.3px" }}
               >
                 "{testimonials[currentIndex].text}"
               </motion.blockquote>
@@ -155,12 +184,12 @@ function Testimonials() {
                 className="text-center"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 }}
+                transition={{ delay: 0.4 }}
               >
-                <div className="text-xl font-medium text-coal">
+                <div className="text-lg md:text-xl font-medium text-coal mb-1">
                   {testimonials[currentIndex].name}
                 </div>
-                <div className="text-[#C6A34F]">
+                <div className="text-[#C7A451] font-medium">
                   {testimonials[currentIndex].city}
                 </div>
               </motion.div>
@@ -168,14 +197,16 @@ function Testimonials() {
           </AnimatePresence>
 
           {/* Navigation Dots */}
-          <div className="mt-8 flex items-center justify-center gap-3">
+          <div className="mt-8 flex items-center justify-center gap-2">
             {testimonials.map((_, index) => (
-              <button
+              <motion.button
                 key={index}
                 onClick={() => handleDotClick(index)}
-                className={`h-3 w-3 rounded-full transition-all duration-300 ${
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+                className={`h-2.5 w-2.5 rounded-full transition-all duration-300 ${
                   currentIndex === index 
-                    ? "bg-[#C6A34F] scale-125 shadow-md" 
+                    ? "bg-[#C7A451] scale-125 shadow-md" 
                     : "bg-coal/30 hover:bg-coal/50"
                 }`}
                 aria-label={`Aller au témoignage ${index + 1}`}

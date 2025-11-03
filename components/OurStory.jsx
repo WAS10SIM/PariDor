@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function OurStory() {
   const ref = useRef(null);
@@ -47,7 +48,7 @@ export default function OurStory() {
     <section
       id="notre-histoire"
       ref={ref}
-      className="relative py-12 sm:py-20 md:py-28 bg-[#FAF8F5] overflow-hidden"
+      className="relative py-12 sm:py-20 md:py-28 bg-[#FAF7F3] overflow-hidden"
     >
       {/* Décorations subtiles */}
       <div className="absolute top-0 left-0 w-64 h-64 bg-[#C6A34F]/5 rounded-full blur-3xl" />
@@ -110,32 +111,38 @@ export default function OurStory() {
             <div className="relative grid grid-cols-2 gap-4">
               {/* Image principale */}
               <div className="col-span-2 relative h-80 rounded-2xl overflow-hidden shadow-2xl group cursor-pointer">
-                <img
+                <Image
                   src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
                   alt="Atelier artisanal Pari Dor"
-                  className="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
+                  fill
+                  className="object-cover transition-all duration-300 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                <div className="absolute bottom-6 left-6 text-white">
+                <div className="absolute bottom-6 left-6 text-white z-10">
                   <p className="font-playfair text-2xl font-semibold">Artisanat d'excellence</p>
                 </div>
               </div>
 
               {/* Images secondaires */}
               <div className="relative h-48 rounded-xl overflow-hidden shadow-lg group cursor-pointer">
-                <img
+                <Image
                   src="https://images.unsplash.com/photo-1540574163026-643ea20ade25?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
                   alt="Matériaux premium"
-                  className="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
+                  fill
+                  className="object-cover transition-all duration-300 group-hover:scale-105"
+                  sizes="(max-width: 768px) 50vw, 25vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
               </div>
 
               <div className="relative h-48 rounded-xl overflow-hidden shadow-lg group cursor-pointer">
-                <img
+                <Image
                   src="https://images.unsplash.com/photo-1567016432779-094069958ea5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
                   alt="Confort sur mesure"
-                  className="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
+                  fill
+                  className="object-cover transition-all duration-300 group-hover:scale-105"
+                  sizes="(max-width: 768px) 50vw, 25vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
               </div>

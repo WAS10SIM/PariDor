@@ -30,23 +30,29 @@ function Hero() {
       </motion.div>
 
       {/* Content */}
-      <div className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto pt-24 md:pt-32">
+      <div className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto flex flex-col justify-center min-h-screen">
         {/* Dark overlay behind text for better readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-transparent blur-2xl -z-10" />
         
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
+        <motion.h1
+          initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="mb-6 sm:mb-8 relative"
+          className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-playfair font-bold text-white mb-3 sm:mb-4 drop-shadow-2xl tracking-tight"
+          style={{ letterSpacing: "0.3px" }}
         >
-          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-playfair font-bold text-white mb-2 sm:mb-4 drop-shadow-2xl tracking-tight">
-            PARI DOR
-          </h1>
-          <p className="text-sm sm:text-base md:text-lg lg:text-2xl text-white/90 font-light drop-shadow-lg tracking-wide">
-            L'art du confort sur mesure
-          </p>
-        </motion.div>
+          PARI DOR
+        </motion.h1>
+        
+        <motion.p
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="text-sm sm:text-base md:text-lg lg:text-2xl text-white/90 font-light drop-shadow-lg tracking-wide mb-6 sm:mb-8"
+          style={{ letterSpacing: "0.3px" }}
+        >
+          L'art du confort sur mesure
+        </motion.p>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -65,26 +71,32 @@ function Hero() {
           transition={{ duration: 0.8, delay: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
           className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center px-4"
         >
-          <Link
-            href="/creations"
-            className="group relative inline-flex items-center justify-center w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-[#C7A451] to-[#D4B975] text-[#111] font-semibold rounded-full shadow-xl transition-all duration-300 hover:shadow-[0_0_30px_rgba(199,164,81,0.6)] hover:scale-105 text-sm sm:text-base"
-          >
-            <span>Découvrir nos créations</span>
-            <motion.span
-              className="ml-2"
-              animate={{ x: [0, 5, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Link
+              href="/creations"
+              className="group relative inline-flex items-center justify-center w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-[#C7A451] to-[#D4B975] text-[#111] font-semibold rounded-full shadow-md transition-all duration-300 hover:shadow-[0_0_25px_rgba(199,164,81,0.5)] text-sm sm:text-base"
+              style={{ letterSpacing: "0.3px" }}
             >
-              →
-            </motion.span>
-          </Link>
+              <span>Découvrir nos créations</span>
+              <motion.span
+                className="ml-2"
+                animate={{ x: [0, 5, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              >
+                →
+              </motion.span>
+            </Link>
+          </motion.div>
 
-          <Link
-            href="/produits"
-            className="group relative inline-flex items-center justify-center w-full sm:w-auto px-8 py-4 border-2 border-white/90 text-white font-semibold rounded-full transition-all duration-300 hover:bg-white/10 hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:scale-105 backdrop-blur-sm text-sm sm:text-base"
-          >
-            <span>Catalogue sur mesure</span>
-          </Link>
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Link
+              href="/produits"
+              className="group relative inline-flex items-center justify-center w-full sm:w-auto px-8 py-4 border-2 border-white/90 text-white font-semibold rounded-full transition-all duration-300 hover:bg-white/10 hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] backdrop-blur-sm text-sm sm:text-base"
+              style={{ letterSpacing: "0.3px" }}
+            >
+              <span>Catalogue sur mesure</span>
+            </Link>
+          </motion.div>
         </motion.div>
       </div>
 

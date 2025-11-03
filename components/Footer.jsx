@@ -71,15 +71,15 @@ export default function Footer() {
             <div className="space-y-3 text-center md:text-left">
               <div className="flex items-center justify-center md:justify-start space-x-2 text-gray-400">
                 <MapPin className="h-5 w-5 text-[#C7A451]" />
-                <span className="text-sm">Casablanca, Maroc</span>
+                <span className="text-sm">BLOC A3 N° 80, Hay Al Qods – Agadir, Maroc</span>
               </div>
               <div className="flex items-center justify-center md:justify-start space-x-2 text-gray-400">
                 <Phone className="h-5 w-5 text-[#C7A451]" />
-                <span className="text-sm">+212 6 00 00 00 00</span>
+                <span className="text-sm">06 70 87 37 18</span>
               </div>
               <div className="flex items-center justify-center md:justify-start space-x-2 text-gray-400">
                 <Mail className="h-5 w-5 text-[#C7A451]" />
-                <span className="text-sm">contact@paridor.ma</span>
+                <span className="text-sm">societeparidor@gmail.com</span>
               </div>
 
               {/* Social Links */}
@@ -103,7 +103,7 @@ export default function Footer() {
                   <Facebook className="h-6 w-6" />
                 </a>
                 <a
-                  href="https://wa.me/212600000000"
+                  href="https://wa.me/212678978999"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-[#25D366] transition-colors duration-300"

@@ -109,12 +109,31 @@ export default function MesCommandesPage() {
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="text-2xl font-bold" style={{ color: "#C6A34F" }}>
+                  <p className="text-2xl font-bold text-[#C7A451] mb-2">
                     {order.amount_total || order.amount || 0} MAD
                   </p>
-                  <p className="text-sm text-coal/60 capitalize">
-                    {order.status === "paid" ? "Payée" : order.status || "En attente"}
-                  </p>
+                  <motion.span
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: index * 0.1 + 0.2 }}
+                    className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
+                      order.status === "paid" || order.status === "complete"
+                        ? "bg-green-100 text-green-700"
+                        : order.status === "processing" || order.status === "preparation"
+                        ? "bg-yellow-100 text-yellow-700"
+                        : order.status === "delivered" || order.status === "livree"
+                        ? "bg-blue-100 text-blue-700"
+                        : "bg-gray-100 text-gray-700"
+                    }`}
+                  >
+                    {order.status === "paid" || order.status === "complete"
+                      ? "Payée"
+                      : order.status === "processing" || order.status === "preparation"
+                      ? "En préparation"
+                      : order.status === "delivered" || order.status === "livree"
+                      ? "Livrée"
+                      : order.status || "En attente"}
+                  </motion.span>
                 </div>
               </div>
 
@@ -129,25 +148,45 @@ export default function MesCommandesPage() {
               )}
 
               {order.items && order.items.length > 0 && (
-                <div className="border-t border-coal/10 pt-4">
-                  <h3 className="mb-2 font-medium text-coal">Articles commandés :</h3>
-                  <ul className="space-y-3">
+                <div className="border-t border-coal/10 pt-6 mt-6">
+                  <h3 className="mb-4 font-medium text-coal">Articles commandés :</h3>
+                  <ul className="space-y-4">
                     {order.items.map((item, idx) => (
-                      <li key={idx} className="flex items-center justify-between text-sm text-coal/70">
-                        <div className="flex items-center gap-3">
+                      <motion.li
+                        key={idx}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.1 + idx * 0.05 }}
+                        className="flex items-center justify-between gap-4 text-sm text-coal/70 bg-[#FAF7F3]/50 rounded-lg p-3"
+                      >
+                        <div className="flex items-center gap-4 flex-1">
                           {item.image && (
-                            <div className="h-12 w-12 overflow-hidden rounded-md">
+                            <div className="h-14 w-14 overflow-hidden rounded-lg flex-shrink-0">
                               {/* eslint-disable-next-line @next/next/no-img-element */}
                               <img src={item.image} alt={item.name || 'Produit'} className="h-full w-full object-cover" />
                             </div>
                           )}
-                          <span>
-                            {item.name || item.productName} {item.size && `(${item.size})`}{" "}
-                            {item.color && `- ${item.color}`} × {item.quantity}
-                          </span>
+                          <div className="flex items-center gap-3 flex-wrap">
+                            <span className="font-medium text-coal">
+                              {item.name || item.productName}
+                            </span>
+                            {item.size && <span className="text-coal/60">({item.size})</span>}
+                            {item.color && (
+                              <div className="flex items-center gap-2">
+                                <span className="text-coal/60">Couleur:</span>
+                                <div 
+                                  className="h-5 w-5 rounded-full border-2 border-white shadow-sm" 
+                                  style={{ backgroundColor: item.colorCode || item.color }}
+                                  title={item.color}
+                                  aria-label={`Couleur ${item.color}`}
+                                />
+                              </div>
+                            )}
+                            <span className="text-coal/60">× {item.quantity}</span>
+                          </div>
                         </div>
-                        <span className="font-medium">{(item.unitPrice || item.price || 0) * (item.quantity || 1)} MAD</span>
-                      </li>
+                        <span className="font-semibold text-coal">{(item.unitPrice || item.price || 0) * (item.quantity || 1)} MAD</span>
+                      </motion.li>
                     ))}
                   </ul>
                 </div>
