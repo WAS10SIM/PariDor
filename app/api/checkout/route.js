@@ -20,9 +20,7 @@ export async function POST(req) {
     }
 
     // Initialiser Stripe uniquement si la clé est disponible
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: "2025-09-30",
-});
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 
     const host = req.headers.get("host");
