@@ -146,7 +146,7 @@ function Testimonials() {
                 duration: 0.6, 
                 ease: "easeInOut" 
               }}
-              className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white to-[#FAF7F3] p-12 shadow-md"
+              className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white to-[#F8F4EC] p-12 shadow-md"
             >
               {/* Stars */}
               <motion.div 

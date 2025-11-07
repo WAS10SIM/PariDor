@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { useCart } from "../../context/CartContext";
 import { useToast } from "../../components/toast/ToastProvider";
 import Link from "next/link";
@@ -124,7 +125,7 @@ Merci de me contacter pour finaliser la commande.`;
   };
 
   return (
-    <div className="bg-beige py-24">
+    <div className="bg-[#F8F4EC] py-24 pb-32 md:pb-24">
       <div className="mx-auto max-w-7xl px-6">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
@@ -236,15 +237,17 @@ Merci de me contacter pour finaliser la commande.`;
                 return (
                   <div key={itemKey} className="flex items-start sm:items-center gap-3 sm:gap-4">
                     {item.image ? (
-                      <div className="relative h-14 w-14 sm:h-16 sm:w-16 rounded-md overflow-hidden flex-shrink-0">
-                        <img 
-                          src={item.image} 
+                      <div className="relative h-16 w-16 sm:h-20 sm:w-20 rounded-xl overflow-hidden flex-shrink-0 shadow-md">
+                        <Image
+                          src={item.image}
                           alt={item.name}
-                          className="h-full w-full object-cover"
+                          fill
+                          className="object-cover"
+                          sizes="64px"
                         />
                       </div>
                     ) : (
-                      <div className="h-14 w-14 sm:h-16 sm:w-16 rounded-lg bg-bone flex items-center justify-center flex-shrink-0">
+                      <div className="h-16 w-16 sm:h-20 sm:w-20 rounded-xl bg-bone flex items-center justify-center flex-shrink-0 shadow-md">
                         <span className="text-xl sm:text-2xl">🛋️</span>
                       </div>
                     )}
@@ -306,23 +309,85 @@ Merci de me contacter pour finaliser la commande.`;
               <button
                 onClick={handleStripeCheckout}
                 disabled={isStripeLoading || isWhatsAppLoading}
-                className="w-full rounded-full bg-gradient-to-r from-gold to-lightGold px-6 py-3 font-medium text-coal shadow-lg transition-all duration-300 hover:shadow-xl hover:bg-opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="btn-luxury w-full disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 aria-label="Payer par carte bancaire"
+                style={{ letterSpacing: "0.3px" }}
               >
-                {isStripeLoading ? "Redirection..." : "Payer par carte"}
+                {isStripeLoading ? (
+                  <>
+                    <motion.div
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                      className="w-5 h-5 border-2 border-coal border-t-transparent rounded-full"
+                    />
+                    <span>Redirection vers le paiement...</span>
+                  </>
+                ) : (
+                  "Payer par carte"
+                )}
               </button>
+              {/* Desktop: Bouton WhatsApp (caché sur mobile car fixe en bas) */}
               <button
                 onClick={handleWhatsAppOrder}
                 disabled={isStripeLoading || isWhatsAppLoading}
-                className="w-full rounded-full bg-green-500 px-6 py-3 font-medium text-white shadow-lg transition-all duration-300 hover:bg-green-600 hover:shadow-xl hover:bg-opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="hidden md:flex w-full rounded-xl bg-green-500 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:bg-green-600 hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed items-center justify-center gap-2"
                 aria-label="Commander via WhatsApp"
+                style={{ letterSpacing: "0.3px" }}
               >
-                {isWhatsAppLoading ? "Ouverture..." : "Commander via WhatsApp"}
+                {isWhatsAppLoading ? (
+                  <>
+                    <motion.div
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                      className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
+                    />
+                    <span>Ouverture...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>📱</span>
+                    <span>Commander via WhatsApp</span>
+                  </>
+                )}
               </button>
             </div>
           </motion.div>
         </div>
       </div>
+
+      {/* Mobile: Bouton WhatsApp fixe en bas */}
+      <motion.div
+        initial={{ y: 100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.3 }}
+        className="fixed inset-x-0 bottom-0 z-30 md:hidden bg-white border-t border-coal/10 shadow-2xl pb-[env(safe-area-inset-bottom)]"
+      >
+        <div className="px-4 py-3">
+          <button
+            onClick={handleWhatsAppOrder}
+            disabled={isStripeLoading || isWhatsAppLoading}
+            className="w-full rounded-xl bg-green-500 px-6 py-4 font-semibold text-white shadow-lg transition-all duration-300 hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            aria-label="Commander via WhatsApp"
+            style={{ letterSpacing: "0.3px" }}
+          >
+            {isWhatsAppLoading ? (
+              <>
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                  className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
+                />
+                <span>Ouverture...</span>
+              </>
+            ) : (
+              <>
+                <span>📱</span>
+                <span>Commander via WhatsApp</span>
+              </>
+            )}
+          </button>
+        </div>
+      </motion.div>
     </div>
   );
 }

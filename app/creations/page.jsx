@@ -1,6 +1,6 @@
 "use client";
 import { useState, useMemo } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import products from "../../data/products.json";
@@ -13,9 +13,17 @@ export default function CreationsPage() {
 
   const getSelectedVariant = (p) => selectedBySlug[p.slug || p.id] || p.variants?.[0] || null;
 
+  if (!enriched || enriched.length === 0) {
+    return (
+      <div className="flex items-center justify-center min-h-screen text-gray-500">
+        Chargement...
+      </div>
+    );
+  }
+
   return (
     <>
-      <div className="min-h-screen bg-bone pt-24 pb-16">
+      <div className="min-h-screen bg-[#F8F4EC] pt-24 pb-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <motion.div
@@ -25,7 +33,7 @@ export default function CreationsPage() {
             className="mb-12 text-center"
           >
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-playfair font-bold text-coal mb-4">
-              Nos <span className="text-[#C6A34F]">Créations</span>
+              Nos <span className="text-[#C7A451]">Créations</span>
             </h1>
             <p className="text-base sm:text-lg md:text-xl text-coal/70 max-w-3xl mx-auto leading-relaxed">
               Découvrez notre portfolio de réalisations sur mesure. Chaque pièce raconte une histoire unique, 
@@ -34,7 +42,7 @@ export default function CreationsPage() {
           </motion.div>
 
           {/* Gallery Grid */}
-          <div className="grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3 items-stretch">
             {enriched.map((product, index) => {
               const variant = getSelectedVariant(product);
               const displayImage = variant?.image || product.image;
@@ -51,35 +59,37 @@ export default function CreationsPage() {
                   ease: [0.25, 0.46, 0.45, 0.94]
                 }}
                 whileHover={{ y: -8 }}
-                className="group h-full"
+                className="group h-full flex"
               >
-                <div className="relative overflow-hidden rounded-3xl bg-white shadow-lg transition-all duration-500 hover:shadow-2xl hover:shadow-[#C6A34F]/20 h-full flex flex-col">
+                <div className="relative overflow-hidden rounded-3xl bg-white shadow-md transition-all duration-500 hover:shadow-xl hover:shadow-[#C7A451]/20 h-full flex flex-col w-full min-h-[520px]">
                   {/* Image Container */}
                   <div className="relative h-80 overflow-hidden flex-shrink-0">
-                    <motion.div 
-                      key={displayImage} 
-                      initial={{ opacity: 0, scale: 1.05 }} 
-                      animate={{ opacity: 1, scale: 1 }} 
-                      exit={{ opacity: 0, scale: 0.98 }}
-                      transition={{ duration: 0.5, ease: "easeInOut" }} 
-                      className="absolute inset-0"
-                    >
-                      <Image
-                        src={displayImage}
-                        alt={product.title}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-110"
-                        priority
-                        sizes="(max-width: 768px) 100vw, 33vw"
-                      />
-                    </motion.div>
+                    <AnimatePresence mode="wait">
+                      <motion.div 
+                        key={displayImage} 
+                        initial={{ opacity: 0, scale: 0.98 }} 
+                        animate={{ opacity: 1, scale: 1 }} 
+                        exit={{ opacity: 0, scale: 1.02 }}
+                        transition={{ duration: 0.35, ease: "easeInOut" }} 
+                        className="absolute inset-0"
+                      >
+                        <Image
+                          src={displayImage}
+                          alt={product.title}
+                          fill
+                          className="object-cover transition-transform duration-700 group-hover:scale-110"
+                          priority
+                          sizes="(max-width: 768px) 100vw, 33vw"
+                        />
+                      </motion.div>
+                    </AnimatePresence>
                     
                     {/* Gradient Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                     
                     {/* Category Badge */}
                     <div className="absolute top-4 left-4">
-                      <span className="rounded-full bg-[#C6A34F] px-3 py-1 text-sm font-medium text-coal backdrop-blur-sm">
+                      <span className="rounded-full bg-[#C7A451] px-3 py-1 text-sm font-medium text-coal backdrop-blur-sm">
                         {product.category}
                       </span>
                     </div>
@@ -102,7 +112,7 @@ export default function CreationsPage() {
                       {product.excerpt || "Confectionné avec soin pour allier élégance et confort incomparable."}
                     </p>
                     
-                    <div className="mb-5 text-lg sm:text-xl font-medium text-[#C6A34F]">
+                    <div className="mb-5 text-lg sm:text-xl font-medium text-[#C7A451]">
                       À partir de {displayPrice.toLocaleString("fr-MA")} MAD
                     </div>
 
@@ -121,7 +131,7 @@ export default function CreationsPage() {
                             }}
                             transition={{ duration: 0.2 }}
                             className={`h-8 w-8 rounded-full border-2 transition-all ${
-                              (variant?.key || '') === c.key ? 'border-[#C6A34F] ring-2 ring-[#C6A34F]/30' : 'border-white'
+                              (variant?.key || '') === c.key ? 'border-[#C7A451] ring-2 ring-[#C7A451]/30' : 'border-white'
                             }`}
                             style={{ backgroundColor: c.code }}
                           />
@@ -130,15 +140,17 @@ export default function CreationsPage() {
                     )}
                     
                     {/* CTA unique : Demander un devis */}
-                    <Link
-                      href="/contact"
-                      className="w-full inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#C6A34F] to-[#E3C97F] px-6 py-3 font-medium text-coal transition-all duration-300 hover:scale-105 hover:shadow-lg shadow-md mt-auto"
-                    >
-                      Demander un devis
-                      <svg className="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                      </svg>
-                    </Link>
+                    <div className="mt-auto pt-4">
+                      <Link
+                        href="/contact"
+                        className="btn-luxury w-full inline-flex items-center justify-center"
+                      >
+                        Demander un devis
+                        <svg className="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                        </svg>
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -164,7 +176,7 @@ export default function CreationsPage() {
               </p>
               <Link
                 href="/contact"
-                className="inline-flex items-center rounded-full border-2 border-[#C6A34F] px-8 py-4 font-medium text-[#C6A34F] transition-all duration-300 hover:bg-[#C6A34F] hover:text-coal"
+                className="btn-luxury-outline inline-flex items-center"
               >
                 Discuter de mon projet
                 <svg className="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

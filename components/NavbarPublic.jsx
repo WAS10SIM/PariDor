@@ -29,16 +29,16 @@ function NavbarPublic() {
   // Classes dynamiques selon le scroll et la page avec shrinkage
   const navClasses = `fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out ${
     scrolled || !isHomePage
-      ? "bg-black/80 backdrop-blur-lg shadow-xl"
+      ? "bg-[#F8F4EC]/95 backdrop-blur-lg shadow-md"
       : "bg-transparent"
   }`;
 
   const textClasses = `transition-colors duration-300 ${
-    scrolled || !isHomePage ? "text-white" : "text-white"
+    scrolled || !isHomePage ? "text-[#1A1A1A]" : "text-white"
   }`;
 
-  // Pas de filtre - le logo est déjà doré
-  const logoFilter = "";
+  // Logo blanc sur hero, couleur sur fond clair
+  const logoFilter = scrolled || !isHomePage ? "" : "brightness(0) invert(1)";
 
   const totalItems = items.reduce((sum, item) => sum + (item.quantity || 1), 0);
 
@@ -62,7 +62,10 @@ function NavbarPublic() {
               width={140}
               height={60}
               className="h-14 w-auto object-contain transition-all duration-300"
-              style={{ filter: logoFilter }}
+              style={{ 
+                filter: logoFilter,
+                maxHeight: "56px"
+              }}
               priority
             />
           </Link>
@@ -76,14 +79,15 @@ function NavbarPublic() {
                   key={link.href}
                   href={link.href}
                   className={`${textClasses} font-medium hover:text-[#C7A451] transition-colors duration-300 relative group`}
+                  style={{ letterSpacing: "0.3px" }}
                 >
                   {link.label}
                   <motion.span 
-                    className="absolute bottom-0 left-0 h-0.5 bg-[#C7A451]"
+                    className="absolute -bottom-1 left-0 h-0.5 bg-[#C7A451]"
                     initial={{ width: isActive ? "100%" : "0%" }}
                     animate={{ width: isActive ? "100%" : "0%" }}
                     whileHover={{ width: "100%" }}
-                    transition={{ duration: 0.3 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
                   />
                 </Link>
               );
@@ -95,30 +99,39 @@ function NavbarPublic() {
             <Link
               href="/mes-commandes"
               className={`${textClasses} font-medium hover:text-[#C7A451] transition-colors duration-300 relative group`}
+              style={{ letterSpacing: "0.3px" }}
             >
               Mes commandes
-              {pathname === "/mes-commandes" && (
-                <motion.span 
-                  className="absolute bottom-0 left-0 w-full h-0.5 bg-[#C7A451]"
-                  initial={{ width: 0 }}
-                  animate={{ width: "100%" }}
-                  transition={{ duration: 0.3 }}
-                />
-              )}
+              <motion.span 
+                className="absolute -bottom-1 left-0 h-0.5 bg-[#C7A451]"
+                initial={{ width: pathname === "/mes-commandes" ? "100%" : "0%" }}
+                animate={{ width: pathname === "/mes-commandes" ? "100%" : "0%" }}
+                whileHover={{ width: "100%" }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              />
             </Link>
 
-            <Link
-              href="/panier"
-              className={`${textClasses} relative hover:text-[#C7A451] transition-colors duration-300`}
-              aria-label="Panier"
+            <motion.div
+              animate={totalItems > 0 ? { scale: [1, 1.2, 1] } : {}}
+              transition={{ duration: 0.3 }}
             >
-              <ShoppingCart className="h-6 w-6" />
-              {totalItems > 0 && (
-                <span className="absolute -top-2 -right-2 bg-[#C7A451] text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
-                  {totalItems}
-                </span>
-              )}
-            </Link>
+              <Link
+                href="/panier"
+                className={`${textClasses} relative hover:text-[#C7A451] transition-colors duration-300`}
+                aria-label="Panier"
+              >
+                <ShoppingCart className="h-6 w-6" />
+                {totalItems > 0 && (
+                  <motion.span
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    className="absolute -top-2 -right-2 bg-[#C7A451] text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center"
+                  >
+                    {totalItems}
+                  </motion.span>
+                )}
+              </Link>
+            </motion.div>
 
             <Link
               href="/produits"
@@ -130,12 +143,19 @@ function NavbarPublic() {
           </div>
 
           {/* Mobile Menu Button */}
-          <button
+          <motion.button
             onClick={() => setIsOpen(!isOpen)}
             className={`lg:hidden ${textClasses} p-2 rounded-md hover:bg-white/10 transition-colors`}
+            whileTap={{ scale: 0.95 }}
+            aria-label="Menu mobile"
           >
-            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
+            <motion.div
+              animate={isOpen ? { rotate: 90 } : { rotate: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </motion.div>
+          </motion.button>
         </div>
       </div>
 
@@ -156,9 +176,9 @@ function NavbarPublic() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 bottom-0 w-80 max-w-[85vw] bg-[#FAF7F3]/95 backdrop-blur-xl z-50 lg:hidden shadow-2xl border-l border-[#C7A451]/20 overflow-y-auto"
+              className="fixed top-0 right-0 bottom-0 w-80 max-w-[85vw] bg-[#F8F4EC]/98 backdrop-blur-xl z-50 lg:hidden shadow-2xl border-l border-[#C7A451]/20 overflow-y-auto"
             >
-              <div className="px-6 py-8 space-y-6">
+              <div className="px-6 py-8 space-y-4">
                 {/* Close Button */}
                 <div className="flex justify-end mb-4">
                   <button
@@ -181,10 +201,16 @@ function NavbarPublic() {
                     <Link
                       href={link.href}
                       onClick={() => setIsOpen(false)}
-                      className="block text-[#1a1a1a] font-medium hover:text-[#C7A451] transition-colors py-3 border-b border-[#1a1a1a]/10 text-lg"
+                      className="block text-[#1A1A1A] font-medium hover:text-[#C7A451] transition-colors py-3 border-b border-[#1A1A1A]/10 text-lg relative group"
                       style={{ letterSpacing: "0.3px" }}
                     >
                       {link.label}
+                      <motion.span
+                        className="absolute bottom-0 left-0 h-0.5 bg-[#C7A451]"
+                        initial={{ width: 0 }}
+                        whileHover={{ width: "100%" }}
+                        transition={{ duration: 0.3 }}
+                      />
                     </Link>
                   </motion.div>
                 ))}
@@ -197,10 +223,16 @@ function NavbarPublic() {
                   <Link
                     href="/mes-commandes"
                     onClick={() => setIsOpen(false)}
-                    className="block text-[#1a1a1a] font-medium hover:text-[#C7A451] transition-colors py-3 border-b border-[#1a1a1a]/10 text-lg"
+                    className="block text-[#1A1A1A] font-medium hover:text-[#C7A451] transition-colors py-3 border-b border-[#1A1A1A]/10 text-lg relative group"
                     style={{ letterSpacing: "0.3px" }}
                   >
                     Mes commandes
+                    <motion.span
+                      className="absolute bottom-0 left-0 h-0.5 bg-[#C7A451]"
+                      initial={{ width: 0 }}
+                      whileHover={{ width: "100%" }}
+                      transition={{ duration: 0.3 }}
+                    />
                   </Link>
                 </motion.div>
 
@@ -212,7 +244,7 @@ function NavbarPublic() {
                   <Link
                     href="/panier"
                     onClick={() => setIsOpen(false)}
-                    className="flex items-center justify-between text-[#1a1a1a] font-medium hover:text-[#C7A451] transition-colors py-3 border-b border-[#1a1a1a]/10 text-lg"
+                    className="flex items-center justify-between text-[#1A1A1A] font-medium hover:text-[#C7A451] transition-colors py-3 border-b border-[#1A1A1A]/10 text-lg relative group"
                     style={{ letterSpacing: "0.3px" }}
                   >
                     <span>Panier</span>
@@ -221,6 +253,12 @@ function NavbarPublic() {
                         {totalItems}
                       </span>
                     )}
+                    <motion.span
+                      className="absolute bottom-0 left-0 h-0.5 bg-[#C7A451]"
+                      initial={{ width: 0 }}
+                      whileHover={{ width: "100%" }}
+                      transition={{ duration: 0.3 }}
+                    />
                   </Link>
                 </motion.div>
 

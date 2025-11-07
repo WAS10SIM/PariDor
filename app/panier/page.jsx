@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { ShoppingBag, X } from "lucide-react";
 import { useCart } from "../../context/CartContext";
 import { WHATSAPP_URL } from "../../data/company";
 
@@ -28,7 +29,9 @@ export default function PanierPage() {
           >
             <h1 className="mb-8 text-4xl font-light text-coal">Votre panier</h1>
             <div className="rounded-3xl bg-white p-12 shadow-lg">
-              <div className="mb-6 text-6xl">🛒</div>
+              <div className="mb-6 flex justify-center">
+                <ShoppingBag className="h-16 w-16 text-[#C7A451]/30" />
+              </div>
               <h2 className="mb-4 text-2xl font-medium text-coal">Votre panier est vide</h2>
               <p className="mb-8 text-coal/60">Découvrez nos créations et ajoutez vos articles préférés.</p>
               <Link
@@ -128,13 +131,15 @@ export default function PanierPage() {
                       </button>
                     </div>
                     
-                    <button
+                    <motion.button
                       onClick={() => removeItem(itemKey)}
-                      className="text-coal/60 transition-colors hover:text-coal p-1"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      className="text-coal/60 transition-colors hover:text-red-500 p-1"
                       aria-label="Supprimer l'article"
                     >
-                      ✕
-                    </button>
+                      <X className="h-5 w-5" />
+                    </motion.button>
                   </div>
                 </motion.div>
               );
@@ -145,7 +150,7 @@ export default function PanierPage() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="mt-8 rounded-3xl bg-[#FAF7F3] p-8 shadow-md"
+            className="mt-8 rounded-3xl bg-[#F8F4EC] p-8 shadow-md"
           >
             <div className="flex items-center justify-between mb-6">
               <div>
@@ -162,7 +167,7 @@ export default function PanierPage() {
                 onClick={clear}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="flex-1 rounded-full border-2 border-[#C7A451] px-6 py-3 font-medium text-[#C7A451] transition-all duration-300 hover:bg-[#C7A451]/10 hover:shadow-md"
+                className="btn-luxury-outline flex-1"
                 style={{ letterSpacing: "0.3px" }}
               >
                 Vider le panier
@@ -175,7 +180,7 @@ export default function PanierPage() {
               >
                 <Link
                   href="/checkout"
-                  className="block rounded-full bg-gradient-to-r from-[#C7A451] to-[#D4B975] px-6 py-3 text-center font-semibold text-[#111] shadow-md transition-all duration-300 hover:shadow-lg hover:shadow-[#C7A451]/40 hover:scale-105"
+                  className="btn-luxury block w-full text-center"
                   style={{ letterSpacing: "0.3px" }}
                 >
                   Passer à la commande

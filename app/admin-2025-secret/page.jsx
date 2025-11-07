@@ -30,7 +30,6 @@ export default function AdminSecretPage() {
     if (!isAuthenticated || !token) return;
 
     const interval = setInterval(() => {
-      console.log("🔄 Auto-refresh des commandes...");
       fetchOrders(token);
     }, 30000); // 30 secondes
 
@@ -136,7 +135,6 @@ export default function AdminSecretPage() {
             order._id === orderId ? { ...order, status: newStatus } : order
           )
         );
-        console.log(`✅ Statut mis à jour: ${orderId} → ${frenchStatus}`);
       } else {
         console.error("❌ Erreur:", data.message);
         alert(`Erreur: ${data.message}`);
@@ -172,12 +170,12 @@ export default function AdminSecretPage() {
 
   const getStatusColor = (status) => {
     const colors = {
-      paid: "bg-green-100 text-green-800",
-      pending: "bg-yellow-100 text-yellow-800",
-      cancelled: "bg-red-100 text-red-800",
-      completed: "bg-blue-100 text-blue-800",
+      paid: "bg-green-100 text-green-700 border-green-300",
+      pending: "bg-[#C7A451]/20 text-[#C7A451] border-[#C7A451]/40",
+      cancelled: "bg-red-100 text-red-700 border-red-300",
+      completed: "bg-blue-100 text-blue-700 border-blue-300",
     };
-    return colors[status] || "bg-gray-100 text-gray-800";
+    return colors[status] || "bg-gray-100 text-gray-700 border-gray-300";
   };
 
   // Si pas authentifié, afficher formulaire de connexion
@@ -379,8 +377,8 @@ export default function AdminSecretPage() {
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: index * 0.05 }}
-                        className={`border-b border-[#1a1a1a]/5 hover:bg-[#FAF7F3] transition-colors ${
-                          index % 2 === 0 ? "bg-white" : "bg-[#FAF7F3]"
+                        className={`border-b border-[#1a1a1a]/5 hover:bg-[#fafafa] transition-colors ${
+                          index % 2 === 0 ? "bg-white" : "bg-white"
                         }`}
                       >
                         <td className="px-6 py-4">
@@ -416,7 +414,7 @@ export default function AdminSecretPage() {
                             onChange={(e) => handleStatusChange(order._id, e.target.value)}
                             className={`px-3 py-2 rounded-lg text-xs font-semibold border-2 cursor-pointer transition-all duration-300 ${getStatusColor(
                               order.status
-                            )} hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-[#C6A34F]`}
+                            )} hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-[#C7A451]`}
                           >
                             <option value="pending">En attente</option>
                             <option value="paid">Payée</option>
@@ -478,7 +476,7 @@ export default function AdminSecretPage() {
                       onChange={(e) => handleStatusChange(order._id, e.target.value)}
                       className={`px-2 py-1 rounded-lg text-xs font-semibold border-2 cursor-pointer transition-all duration-300 ${getStatusColor(
                         order.status
-                      )} hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-[#C6A34F]`}
+                      )} hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-[#C7A451]`}
                     >
                       <option value="pending">En attente</option>
                       <option value="paid">Payée</option>

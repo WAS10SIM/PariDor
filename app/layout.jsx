@@ -1,4 +1,5 @@
 export const metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://paridor.vercel.app'),
   title: "Pari Dor — L'art du confort sur mesure | Meubles Haut de Gamme Maroc",
   description:
     "Fabricant marocain d'ameublement haut de gamme depuis 10+ ans : matelas premium, canapés sur mesure, banquettes élégantes et têtes de lit. Artisanat marocain authentique, 100% fait au Maroc à Agadir. Livraison dans tout le royaume.",
@@ -50,6 +51,9 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="theme-color" content="#C7A451" />
       </head>
       <body className="bg-beige">
         <ToastProvider>

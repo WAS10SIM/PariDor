@@ -4,7 +4,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px;
+  scroll-padding-top: 100px;
 }
 
 body {
@@ -21,12 +21,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #d4af37;
+  background: #C7A451;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #b8941f;
+  background: #D4B975;
 }
 
 @layer base {
@@ -35,14 +35,19 @@ body {
   }
 
   body {
-    @apply bg-[#FAF7F3] text-coal antialiased;
+    @apply bg-[#F8F4EC] text-coal antialiased;
     letter-spacing: 0.3px;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
   }
 }
 
 @layer components {
   .btn-luxury {
-    @apply relative inline-flex items-center justify-center rounded-full px-8 py-4 font-semibold transition-all duration-300 ease-in-out overflow-hidden;
+    @apply relative inline-flex items-center justify-center rounded-xl px-6 py-3 font-semibold transition-all duration-300 ease-in-out overflow-hidden;
     @apply bg-gradient-to-r from-[#C7A451] to-[#D4B975] text-[#111];
     @apply shadow-md hover:shadow-lg hover:shadow-[#C7A451]/40;
     @apply hover:scale-105 active:scale-95;
@@ -59,9 +64,17 @@ body {
     @apply opacity-100;
   }
   
+  .btn-luxury-outline {
+    @apply relative inline-flex items-center justify-center rounded-xl px-6 py-3 font-semibold transition-all duration-300 ease-in-out overflow-hidden;
+    @apply border-2 border-[#C7A451] text-[#C7A451] bg-transparent;
+    @apply hover:bg-[#C7A451] hover:text-white;
+    @apply hover:scale-105 active:scale-95;
+    @apply shadow-md hover:shadow-lg;
+  }
+  
   .btn-ghost-luxury {
-    @apply relative inline-flex items-center justify-center rounded-full px-8 py-4 font-semibold transition-all duration-300 ease-in-out overflow-hidden;
-    @apply border-2 border-[#C6A34F] text-[#C6A34F];
+    @apply relative inline-flex items-center justify-center rounded-xl px-8 py-4 font-semibold transition-all duration-300 ease-in-out overflow-hidden;
+    @apply border-2 border-[#C7A451] text-[#C7A451];
     @apply hover:text-white;
     @apply hover:scale-105 active:scale-95;
   }
@@ -103,6 +116,10 @@ body {
     box-shadow: 0 4px 12px rgba(199, 164, 81, 0.12);
   }
 
+  .min-h-card {
+    min-height: 520px;
+  }
+
   /* Link hover with gold underline */
   .link-luxury {
     @apply relative transition-colors duration-300;
@@ -110,7 +127,7 @@ body {
 
   .link-luxury::after {
     content: "";
-    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-[#C6A34F] transition-all duration-300;
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-[#C7A451] transition-all duration-300;
   }
 
   .link-luxury:hover::after {

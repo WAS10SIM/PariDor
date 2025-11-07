@@ -1,17 +1,28 @@
 "use client";
 import { usePathname } from "next/navigation";
+import { useEffect } from "react";
+import dynamic from "next/dynamic";
 import { AnimatePresence, motion } from "framer-motion";
 import NavbarPublic from "../components/NavbarPublic";
-import Footer from "../components/Footer";
-import MobileButtons from "../components/MobileButtons";
-import ScrollToTop from "../components/ScrollToTop";
-import Preloader from "../components/Preloader";
+
+// Code-splitting pour les composants lourds
+const Footer = dynamic(() => import("../components/Footer"), { ssr: true });
+const MobileButtons = dynamic(() => import("../components/MobileButtons"), { ssr: false });
+const ScrollToTop = dynamic(() => import("../components/ScrollToTop"), { ssr: false });
+const Preloader = dynamic(() => import("../components/Preloader"), { ssr: false });
 
 export default function LayoutClient({ children }) {
   const pathname = usePathname();
   
+  // Scroll to top sur changement de route
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, [pathname]);
+  
   // Vérifier si on est sur une page admin
   const isAdminPage = pathname?.startsWith("/admin");
+  // Masquer le footer sur la page success pour un rendu plus professionnel
+  const isSuccessPage = pathname === "/success" || pathname?.startsWith("/success") || pathname?.includes("/succes");
 
   return (
     <>
@@ -28,22 +39,28 @@ export default function LayoutClient({ children }) {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -15 }}
           transition={{ duration: 0.2, ease: "easeInOut" }}
+          className={isSuccessPage ? "min-h-screen" : "min-h-[80vh]"}
         >
           {children}
         </motion.main>
       </AnimatePresence>
 
-      {/* Footer (masqué sur pages admin) */}
-      {!isAdminPage && <Footer />}
+      {/* Footer (masqué sur pages admin et success) */}
+      {!isAdminPage && !isSuccessPage && <Footer />}
       
-      {/* Boutons mobiles (masqués sur pages admin) */}
-      {!isAdminPage && <MobileButtons />}
+      {/* Boutons mobiles (masqués sur pages admin et success) */}
+      {!isAdminPage && !isSuccessPage && <MobileButtons />}
       
       {/* Scroll to top (visible partout) */}
       <ScrollToTop />
     </>
   );
 }
+
+
+
+
+
 
 
 

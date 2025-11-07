@@ -1,6 +1,6 @@
 "use client";
 import { useState, useMemo } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import products from "../data/products.json";
@@ -34,7 +34,7 @@ function Showroom() {
   };
 
   return (
-    <section id="creations" className="py-20 md:py-28 bg-[#FAF7F3]">
+    <section id="creations" className="py-20 md:py-28 bg-[#F8F4EC]">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -55,7 +55,7 @@ function Showroom() {
         </motion.div>
 
         {/* Products Grid - show only 3 items on homepage */}
-        <div className="grid gap-8 md:gap-10 lg:gap-12 lg:grid-cols-3">
+        <div className="grid gap-8 md:gap-10 lg:gap-12 lg:grid-cols-3 items-stretch">
           {enriched.slice(0, 3).map((product, index) => {
             const variant = getSelectedVariant(product);
             const displayImage = variant?.image || product.image;
@@ -79,31 +79,33 @@ function Showroom() {
                 whileHover={{ 
                   scale: 1.03,
                   y: -8,
-                  boxShadow: "0 8px 24px rgba(198, 163, 79, 0.15)",
+                  boxShadow: "0 8px 24px rgba(199, 164, 81, 0.15)",
                   transition: { duration: 0.3 }
                 }}
-                className="relative overflow-hidden rounded-3xl bg-white shadow-lg transition-all duration-300 h-full flex flex-col"
+                className="relative overflow-hidden rounded-3xl bg-white shadow-md transition-all duration-300 h-full flex flex-col min-h-[520px]"
               >
                 {/* Image Container */}
                 <div className="relative aspect-[4/3] overflow-hidden flex-shrink-0">
-                  <motion.div 
-                    key={displayImage} 
-                    initial={{ opacity: 0, scale: 1.05 }} 
-                    animate={{ opacity: 1, scale: 1 }} 
-                    exit={{ opacity: 0, scale: 0.98 }}
-                    transition={{ duration: 0.5, ease: "easeInOut" }} 
-                    className="absolute inset-0"
-                  >
-                    <Image
-                      src={displayImage}
-                      alt={product.title || `${product.category} - Pari D'Or`}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-110"
-                      priority={index < 3}
-                      loading={index >= 3 ? "lazy" : undefined}
-                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    />
-                  </motion.div>
+                  <AnimatePresence mode="wait">
+                    <motion.div 
+                      key={displayImage} 
+                      initial={{ opacity: 0, scale: 0.98 }} 
+                      animate={{ opacity: 1, scale: 1 }} 
+                      exit={{ opacity: 0, scale: 1.02 }}
+                      transition={{ duration: 0.35, ease: "easeInOut" }} 
+                      className="absolute inset-0"
+                    >
+                      <Image
+                        src={displayImage}
+                        alt={product.title || `${product.category} - Pari D'Or`}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                        priority={index < 3}
+                        loading={index >= 3 ? "lazy" : undefined}
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
+                    </motion.div>
+                  </AnimatePresence>
                   
                   {/* Gradient Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
@@ -126,9 +128,15 @@ function Showroom() {
                     {product.excerpt || "Confectionné avec soin pour allier élégance et confort incomparable."}
                   </p>
                   
-                  <div className="mb-5 text-2xl font-semibold text-[#C7A451]">
+                  <motion.div 
+                    key={`price-${product.id}-${variant?.key || 'default'}`}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.2 }}
+                    className="mb-5 text-2xl font-semibold text-[#C7A451]"
+                  >
                     À partir de {displayPrice.toLocaleString("fr-MA")} MAD
-                  </div>
+                  </motion.div>
 
                   {product.variants && product.variants.length > 0 && (
                     <div className="mb-5 flex flex-wrap gap-2">
@@ -153,11 +161,10 @@ function Showroom() {
                     </div>
                   )}
                   
-                  <div className="flex gap-3 mt-auto">
+                  <div className="flex gap-3 mt-auto pt-4">
                     <Link
                       href={`/products/${product.slug}`}
-                      className="flex-1 inline-flex items-center justify-center rounded-full border-2 border-[#C7A451] px-4 py-3 font-semibold text-[#C7A451] transition-all duration-300 hover:bg-[#C7A451]/10 hover:border-[#C7A451] hover:shadow-md"
-                      style={{ letterSpacing: "0.3px" }}
+                      className="btn-luxury-outline flex-1 inline-flex items-center justify-center"
                     >
                       Découvrir
                       <svg className="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -168,8 +175,7 @@ function Showroom() {
                       onClick={() => handleAddToCart(product)}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="flex-1 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#C7A451] to-[#D4B975] text-[#111] px-4 py-3 font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-[#C7A451]/40"
-                      style={{ letterSpacing: "0.3px" }}
+                      className="btn-luxury flex-1"
                     >
                       Ajouter au panier
                     </motion.button>

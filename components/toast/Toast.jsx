@@ -1,6 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { CheckCircle2, XCircle, ShoppingBag, Info, X } from "lucide-react";
 
 export default function Toast({ id, message, type = "success", duration = 3000, onRemove }) {
   useEffect(() => {
@@ -14,30 +15,31 @@ export default function Toast({ id, message, type = "success", duration = 3000, 
   const getTypeStyles = () => {
     switch (type) {
       case "success":
-        return "bg-green-500 text-white";
+        return "bg-green-50 border border-green-200 text-green-800";
       case "error":
-        return "bg-red-500 text-white";
+        return "bg-red-50 border border-red-200 text-red-800";
       case "cart":
-        return "bg-gold text-coal";
+        return "bg-[#fff8ec] border border-[#C7A451]/30 text-[#1A1A1A]";
       case "info":
-        return "bg-blue-500 text-white";
+        return "bg-blue-50 border border-blue-200 text-blue-800";
       default:
-        return "bg-coal text-white";
+        return "bg-gray-50 border border-gray-200 text-gray-800";
     }
   };
 
   const getIcon = () => {
+    const iconProps = { className: "w-5 h-5 flex-shrink-0" };
     switch (type) {
       case "success":
-        return "✅";
+        return <CheckCircle2 {...iconProps} className="w-5 h-5 text-green-600" />;
       case "error":
-        return "❌";
+        return <XCircle {...iconProps} className="w-5 h-5 text-red-600" />;
       case "cart":
-        return "🛒";
+        return <ShoppingBag {...iconProps} className="w-5 h-5 text-[#C7A451]" />;
       case "info":
-        return "ℹ️";
+        return <Info {...iconProps} className="w-5 h-5 text-blue-600" />;
       default:
-        return "📢";
+        return null;
     }
   };
 
@@ -53,23 +55,29 @@ export default function Toast({ id, message, type = "success", duration = 3000, 
           stiffness: 300,
           duration: 0.4 
         }}
-        className={`relative rounded-xl px-4 py-3 shadow-[0_10px_35px_rgba(0,0,0,0.08)] ${getTypeStyles()}`}
+        className={`relative rounded-xl px-4 py-3 shadow-lg ${getTypeStyles()}`}
+        style={{ borderRadius: "12px" }}
       >
         <div className="flex items-center gap-3">
-          <span className="text-lg">{getIcon()}</span>
-          <span className="text-sm font-medium">{message}</span>
+          {getIcon()}
+          <span className="text-sm font-medium flex-1">{message}</span>
           <button
             onClick={() => onRemove(id)}
-            className="ml-2 text-white/80 hover:text-white transition-colors"
+            className="ml-2 opacity-70 hover:opacity-100 transition-opacity"
             aria-label="Fermer"
           >
-            ✕
+            <X className="w-4 h-4" />
           </button>
         </div>
       </motion.div>
     </AnimatePresence>
   );
 }
+
+
+
+
+
 
 
 

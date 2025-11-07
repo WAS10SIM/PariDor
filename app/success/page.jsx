@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { CheckCircle2 } from "lucide-react";
 import { useCart } from "../../context/CartContext";
 
 export default function SuccessPage() {
@@ -33,9 +34,8 @@ export default function SuccessPage() {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ sessionId }),
               });
-              console.log("✅ Statut commande mis à jour dans orders.json");
             } catch (fileError) {
-              console.error("⚠️ Erreur mise à jour orders.json:", fileError);
+              // Erreur silencieuse - la commande sera quand même sauvegardée dans localStorage
             }
           }
 
@@ -70,7 +70,6 @@ export default function SuccessPage() {
 
           // 🧹 Vider le panier via le Context (synchronisation automatique)
           clear();
-          console.log("🧹 Panier vidé automatiquement après paiement réussi");
 
           // Vider aussi les données client
           localStorage.removeItem("paridor-customer");
@@ -84,7 +83,7 @@ export default function SuccessPage() {
   }, [clear]);
 
   return (
-    <main className="min-h-screen bg-beige flex flex-col items-center justify-center text-center px-6">
+    <main className="min-h-screen bg-[#F8F4EC] flex flex-col items-center justify-center text-center px-6 pt-24">
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -92,19 +91,19 @@ export default function SuccessPage() {
         className="max-w-2xl mx-auto"
       >
         <motion.div
-          initial={{ y: -20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="text-green-500 text-7xl mb-6"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
+          className="mb-6 flex justify-center"
         >
-          ✅
+          <CheckCircle2 className="w-16 h-16 text-[#C7A451]" strokeWidth={1.5} />
         </motion.div>
         
         <motion.h1
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.4 }}
-          className="text-4xl font-bold text-gold mb-3"
+          transition={{ delay: 0.2 }}
+          className="text-3xl sm:text-4xl font-playfair font-bold text-[#C7A451] mt-4 mb-3"
         >
           Merci pour votre commande !
         </motion.h1>
@@ -112,8 +111,8 @@ export default function SuccessPage() {
         <motion.p
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className="text-lg text-coal/80 mb-4"
+          transition={{ delay: 0.3 }}
+          className="text-lg text-coal/80 mb-2 mt-2"
         >
           Votre commande a été enregistrée avec succès.
         </motion.p>
@@ -121,10 +120,10 @@ export default function SuccessPage() {
         <motion.p
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.6 }}
+          transition={{ delay: 0.4 }}
           className="text-base text-coal/60 mb-8"
         >
-          Votre panier a été vidé automatiquement. 🧹
+          Votre panier a été vidé automatiquement.
         </motion.p>
         
         <motion.div
@@ -133,10 +132,10 @@ export default function SuccessPage() {
           transition={{ delay: 0.7 }}
           className="flex flex-col sm:flex-row gap-3 justify-center"
         >
-          <Link href="/mes-commandes" className="btn-luxury px-6 py-3">
+          <Link href="/mes-commandes" className="btn-luxury">
             Voir mes commandes
           </Link>
-          <Link href="/" className="btn-luxury-outline px-6 py-3">
+          <Link href="/" className="btn-luxury-outline">
             Retour à l'accueil
           </Link>
         </motion.div>

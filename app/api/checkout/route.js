@@ -5,23 +5,18 @@ import path from "path";
 
 export async function POST(req) {
   try {
-    console.log('📥 Checkout API: reçu requête POST');
     const { items, customerInfo } = await req.json();
-    console.log('📦 Items:', items?.length, 'items');
-    console.log('👤 CustomerInfo:', customerInfo);
 
     if (!items || items.length === 0) {
       return NextResponse.json({ error: "Panier vide" }, { status: 400 });
     }
 
     if (!process.env.STRIPE_SECRET_KEY) {
-      console.error('❌ STRIPE_SECRET_KEY manquante');
       return NextResponse.json({ error: "Configuration Stripe manquante" }, { status: 500 });
     }
 
     // Initialiser Stripe uniquement si la clé est disponible
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
     const host = req.headers.get("host");
     const protocol = host?.includes("localhost") ? "http" : "https";
@@ -42,13 +37,10 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
       };
     });
 
-    console.log('🛒 Line items créés:', JSON.stringify(line_items, null, 2));
-
     // Calculer le montant total
     const totalAmount = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
     // Créer la session Stripe
-    console.log('🔄 Création session Stripe...');
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       line_items,
@@ -69,14 +61,14 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
       // Créer une nouvelle commande
       const newOrder = {
-        id: `CMD-${Date.now()}`, // Format demandé: CMD-timestamp
-        sessionId: session.id, // Garder la session Stripe pour référence
+        id: `CMD-${Date.now()}`,
+        sessionId: session.id,
         customerName: customerInfo?.name || "Client",
         customerEmail: customerInfo?.email || "client@paridor.com",
         customerPhone: customerInfo?.phone || "",
         customerAddress: customerInfo?.address || "",
         totalAmount: totalAmount,
-        paymentMethod: "carte", // "carte" au lieu de "stripe"
+        paymentMethod: "carte",
         status: "en attente",
         date: new Date().toISOString(),
         articles: items.map((it) => ({
@@ -93,18 +85,13 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
       // Sauvegarder dans le fichier
       await fs.writeFile(filePath, JSON.stringify(orders, null, 2), "utf8");
-
-      console.log("✅ Commande Stripe créée (en attente) dans orders.json - Session:", session.id);
     } catch (fileError) {
       // Ne pas bloquer le paiement si l'écriture échoue
-      console.error("⚠️ Erreur sauvegarde orders.json (non-bloquante):", fileError.message);
+      // Erreur silencieuse pour ne pas perturber l'expérience utilisateur
     }
 
-    console.log('✅ Session Stripe créée:', session.id);
     return NextResponse.json({ url: session.url });
   } catch (error) {
-    console.error("❌ Checkout error:", error.message);
-    console.error("❌ Stack:", error.stack);
     return NextResponse.json({ error: error.message || "Erreur serveur" }, { status: 500 });
   }
 }

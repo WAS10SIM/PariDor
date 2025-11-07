@@ -1,6 +1,6 @@
 "use client";
 import { useState, use, useMemo } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "../../../context/CartContext";
@@ -60,25 +60,27 @@ export default function ProductPage({ params }) {
   };
 
   return (
-    <div className="min-h-screen bg-bone">
+    <div className="min-h-[80vh] bg-[#F8F4EC]">
       {/* Hero Product */}
       <section className="relative h-[60vh] overflow-hidden">
-        <motion.div 
-          key={displayImage} 
-          initial={{ opacity: 0, scale: 1.05 }} 
-          animate={{ opacity: 1, scale: 1 }} 
-          exit={{ opacity: 0, scale: 0.98 }}
-          transition={{ duration: 0.6, ease: "easeInOut" }} 
-          className="absolute inset-0"
-        >
-          <Image
-            src={displayImage}
-            alt={product.title}
-            fill
-            className="object-cover"
-            priority
-          />
-        </motion.div>
+        <AnimatePresence mode="wait">
+          <motion.div 
+            key={displayImage} 
+            initial={{ opacity: 0, scale: 0.98 }} 
+            animate={{ opacity: 1, scale: 1 }} 
+            exit={{ opacity: 0, scale: 1.02 }}
+            transition={{ duration: 0.4, ease: "easeInOut" }} 
+            className="absolute inset-0"
+          >
+            <Image
+              src={displayImage}
+              alt={product.title}
+              fill
+              className="object-cover"
+              priority
+            />
+          </motion.div>
+        </AnimatePresence>
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-transparent" />
         
         <div className="relative z-10 flex h-full items-end">
@@ -114,23 +116,25 @@ export default function ProductPage({ params }) {
               transition={{ duration: 0.8 }}
               className="relative h-96 overflow-hidden rounded-3xl"
             >
-              <motion.div 
-                key={displayImage} 
-                initial={{ opacity: 0, scale: 1.05 }} 
-                animate={{ opacity: 1, scale: 1 }} 
-                exit={{ opacity: 0, scale: 0.98 }}
-                transition={{ duration: 0.6, ease: "easeInOut" }} 
-                className="absolute inset-0"
-              >
-                <Image
-                  src={displayImage}
-                  alt={product.title}
-                  fill
-                  className="object-cover"
-                  priority
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-              </motion.div>
+              <AnimatePresence mode="wait">
+                <motion.div 
+                  key={displayImage} 
+                  initial={{ opacity: 0, scale: 0.98 }} 
+                  animate={{ opacity: 1, scale: 1 }} 
+                  exit={{ opacity: 0, scale: 1.02 }}
+                  transition={{ duration: 0.4, ease: "easeInOut" }} 
+                  className="absolute inset-0"
+                >
+                  <Image
+                    src={displayImage}
+                    alt={product.title}
+                    fill
+                    className="object-cover"
+                    priority
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </motion.div>
+              </AnimatePresence>
             </motion.div>
 
             {/* Product Configuration */}
@@ -233,7 +237,7 @@ export default function ProductPage({ params }) {
                 whileHover={{ y: -2, scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={handleAddToCart}
-                className="w-full rounded-full bg-gradient-to-r from-gold to-lightGold px-8 py-4 font-medium text-coal shadow-lg transition-all duration-300 hover:shadow-xl ring-1 ring-gold/40 shadow-[0_8px_40px_-10px_rgba(212,175,55,0.35)]"
+                className="btn-luxury w-full"
               >
                 Ajouter au panier
               </motion.button>

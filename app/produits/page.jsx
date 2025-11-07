@@ -2,7 +2,8 @@
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { CheckCircle2 } from "lucide-react";
 import products from "../../data/products.json";
 import variants from "../../data/productVariants.json";
 import { enrichProductsWithVariants } from "../../lib/mergeProducts";
@@ -15,6 +16,7 @@ export default function ProduitsPage() {
 
   const enriched = useMemo(() => enrichProductsWithVariants(products, variants), []);
   const [selectedBySlug, setSelectedBySlug] = useState({});
+  const [addedProducts, setAddedProducts] = useState({});
 
   const getSelectedVariant = (p) => {
     const key = p.slug || p.id;
@@ -36,11 +38,24 @@ export default function ProduitsPage() {
     };
     
     addItem(item);
+    const productKey = product.id || product.slug;
+    setAddedProducts(prev => ({ ...prev, [productKey]: true }));
+    setTimeout(() => {
+      setAddedProducts(prev => ({ ...prev, [productKey]: false }));
+    }, 1000);
     toast.cart(`${product.title} ajouté au panier !`);
   };
 
+  if (!enriched || enriched.length === 0) {
+    return (
+      <div className="flex items-center justify-center min-h-screen text-gray-500">
+        Chargement...
+      </div>
+    );
+  }
+
   return (
-    <main className="min-h-screen bg-beige py-12 pt-24">
+    <main className="min-h-[80vh] bg-beige py-12 pt-24">
       <div className="max-w-7xl mx-auto px-6">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
@@ -51,7 +66,7 @@ export default function ProduitsPage() {
           Nos Créations
         </motion.h1>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 items-stretch">
           {enriched.map((product, index) => {
             const variant = getSelectedVariant(product);
             const displayImage = variant?.image || product.image;
@@ -65,37 +80,45 @@ export default function ProduitsPage() {
               whileHover={{ 
                 scale: 1.03, 
                 y: -8,
-                boxShadow: "0 8px 24px rgba(198, 163, 79, 0.15)",
+                boxShadow: "0 8px 24px rgba(199, 164, 81, 0.15)",
                 transition: { duration: 0.3 }
               }}
-              className="rounded-3xl bg-white p-6 shadow-lg"
+              className="rounded-3xl bg-white p-6 shadow-md h-full flex flex-col min-h-[520px] w-full"
             >
-              <div className="relative h-64 w-full overflow-hidden rounded-2xl mb-4">
-                <motion.div 
-                  key={displayImage} 
-                  initial={{ opacity: 0, scale: 1.05 }} 
-                  animate={{ opacity: 1, scale: 1 }} 
-                  exit={{ opacity: 0, scale: 0.98 }}
-                  transition={{ duration: 0.5, ease: "easeInOut" }} 
-                  className="absolute inset-0"
-                >
-                  <Image
-                    src={displayImage}
-                    alt={product.title}
-                    fill
-                    className="object-cover"
-                    priority
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-                </motion.div>
+              <div className="relative h-64 w-full overflow-hidden rounded-2xl mb-4 shadow-md flex-shrink-0">
+                <AnimatePresence mode="wait">
+                  <motion.div 
+                    key={displayImage} 
+                    initial={{ opacity: 0, scale: 0.98 }} 
+                    animate={{ opacity: 1, scale: 1 }} 
+                    exit={{ opacity: 0, scale: 1.02 }}
+                    transition={{ duration: 0.35, ease: "easeInOut" }} 
+                    className="absolute inset-0"
+                  >
+                    <Image
+                      src={displayImage}
+                      alt={product.title}
+                      fill
+                      className="object-cover"
+                      loading="lazy"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                  </motion.div>
+                </AnimatePresence>
               </div>
 
               <h3 className="mb-2 text-2xl font-light text-coal">{product.title}</h3>
               <p className="mb-4 text-sm text-coal/60">{product.excerpt || "Confectionné avec soin pour allier élégance et confort incomparable."}</p>
 
-              <div className="mb-6 flex items-center justify-between">
-                <span className="text-2xl font-bold text-gold">{displayPrice} MAD</span>
-              </div>
+              <motion.div 
+                key={`price-${product.id}-${variant?.key || 'default'}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.2 }}
+                className="mb-6 flex items-center justify-between"
+              >
+                <span className="text-2xl font-bold text-[#C7A451]">{displayPrice.toLocaleString("fr-MA")} MAD</span>
+              </motion.div>
 
               {product.variants && (
                 <div className="mb-5 flex flex-wrap gap-2">
@@ -120,19 +143,33 @@ export default function ProduitsPage() {
                 </div>
               )}
 
-              <div className="flex gap-3">
+              <div className="mt-auto flex gap-3 pt-4">
                 <Link
                   href={`/products/${product.slug}`}
-                  className="flex-1 rounded-full border-2 border-gold bg-transparent px-4 py-3 text-center font-medium text-gold transition-all duration-300 hover:bg-gold hover:text-coal"
+                  className="btn-luxury-outline flex-1 inline-flex items-center justify-center"
                 >
                   Découvrir
                 </Link>
-                <button
+                <motion.button
                   onClick={() => handleAddToCart(product)}
-                  className="flex-1 rounded-full bg-gradient-to-r from-gold to-lightGold px-4 py-3 font-medium text-coal shadow-lg transition-all duration-300 hover:shadow-xl"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="btn-luxury flex-1"
                 >
-                  Ajouter au panier
-                </button>
+                  {addedProducts[product.id || product.slug] ? (
+                    <motion.span
+                      initial={{ scale: 0, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      exit={{ scale: 0, opacity: 0 }}
+                      className="flex items-center justify-center gap-2"
+                    >
+                      <CheckCircle2 className="w-5 h-5" />
+                      <span>Ajouté</span>
+                    </motion.span>
+                  ) : (
+                    "Ajouter au panier"
+                  )}
+                </motion.button>
               </div>
             </motion.div>
             );

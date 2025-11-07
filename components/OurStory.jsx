@@ -48,7 +48,7 @@ export default function OurStory() {
     <section
       id="notre-histoire"
       ref={ref}
-      className="relative py-12 sm:py-20 md:py-28 bg-[#FAF7F3] overflow-hidden"
+      className="relative py-12 sm:py-20 md:py-28 bg-[#F8F4EC] overflow-hidden"
     >
       {/* Décorations subtiles */}
       <div className="absolute top-0 left-0 w-64 h-64 bg-[#C6A34F]/5 rounded-full blur-3xl" />
@@ -113,7 +113,7 @@ export default function OurStory() {
               <div className="col-span-2 relative h-80 rounded-2xl overflow-hidden shadow-2xl group cursor-pointer">
                 <Image
                   src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
-                  alt="Atelier artisanal Pari Dor"
+                  alt="Atelier artisanal Pari Dor à Agadir - Fabrication de meubles haut de gamme marocains"
                   fill
                   className="object-cover transition-all duration-300 group-hover:scale-105"
                   sizes="(max-width: 768px) 100vw, 50vw"
@@ -128,7 +128,7 @@ export default function OurStory() {
               <div className="relative h-48 rounded-xl overflow-hidden shadow-lg group cursor-pointer">
                 <Image
                   src="https://images.unsplash.com/photo-1540574163026-643ea20ade25?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                  alt="Matériaux premium"
+                  alt="Matériaux premium pour meubles haut de gamme - Tissus nobles et mousse haute densité"
                   fill
                   className="object-cover transition-all duration-300 group-hover:scale-105"
                   sizes="(max-width: 768px) 50vw, 25vw"
@@ -139,7 +139,7 @@ export default function OurStory() {
               <div className="relative h-48 rounded-xl overflow-hidden shadow-lg group cursor-pointer">
                 <Image
                   src="https://images.unsplash.com/photo-1567016432779-094069958ea5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                  alt="Confort sur mesure"
+                  alt="Confort sur mesure - Canapés et matelas personnalisés Pari Dor"
                   fill
                   className="object-cover transition-all duration-300 group-hover:scale-105"
                   sizes="(max-width: 768px) 50vw, 25vw"

@@ -19,3 +19,9 @@ export function formatMAD(v: number) {
 
 
 
+
+
+
+
+
+

@@ -22,12 +22,12 @@ export default function NotreHistoirePage() {
 
   return (
     <>
-      <div className="min-h-screen bg-[#FAF7F3] pt-24 pb-16">
+      <div className="min-h-[80vh] bg-[#F8F4EC] pt-24 pb-16">
         {/* Hero Section */}
         <div className="relative py-12 sm:py-20 bg-coal overflow-hidden">
           <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-0 left-0 w-96 h-96 bg-[#C6A34F] rounded-full blur-3xl" />
-            <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#C6A34F] rounded-full blur-3xl" />
+            <div className="absolute top-0 left-0 w-96 h-96 bg-[#C7A451] rounded-full blur-3xl" />
+            <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#C7A451] rounded-full blur-3xl" />
           </div>
 
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -37,7 +37,7 @@ export default function NotreHistoirePage() {
               transition={{ duration: 0.8 }}
             >
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-playfair font-bold text-white mb-6">
-                Notre <span className="text-[#C6A34F]">Histoire</span>
+                Notre <span className="text-[#C7A451]">Histoire</span>
               </h1>
               <p className="text-lg sm:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
                 Plus de 10 ans d'excellence artisanale au service du confort et de l'élégance
@@ -62,18 +62,18 @@ export default function NotreHistoirePage() {
               </h2>
 
               <p className="text-base sm:text-lg text-coal/80 leading-relaxed">
-                Depuis plus de <span className="font-semibold text-[#C6A34F]">dix ans</span>, <strong>Pari Dor</strong> s'impose comme une référence dans l'univers de l'ameublement et de la literie haut de gamme au Maroc. Notre philosophie repose sur un équilibre subtil entre <span className="font-semibold text-[#C6A34F]">tradition artisanale</span> et <span className="font-semibold text-[#C6A34F]">innovation contemporaine</span>.
+                Depuis plus de <span className="font-semibold text-[#C7A451]">dix ans</span>, <strong>Pari Dor</strong> s'impose comme une référence dans l'univers de l'ameublement et de la literie haut de gamme au Maroc. Notre philosophie repose sur un équilibre subtil entre <span className="font-semibold text-[#C7A451]">tradition artisanale</span> et <span className="font-semibold text-[#C7A451]">innovation contemporaine</span>.
               </p>
 
               <p className="text-base sm:text-lg text-coal/80 leading-relaxed">
-                Chaque produit est <span className="font-medium text-[#C6A34F]">conçu dans nos ateliers à Agadir</span>, par des artisans passionnés qui maîtrisent l'art du détail. De la mousse haute densité aux tissus nobles, chaque matériau est sélectionné pour sa <span className="font-semibold text-[#C6A34F]">durabilité</span> et son <span className="font-semibold text-[#C6A34F]">confort exceptionnel</span>.
+                Chaque produit est <span className="font-medium text-[#C7A451]">conçu dans nos ateliers à Agadir</span>, par des artisans passionnés qui maîtrisent l'art du détail. De la mousse haute densité aux tissus nobles, chaque matériau est sélectionné pour sa <span className="font-semibold text-[#C7A451]">durabilité</span> et son <span className="font-semibold text-[#C7A451]">confort exceptionnel</span>.
               </p>
 
               <p className="text-base sm:text-lg text-coal/80 leading-relaxed">
-                Nous façonnons des <span className="font-semibold text-[#C6A34F]">matelas</span>, <span className="font-semibold text-[#C6A34F]">canapés</span>, <span className="font-semibold text-[#C6A34F]">banquettes</span> et <span className="font-semibold text-[#C6A34F]">têtes de lit</span> qui allient élégance intemporelle et bien-être au quotidien. Chaque création reflète notre engagement envers la qualité et le raffinement.
+                Nous façonnons des <span className="font-semibold text-[#C7A451]">matelas</span>, <span className="font-semibold text-[#C7A451]">canapés</span>, <span className="font-semibold text-[#C7A451]">banquettes</span> et <span className="font-semibold text-[#C7A451]">têtes de lit</span> qui allient élégance intemporelle et bien-être au quotidien. Chaque création reflète notre engagement envers la qualité et le raffinement.
               </p>
 
-              <blockquote className="mt-6 pl-6 border-l-4 border-[#C6A34F] italic text-coal/70 text-base sm:text-lg">
+              <blockquote className="mt-6 pl-6 border-l-4 border-[#C7A451] italic text-coal/70 text-base sm:text-lg">
                 "Le vrai luxe réside dans le détail : celui d'une couture invisible, d'un design pensé pour durer."
               </blockquote>
             </motion.div>
@@ -88,9 +88,10 @@ export default function NotreHistoirePage() {
               <div className="relative h-96 sm:h-[500px] rounded-3xl overflow-hidden shadow-2xl">
                 <Image
                   src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
-                  alt="Atelier Pari Dor"
+                  alt="Atelier artisanal Pari Dor à Agadir - Fabrication de meubles haut de gamme marocains depuis 10+ ans"
                   fill
                   className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                 <div className="absolute bottom-8 left-8 text-white">
@@ -121,7 +122,7 @@ export default function NotreHistoirePage() {
                 transition={{ delay: index * 0.1, duration: 0.6 }}
                 className="bg-white rounded-3xl p-8 text-center shadow-lg hover:shadow-xl transition-shadow"
               >
-                <p className="text-5xl font-playfair font-bold text-[#C6A34F] mb-3">{stat.number}</p>
+                <p className="text-5xl font-playfair font-bold text-[#C7A451] mb-3">{stat.number}</p>
                 <h3 className="text-xl font-semibold text-coal mb-2">{stat.label}</h3>
                 <p className="text-coal/60">{stat.desc}</p>
               </motion.div>
@@ -137,10 +138,10 @@ export default function NotreHistoirePage() {
             className="bg-white rounded-3xl p-8 sm:p-12 shadow-xl text-center max-w-4xl mx-auto"
           >
             <h2 className="text-3xl sm:text-4xl font-playfair font-bold text-coal mb-6">
-              Notre <span className="text-[#C6A34F]">Mission</span>
+              Notre <span className="text-[#C7A451]">Mission</span>
             </h2>
             <p className="text-lg text-coal/80 leading-relaxed mb-6">
-              Nous croyons que chaque espace mérite une touche d'<span className="font-semibold text-[#C6A34F]">élégance personnalisée</span>, adaptée au style et au confort de chacun.
+              Nous croyons que chaque espace mérite une touche d'<span className="font-semibold text-[#C7A451]">élégance personnalisée</span>, adaptée au style et au confort de chacun.
             </p>
             <p className="text-base text-coal/70 leading-relaxed italic">
               "Créer des pièces qui transforment votre maison en un havre de paix et de raffinement"
