@@ -48,14 +48,33 @@ export default function ProduitsPage() {
 
   if (!enriched || enriched.length === 0) {
     return (
-      <div className="flex items-center justify-center min-h-screen text-gray-500">
-        Chargement...
-      </div>
+      <main className="min-h-[80vh] bg-[#FAF8F5] py-12 pt-24">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div key={i} className="rounded-3xl bg-white p-6 shadow-md h-full flex flex-col min-h-[520px] w-full animate-pulse">
+                <div className="relative h-64 w-full bg-gray-200 rounded-2xl mb-4" />
+                <div className="h-6 bg-gray-200 rounded mb-2 w-3/4" />
+                <div className="h-4 bg-gray-200 rounded mb-4 w-full" />
+                <div className="h-8 bg-gray-200 rounded mb-4 w-1/2" />
+                <div className="flex gap-2 mb-4">
+                  <div className="h-8 w-8 bg-gray-200 rounded-full" />
+                  <div className="h-8 w-8 bg-gray-200 rounded-full" />
+                </div>
+                <div className="mt-auto flex gap-3 pt-4">
+                  <div className="h-11 bg-gray-200 rounded-xl flex-1" />
+                  <div className="h-11 bg-gray-200 rounded-xl flex-1" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </main>
     );
   }
 
   return (
-    <main className="min-h-[80vh] bg-beige py-12 pt-24">
+    <main className="min-h-[80vh] bg-[#FAF8F5] py-12 pt-24">
       <div className="max-w-7xl mx-auto px-6">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}

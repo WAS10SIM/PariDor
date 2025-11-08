@@ -15,7 +15,7 @@ export default function NavbarAdmin({ onRefresh }) {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#FAF7F3] border-b border-[#C7A451]/20 shadow-md">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#FAF8F5]/95 backdrop-blur-lg border-b border-[#C7A451]/20 shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
@@ -32,8 +32,8 @@ export default function NavbarAdmin({ onRefresh }) {
 
           {/* Admin Title */}
           <div className="hidden md:block">
-            <h1 className="text-xl font-semibold text-[#1a1a1a]">
-              Tableau de bord <span className="text-[#C6A34F]">Admin</span>
+            <h1 className="text-xl font-semibold text-[#1E1E1E]">
+              Tableau de bord <span className="text-[#C7A451]">Admin</span>
             </h1>
           </div>
 
@@ -42,7 +42,7 @@ export default function NavbarAdmin({ onRefresh }) {
             {onRefresh && (
               <button
                 onClick={onRefresh}
-                className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-[#C6A34F]/10 text-[#C6A34F] hover:bg-[#C6A34F]/20 transition-all duration-300 group"
+                className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-[#C7A451]/10 text-[#C7A451] hover:bg-[#C7A451]/20 transition-all duration-300 group"
               >
                 <RefreshCw className="h-5 w-5 group-hover:rotate-180 transition-transform duration-500" />
                 <span className="hidden sm:inline font-medium">Actualiser</span>

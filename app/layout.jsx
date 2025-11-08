@@ -1,14 +1,15 @@
 export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://paridor.vercel.app'),
-  title: "Pari Dor — L'art du confort sur mesure | Meubles Haut de Gamme Maroc",
+  title: "Pari Dor — L'art du confort sur mesure au Maroc | Meubles & Literie Haut de Gamme",
   description:
-    "Fabricant marocain d'ameublement haut de gamme depuis 10+ ans : matelas premium, canapés sur mesure, banquettes élégantes et têtes de lit. Artisanat marocain authentique, 100% fait au Maroc à Agadir. Livraison dans tout le royaume.",
-  keywords: "meubles maroc, canapés sur mesure, matelas premium, banquettes, têtes de lit, ameublement Agadir, mobilier marocain, artisanat maroc",
+    "Fabricant marocain de meubles et literie haut de gamme : Pari Dor unit élégance et savoir-faire local. Canapés, matelas et mobilier de luxe fabriqués à Agadir, Maroc.",
+  keywords: "meubles maroc, canapés sur mesure, matelas premium, banquettes, têtes de lit, ameublement Agadir, mobilier marocain, artisanat maroc, literie haut de gamme",
   authors: [{ name: "Pari Dor" }],
   openGraph: {
-    title: "Pari Dor — L'art du confort sur mesure",
+    title: "Pari Dor — Meubles & Literie Haut de Gamme",
     description:
-      "Créateur de meubles d'exception au Maroc. Matelas, canapés, banquettes sur mesure. 10+ ans d'excellence artisanale.",
+      "Canapés, matelas et mobilier de luxe fabriqués au Maroc. Artisanat d'exception depuis 10+ ans.",
+    url: "https://paridor.vercel.app",
     type: "website",
     locale: "fr_FR",
     siteName: "Pari Dor",
@@ -24,7 +25,7 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Pari Dor — L'art du confort sur mesure",
-    description: "Meubles haut de gamme 100% marocains. Artisanat d'exception depuis 10+ ans.",
+    description: "Meubles et literie premium conçus à Agadir, Maroc.",
   },
   robots: {
     index: true,
@@ -55,7 +56,7 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/favicon.ico" />
         <meta name="theme-color" content="#C7A451" />
       </head>
-      <body className="bg-beige">
+      <body className="bg-[#FAF8F5]">
         <ToastProvider>
           <CartProvider>
             <LayoutClient>{children}</LayoutClient>

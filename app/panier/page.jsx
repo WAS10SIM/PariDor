@@ -11,7 +11,7 @@ export default function PanierPage() {
 
   if (!mounted) {
     return (
-      <div className="min-h-screen bg-bone py-24 flex items-center justify-center">
+      <div className="min-h-screen bg-[#FAF8F5] py-24 flex items-center justify-center">
         <div className="text-coal text-xl">Chargement du panier...</div>
       </div>
     );
@@ -19,7 +19,7 @@ export default function PanierPage() {
 
   if (items.length === 0) {
     return (
-      <div className="min-h-screen bg-bone py-24">
+      <div className="min-h-screen bg-[#FAF8F5] py-24">
         <div className="mx-auto max-w-4xl px-6">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -48,7 +48,7 @@ export default function PanierPage() {
   }
 
   return (
-    <div className="min-h-screen bg-bone py-24">
+    <div className="min-h-screen bg-[#FAF8F5] py-24">
       <div className="mx-auto max-w-4xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -150,7 +150,7 @@ export default function PanierPage() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="mt-8 rounded-3xl bg-[#F8F4EC] p-8 shadow-md"
+            className="mt-8 rounded-3xl bg-white/60 p-8 shadow-md border border-[#C7A451]/10"
           >
             <div className="flex items-center justify-between mb-6">
               <div>

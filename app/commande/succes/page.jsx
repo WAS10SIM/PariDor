@@ -14,7 +14,7 @@ export default function SuccessPage() {
   }, [clear]);
 
   return (
-    <div className="min-h-screen bg-[#F8F4EC] flex items-center justify-center px-6 pt-24">
+    <div className="min-h-screen bg-[#FAF8F5] flex items-center justify-center px-6 pt-24">
       <div className="mx-auto max-w-2xl text-center">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}

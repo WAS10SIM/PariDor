@@ -1,4 +1,5 @@
 "use client";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { MapPin, Phone, Mail, Instagram, Facebook } from "lucide-react";
@@ -7,7 +8,13 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#1a1a1a] text-white">
+    <motion.footer 
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+      className="bg-[#1E1E1E] text-white"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Logo & Description */}
@@ -141,6 +148,6 @@ export default function Footer() {
           </div>
         </div>
       </div>
-    </footer>
+    </motion.footer>
   );
 }

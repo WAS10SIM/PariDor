@@ -37,8 +37,23 @@ export default function CataloguePage() {
 
   if (!enriched || enriched.length === 0) {
     return (
-      <div className="flex items-center justify-center min-h-screen text-gray-500">
-        Chargement...
+      <div className="min-h-[80vh] bg-[#FAF8F5] pt-24 pb-16">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
+              <div key={i} className="rounded-3xl bg-white p-6 shadow-md h-full flex flex-col min-h-[520px] w-full animate-pulse">
+                <div className="relative h-80 w-full bg-gray-200 rounded-2xl mb-4" />
+                <div className="h-6 bg-gray-200 rounded mb-2 w-3/4" />
+                <div className="h-4 bg-gray-200 rounded mb-4 w-full" />
+                <div className="h-8 bg-gray-200 rounded mb-4 w-1/2" />
+                <div className="mt-auto flex gap-3 pt-4">
+                  <div className="h-11 bg-gray-200 rounded-xl flex-1" />
+                  <div className="h-11 bg-gray-200 rounded-xl flex-1" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     );
   }
@@ -85,7 +100,7 @@ export default function CataloguePage() {
 
   return (
     <>
-      <div className="min-h-[80vh] bg-beige pt-24 pb-16">
+      <div className="min-h-[80vh] bg-[#FAF8F5] pt-24 pb-16">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           {/* Header */}
           <motion.div

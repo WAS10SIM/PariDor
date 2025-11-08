@@ -48,11 +48,11 @@ export default function OurStory() {
     <section
       id="notre-histoire"
       ref={ref}
-      className="relative py-12 sm:py-20 md:py-28 bg-[#F8F4EC] overflow-hidden"
+      className="relative py-12 sm:py-20 md:py-28 bg-[#FAF8F5] overflow-hidden"
     >
       {/* Décorations subtiles */}
-      <div className="absolute top-0 left-0 w-64 h-64 bg-[#C6A34F]/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#C6A34F]/5 rounded-full blur-3xl" />
+      <div className="absolute top-0 left-0 w-64 h-64 bg-[#C7A451]/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#C7A451]/5 rounded-full blur-3xl" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -66,9 +66,9 @@ export default function OurStory() {
             <motion.div variants={itemVariants}>
               <h2 className="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#1a1a1a] mb-3">
                 Notre{" "}
-                <span className="text-[#C6A34F]">histoire</span>
+                <span className="text-[#C7A451]">histoire</span>
               </h2>
-              <div className="h-1 w-20 bg-[#C6A34F] rounded-full mt-2" />
+              <div className="h-1 w-20 bg-[#C7A451] rounded-full mt-2" />
             </motion.div>
 
             <motion.p
@@ -153,10 +153,10 @@ export default function OurStory() {
               initial={{ opacity: 0, scale: 0 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ delay: 0.8, duration: 0.6, type: "spring", bounce: 0.5 }}
-              className="absolute -top-6 -right-6 bg-white rounded-full p-6 shadow-2xl border-4 border-[#C6A34F]/20 bounce-in"
+              className="absolute -top-6 -right-6 bg-white rounded-full p-6 shadow-2xl border-4 border-[#C7A451]/20 bounce-in"
             >
               <div className="text-center">
-                <p className="text-[#C6A34F] font-playfair text-3xl font-bold">100%</p>
+                <p className="text-[#C7A451] font-playfair text-3xl font-bold">100%</p>
                 <p className="text-[#1a1a1a] text-xs font-medium mt-1">Made in<br />Morocco</p>
               </div>
             </motion.div>

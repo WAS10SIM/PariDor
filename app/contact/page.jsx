@@ -45,7 +45,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-bone">
+    <div className="min-h-screen bg-[#FAF8F5]">
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center bg-gradient-to-br from-coal via-coal/95 to-coal/90">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')] bg-cover bg-center opacity-20" />

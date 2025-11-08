@@ -18,11 +18,27 @@ export default function CheckoutPage() {
   // Skeleton pendant le chargement
   if (!mounted) {
     return (
-      <div className="bg-beige py-24 min-h-screen">
+      <div className="bg-[#FAF8F5] py-24 min-h-screen">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid gap-10 lg:grid-cols-2">
-            <div className="rounded-3xl bg-white p-8 shadow-lg animate-pulse h-[600px]"></div>
-            <div className="rounded-3xl bg-white p-8 shadow-lg animate-pulse h-[400px]"></div>
+            <div className="rounded-3xl bg-white p-8 shadow-lg animate-pulse h-[600px]">
+              <div className="h-8 bg-gray-200 rounded mb-6 w-1/3" />
+              <div className="space-y-4">
+                <div className="h-12 bg-gray-200 rounded" />
+                <div className="h-12 bg-gray-200 rounded" />
+                <div className="h-12 bg-gray-200 rounded" />
+                <div className="h-12 bg-gray-200 rounded" />
+                <div className="h-12 bg-gray-200 rounded" />
+              </div>
+            </div>
+            <div className="rounded-3xl bg-white p-8 shadow-lg animate-pulse h-[400px]">
+              <div className="h-8 bg-gray-200 rounded mb-6 w-1/2" />
+              <div className="space-y-4">
+                <div className="h-20 bg-gray-200 rounded" />
+                <div className="h-20 bg-gray-200 rounded" />
+              </div>
+              <div className="mt-8 h-12 bg-gray-200 rounded" />
+            </div>
           </div>
         </div>
       </div>
@@ -32,7 +48,7 @@ export default function CheckoutPage() {
   // Panier vide
   if (items.length === 0) {
     return (
-      <div className="min-h-[80vh] flex flex-col items-center justify-center text-center px-4 bg-beige">
+      <div className="min-h-[80vh] flex flex-col items-center justify-center text-center px-4 bg-[#FAF8F5]">
         <h1 className="text-4xl font-playfair font-bold text-coal mb-4">Votre panier est vide</h1>
         <p className="text-lg text-coal/70 mb-8">Impossible de finaliser une commande sans articles.</p>
         <Link href="/#creations" className="btn-luxury">Retour au catalogue</Link>
@@ -125,7 +141,7 @@ Merci de me contacter pour finaliser la commande.`;
   };
 
   return (
-    <div className="bg-[#F8F4EC] py-24 pb-32 md:pb-24">
+    <div className="bg-[#FAF8F5] py-24 pb-32 md:pb-24">
       <div className="mx-auto max-w-7xl px-6">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}

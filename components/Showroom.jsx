@@ -34,7 +34,7 @@ function Showroom() {
   };
 
   return (
-    <section id="creations" className="py-20 md:py-28 bg-[#F8F4EC]">
+    <section id="creations" className="py-20 md:py-28 bg-[#FAF8F5]">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Header */}
         <motion.div

@@ -35,28 +35,29 @@ body {
   }
 
   body {
-    @apply bg-[#F8F4EC] text-coal antialiased;
+    @apply bg-[#FAF8F5] text-coal antialiased;
     letter-spacing: 0.3px;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Inter', sans-serif;
   }
   
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Playfair Display', serif;
+    font-weight: 500;
   }
 }
 
 @layer components {
   .btn-luxury {
-    @apply relative inline-flex items-center justify-center rounded-xl px-6 py-3 font-semibold transition-all duration-300 ease-in-out overflow-hidden;
+    @apply relative inline-flex items-center justify-center rounded-2xl px-6 py-3 font-semibold transition-all duration-200 ease-in-out overflow-hidden;
     @apply bg-gradient-to-r from-[#C7A451] to-[#D4B975] text-[#111];
     @apply shadow-md hover:shadow-lg hover:shadow-[#C7A451]/40;
-    @apply hover:scale-105 active:scale-95;
+    @apply hover:scale-[1.03] active:scale-95;
     letter-spacing: 0.3px;
   }
 
   .btn-luxury::before {
     content: "";
-    @apply absolute inset-0 bg-gradient-to-r from-[#E3C97F] to-[#C6A34F] opacity-0 transition-opacity duration-300;
+    @apply absolute inset-0 bg-gradient-to-r from-[#D4B975] to-[#C7A451] opacity-0 transition-opacity duration-300;
     z-index: -1;
   }
 
@@ -65,10 +66,10 @@ body {
   }
   
   .btn-luxury-outline {
-    @apply relative inline-flex items-center justify-center rounded-xl px-6 py-3 font-semibold transition-all duration-300 ease-in-out overflow-hidden;
+    @apply relative inline-flex items-center justify-center rounded-2xl px-6 py-3 font-semibold transition-all duration-200 ease-in-out overflow-hidden;
     @apply border-2 border-[#C7A451] text-[#C7A451] bg-transparent;
     @apply hover:bg-[#C7A451] hover:text-white;
-    @apply hover:scale-105 active:scale-95;
+    @apply hover:scale-[1.03] active:scale-95;
     @apply shadow-md hover:shadow-lg;
   }
   
@@ -81,7 +82,7 @@ body {
 
   .btn-ghost-luxury::after {
     content: "";
-    @apply absolute left-0 top-0 w-0 h-full bg-[#C6A34F] transition-all duration-300;
+    @apply absolute left-0 top-0 w-0 h-full bg-[#C7A451] transition-all duration-300;
     z-index: -1;
   }
 
@@ -152,10 +153,10 @@ body {
 /* Animation glow doré */
 @keyframes glow {
   0%, 100% {
-    box-shadow: 0 0 0px #C6A34F;
+    box-shadow: 0 0 0px #C7A451;
   }
   50% {
-    box-shadow: 0 0 15px #C6A34F;
+    box-shadow: 0 0 15px #C7A451;
   }
 }
 

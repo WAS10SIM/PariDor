@@ -22,7 +22,7 @@ export default function NotreHistoirePage() {
 
   return (
     <>
-      <div className="min-h-[80vh] bg-[#F8F4EC] pt-24 pb-16">
+      <div className="min-h-[80vh] bg-[#FAF8F5] pt-24 pb-16">
         {/* Hero Section */}
         <div className="relative py-12 sm:py-20 bg-coal overflow-hidden">
           <div className="absolute inset-0 opacity-10">

@@ -30,7 +30,7 @@ export default function MesCommandesPage() {
 
   if (!mounted) {
     return (
-      <div className="min-h-screen bg-beige py-24">
+      <div className="min-h-screen bg-[#FAF8F5] py-24">
         <div className="mx-auto max-w-4xl px-6">
           <div className="text-center text-coal text-xl">Chargement...</div>
         </div>
@@ -40,7 +40,7 @@ export default function MesCommandesPage() {
 
   if (orders.length === 0) {
     return (
-      <div className="min-h-screen bg-beige py-24">
+      <div className="min-h-screen bg-[#FAF8F5] py-24">
         <div className="mx-auto max-w-4xl px-6">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -64,7 +64,7 @@ export default function MesCommandesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-beige py-24">
+      <div className="min-h-screen bg-[#FAF8F5] py-24">
       <div className="mx-auto max-w-4xl px-6">
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
@@ -116,14 +116,14 @@ export default function MesCommandesPage() {
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: index * 0.1 + 0.2 }}
-                    className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
+                    className={`inline-block px-3 py-1 rounded-full text-xs font-semibold border ${
                       order.status === "paid" || order.status === "complete"
-                        ? "bg-green-100 text-green-700"
+                        ? "bg-green-100 text-green-700 border-green-300"
                         : order.status === "processing" || order.status === "preparation"
-                        ? "bg-yellow-100 text-yellow-700"
+                        ? "bg-[#C7A451]/20 text-[#C7A451] border-[#C7A451]/40"
                         : order.status === "delivered" || order.status === "livree"
-                        ? "bg-blue-100 text-blue-700"
-                        : "bg-gray-100 text-gray-700"
+                        ? "bg-blue-100 text-blue-700 border-blue-300"
+                        : "bg-gray-100 text-gray-700 border-gray-300"
                     }`}
                   >
                     {order.status === "paid" || order.status === "complete"
@@ -161,9 +161,14 @@ export default function MesCommandesPage() {
                       >
                         <div className="flex items-center gap-4 flex-1">
                           {item.image && (
-                            <div className="h-14 w-14 overflow-hidden rounded-lg flex-shrink-0">
-                              {/* eslint-disable-next-line @next/next/no-img-element */}
-                              <img src={item.image} alt={item.name || 'Produit'} className="h-full w-full object-cover" />
+                            <div className="relative h-14 w-14 overflow-hidden rounded-lg flex-shrink-0">
+                              <Image
+                                src={item.image}
+                                alt={item.name || 'Produit'}
+                                fill
+                                className="object-cover"
+                                sizes="56px"
+                              />
                             </div>
                           )}
                           <div className="flex items-center gap-3 flex-wrap">

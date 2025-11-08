@@ -29,12 +29,12 @@ function NavbarPublic() {
   // Classes dynamiques selon le scroll et la page avec shrinkage
   const navClasses = `fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out ${
     scrolled || !isHomePage
-      ? "bg-[#F8F4EC]/95 backdrop-blur-lg shadow-md"
+      ? "bg-[#FAF8F5]/95 backdrop-blur-lg shadow-md"
       : "bg-transparent"
   }`;
 
   const textClasses = `transition-colors duration-300 ${
-    scrolled || !isHomePage ? "text-[#1A1A1A]" : "text-white"
+    scrolled || !isHomePage ? "text-[#1E1E1E]" : "text-white"
   }`;
 
   // Logo blanc sur hero, couleur sur fond clair
@@ -176,7 +176,7 @@ function NavbarPublic() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 bottom-0 w-80 max-w-[85vw] bg-[#F8F4EC]/98 backdrop-blur-xl z-50 lg:hidden shadow-2xl border-l border-[#C7A451]/20 overflow-y-auto"
+              className="fixed top-0 right-0 bottom-0 w-80 max-w-[85vw] bg-[#FAF8F5]/98 backdrop-blur-xl z-50 lg:hidden shadow-2xl border-l border-[#C7A451]/20 overflow-y-auto"
             >
               <div className="px-6 py-8 space-y-4">
                 {/* Close Button */}

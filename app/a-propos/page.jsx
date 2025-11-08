@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-bone">
+    <div className="min-h-screen bg-[#FAF8F5]">
       {/* Hero Section */}
       <section className="relative h-[60vh] overflow-hidden">
         <Image
@@ -74,6 +74,7 @@ export default function AboutPage() {
     </div>
   );
 }
+
 
 
 

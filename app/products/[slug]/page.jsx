@@ -60,7 +60,7 @@ export default function ProductPage({ params }) {
   };
 
   return (
-    <div className="min-h-[80vh] bg-[#F8F4EC]">
+      <div className="min-h-[80vh] bg-[#FAF8F5]">
       {/* Hero Product */}
       <section className="relative h-[60vh] overflow-hidden">
         <AnimatePresence mode="wait">

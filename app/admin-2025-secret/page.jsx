@@ -105,6 +105,75 @@ export default function AdminSecretPage() {
     fetchOrders(token);
   };
 
+  // Exporter les commandes en CSV
+  const handleExportCSV = () => {
+    if (orders.length === 0) {
+      alert("Aucune commande à exporter");
+      return;
+    }
+
+    // En-têtes CSV
+    const headers = [
+      "ID",
+      "Date",
+      "Client",
+      "Email",
+      "Téléphone",
+      "Adresse",
+      "Ville",
+      "Statut",
+      "Montant Total (MAD)",
+      "Articles",
+    ];
+
+    // Convertir les commandes en lignes CSV
+    const rows = orders.map((order) => {
+      const items = order.items
+        ? order.items
+            .map((item) => `${item.quantity}x ${item.name || item.productName || "N/A"}`)
+            .join("; ")
+        : "Aucun article";
+
+      return [
+        order._id || order.sessionId || order.id || "N/A",
+        order.createdAt
+          ? new Date(order.createdAt).toLocaleDateString("fr-FR", {
+              day: "2-digit",
+              month: "2-digit",
+              year: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
+            })
+          : "N/A",
+        order.customerName || order.customer?.name || "N/A",
+        order.customerEmail || order.customer?.email || "N/A",
+        order.customerPhone || order.customer?.phone || "N/A",
+        order.customerAddress || order.customer?.address || "N/A",
+        order.customerCity || order.customer?.city || "N/A",
+        order.status || "pending",
+        order.totalAmount || order.amount_total || order.amount || "0",
+        items,
+      ];
+    });
+
+    // Créer le contenu CSV
+    const csvContent = [
+      headers.join(","),
+      ...rows.map((row) => row.map((cell) => `"${cell}"`).join(",")),
+    ].join("\n");
+
+    // Créer et télécharger le fichier
+    const blob = new Blob(["\uFEFF" + csvContent], { type: "text/csv;charset=utf-8;" });
+    const link = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    link.setAttribute("href", url);
+    link.setAttribute("download", `commandes_${new Date().toISOString().split("T")[0]}.csv`);
+    link.style.visibility = "hidden";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   // Changer le statut d'une commande
   const handleStatusChange = async (orderId, newStatus) => {
     try {
@@ -205,28 +274,28 @@ export default function AdminSecretPage() {
             {/* Formulaire */}
             <form onSubmit={handleLogin} className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
+                <label className="block text-sm font-medium text-[#1E1E1E] mb-2">
                   Nom d'utilisateur
                 </label>
                 <input
                   type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border-2 border-[#1a1a1a]/10 focus:border-[#C6A34F] focus:outline-none transition-colors"
+                  className="w-full px-4 py-3 rounded-xl border-2 border-[#1E1E1E]/10 focus:border-[#C7A451] focus:outline-none focus:ring-2 focus:ring-[#C7A451]/20 transition-colors"
                   placeholder="Identifiant"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-[#1a1a1a] mb-2">
+                <label className="block text-sm font-medium text-[#1E1E1E] mb-2">
                   Mot de passe
                 </label>
                 <input
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border-2 border-[#1a1a1a]/10 focus:border-[#C6A34F] focus:outline-none transition-colors"
+                  className="w-full px-4 py-3 rounded-xl border-2 border-[#1E1E1E]/10 focus:border-[#C7A451] focus:outline-none focus:ring-2 focus:ring-[#C7A451]/20 transition-colors"
                   placeholder="••••••••"
                   required
                 />
@@ -245,7 +314,7 @@ export default function AdminSecretPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-4 rounded-full bg-gradient-to-r from-[#C6A34F] to-[#E3C97F] text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full py-4 rounded-full bg-gradient-to-r from-[#C7A451] to-[#D4B975] text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? "Connexion..." : "Se connecter"}
               </button>
@@ -265,21 +334,35 @@ export default function AdminSecretPage() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.3 }}
-        className="min-h-screen bg-[#F5F0E9] pt-24 pb-8 px-4 sm:px-6 lg:px-8"
+        className="min-h-screen bg-[#FAF8F5] pt-24 pb-8 px-4 sm:px-6 lg:px-8"
       >
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-8"
+            className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
           >
-            <h1 className="text-3xl sm:text-4xl font-playfair font-bold text-[#1a1a1a] mb-2">
-              Gestion des Commandes
-            </h1>
-            <p className="text-[#1a1a1a]/60">
-              {orders.length} commande{orders.length !== 1 ? "s" : ""} enregistrée{orders.length !== 1 ? "s" : ""}
-            </p>
+            <div>
+              <h1 className="text-3xl sm:text-4xl font-playfair font-bold text-[#1E1E1E] mb-2">
+                Gestion des Commandes
+              </h1>
+              <p className="text-[#1E1E1E]/60">
+                {orders.length} commande{orders.length !== 1 ? "s" : ""} enregistrée{orders.length !== 1 ? "s" : ""}
+              </p>
+            </div>
+            <motion.button
+              onClick={handleExportCSV}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              disabled={orders.length === 0}
+              className="btn-luxury-outline flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              Exporter CSV
+            </motion.button>
           </motion.div>
 
         {/* Stats rapides */}
@@ -319,8 +402,8 @@ export default function AdminSecretPage() {
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-[#1a1a1a]/60 mb-1">{stat.label}</p>
-                  <p className="text-3xl font-bold text-[#1a1a1a]">{stat.value}</p>
+                  <p className="text-sm text-[#1E1E1E]/60 mb-1">{stat.label}</p>
+                  <p className="text-3xl font-bold text-[#1E1E1E]">{stat.value}</p>
                 </div>
                 <div className={`p-3 rounded-xl bg-gradient-to-br ${stat.color}`}>
                   <stat.icon className="w-6 h-6 text-white" />
@@ -341,7 +424,10 @@ export default function AdminSecretPage() {
           <div className="hidden lg:block overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="bg-gradient-to-r from-[#C6A34F] to-[#E3C97F]">
+                <tr className="bg-gradient-to-r from-[#C7A451] to-[#D4B975]">
+                  <th className="px-6 py-4 text-left text-sm font-semibold text-white">
+                    ID
+                  </th>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-white">
                     Client
                   </th>
@@ -366,7 +452,7 @@ export default function AdminSecretPage() {
                 <AnimatePresence>
                   {orders.length === 0 ? (
                     <tr>
-                      <td colSpan="6" className="px-6 py-12 text-center text-[#1a1a1a]/60">
+                      <td colSpan="7" className="px-6 py-12 text-center text-[#1E1E1E]/60">
                         Aucune commande pour le moment
                       </td>
                     </tr>
@@ -377,28 +463,33 @@ export default function AdminSecretPage() {
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: index * 0.05 }}
-                        className={`border-b border-[#1a1a1a]/5 hover:bg-[#fafafa] transition-colors ${
+                        className={`border-b border-[#1E1E1E]/5 hover:bg-[#fafafa] transition-colors ${
                           index % 2 === 0 ? "bg-white" : "bg-white"
                         }`}
                       >
                         <td className="px-6 py-4">
+                          <p className="text-xs font-mono text-[#1E1E1E]/60">
+                            #{(order._id || order.sessionId || order.id || "N/A").slice(-8)}
+                          </p>
+                        </td>
+                        <td className="px-6 py-4">
                           <div>
-                            <p className="font-medium text-[#1a1a1a]">
-                              {order.customerName}
+                            <p className="font-medium text-[#1E1E1E]">
+                              {order.customerName || order.customer?.name || "N/A"}
                             </p>
-                            <p className="text-sm text-[#1a1a1a]/60">
-                              {order.customerEmail}
+                            <p className="text-sm text-[#1E1E1E]/60">
+                              {order.customerEmail || order.customer?.email || "N/A"}
                             </p>
-                            {order.customerPhone && (
-                              <p className="text-sm text-[#1a1a1a]/60">
-                                {order.customerPhone}
+                            {(order.customerPhone || order.customer?.phone) && (
+                              <p className="text-sm text-[#1E1E1E]/60">
+                                {order.customerPhone || order.customer?.phone}
                               </p>
                             )}
                           </div>
                         </td>
                         <td className="px-6 py-4">
-                          <span className="text-lg font-bold text-[#C6A34F]">
-                            {order.totalAmount} MAD
+                          <span className="text-lg font-bold text-[#C7A451]">
+                            {(order.totalAmount || order.amount_total || order.amount || 0).toLocaleString("fr-MA")} MAD
                           </span>
                         </td>
                         <td className="px-6 py-4">
@@ -422,20 +513,23 @@ export default function AdminSecretPage() {
                             <option value="cancelled">Annulée</option>
                           </select>
                         </td>
-                        <td className="px-6 py-4 text-sm text-[#1a1a1a]/80">
-                          {formatDate(order.createdAt)}
+                        <td className="px-6 py-4 text-sm text-[#1E1E1E]/80">
+                          {formatDate(order.createdAt || order.when)}
                         </td>
                         <td className="px-6 py-4">
                           <div className="text-sm">
                             {order.items?.slice(0, 2).map((item, i) => (
-                              <div key={i} className="text-[#1a1a1a]/80">
-                                {item.quantity}x {item.name}
+                              <div key={i} className="text-[#1E1E1E]/80">
+                                {item.quantity}x {item.name || item.productName || "N/A"}
                               </div>
                             ))}
                             {order.items?.length > 2 && (
-                              <div className="text-[#C6A34F] font-medium">
+                              <div className="text-[#C7A451] font-medium">
                                 +{order.items.length - 2} autre(s)
                               </div>
+                            )}
+                            {(!order.items || order.items.length === 0) && (
+                              <div className="text-[#1E1E1E]/40 italic">Aucun article</div>
                             )}
                           </div>
                         </td>
@@ -485,7 +579,7 @@ export default function AdminSecretPage() {
                     </select>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-xl font-bold text-[#C6A34F]">
+                    <span className="text-xl font-bold text-[#C7A451]">
                       {order.totalAmount} MAD
                     </span>
                     <span className="text-sm">

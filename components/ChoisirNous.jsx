@@ -39,9 +39,9 @@ export default function ChoisirNous() {
           className="mb-12 md:mb-16 text-center"
         >
           <h2 className="text-3xl md:text-5xl font-playfair font-bold text-[#1a1a1a] mb-4">
-            Pourquoi <span className="text-[#C6A34F]">nous choisir</span>
+            Pourquoi <span className="text-[#C7A451]">nous choisir</span>
           </h2>
-          <div className="h-1 w-20 bg-[#C6A34F] mx-auto mb-6"></div>
+          <div className="h-1 w-20 bg-[#C7A451] mx-auto mb-6"></div>
           <p className="text-base md:text-lg text-[#1a1a1a]/70 mx-auto max-w-3xl leading-relaxed">
             Découvrez ce qui fait de Pari D'Or votre partenaire privilégié pour des meubles d'exception.
           </p>
@@ -92,7 +92,7 @@ export default function ChoisirNous() {
           </p>
           <a
             href="/produits"
-            className="inline-block px-8 py-4 rounded-full bg-gradient-to-r from-[#C6A34F] to-[#E3C97F] text-white font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+            className="inline-block px-8 py-4 rounded-full bg-gradient-to-r from-[#C7A451] to-[#D4B975] text-[#111] font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
           >
             Découvrir notre catalogue
           </a>

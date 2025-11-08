@@ -37,7 +37,7 @@ export default function MobileDrawer({ isOpen, onClose, active }) {
             className="fixed right-0 top-0 bottom-0 z-[70] w-[85%] max-w-sm bg-[#FAF7F3] shadow-2xl md:hidden overflow-y-auto"
           >
             {/* Header */}
-            <div className="flex items-center justify-between p-6 border-b border-[#C6A34F]/20">
+            <div className="flex items-center justify-between p-6 border-b border-[#C7A451]/20">
               <img
                 src="/logo.png"
                 alt="Pari Dor"
@@ -45,7 +45,7 @@ export default function MobileDrawer({ isOpen, onClose, active }) {
               />
               <button
                 onClick={onClose}
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-[#C6A34F]/10 text-[#C6A34F] transition-all duration-300 hover:bg-[#C6A34F] hover:text-white"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-[#C7A451]/10 text-[#C7A451] transition-all duration-300 hover:bg-[#C7A451] hover:text-white"
                 aria-label="Fermer le menu"
               >
                 <X className="h-5 w-5" />
@@ -61,8 +61,8 @@ export default function MobileDrawer({ isOpen, onClose, active }) {
                   onClick={onClose}
                   className={`block py-3 px-4 rounded-xl font-medium transition-all duration-300 ${
                     active === href
-                      ? "bg-[#C6A34F] text-white shadow-md"
-                      : "text-[#1a1a1a] hover:bg-[#C6A34F]/10 hover:text-[#C6A34F]"
+                      ? "bg-[#C7A451] text-white shadow-md"
+                      : "text-[#1a1a1a] hover:bg-[#C7A451]/10 hover:text-[#C7A451]"
                   }`}
                 >
                   {label}
@@ -71,11 +71,11 @@ export default function MobileDrawer({ isOpen, onClose, active }) {
             </nav>
 
             {/* Catalogue Button */}
-            <div className="p-6 border-t border-[#C6A34F]/20">
+            <div className="p-6 border-t border-[#C7A451]/20">
               <Link
                 href="/produits"
                 onClick={onClose}
-                className="block w-full px-6 py-4 rounded-full bg-gradient-to-r from-[#C6A34F] to-[#E3C97F] text-center text-[#1a1a1a] font-medium shadow-lg transition-all duration-300 hover:scale-105"
+                className="block w-full px-6 py-4 rounded-full bg-gradient-to-r from-[#C7A451] to-[#D4B975] text-center text-[#111] font-medium shadow-lg transition-all duration-300 hover:scale-105"
               >
                 Voir le Catalogue
               </Link>

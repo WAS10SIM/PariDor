@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { CheckCircle2 } from "lucide-react";
 import { useCart } from "../../context/CartContext";
+import Confetti from "../../components/Confetti";
 
 export default function SuccessPage() {
   const { clear } = useCart();
@@ -83,7 +84,8 @@ export default function SuccessPage() {
   }, [clear]);
 
   return (
-    <main className="min-h-screen bg-[#F8F4EC] flex flex-col items-center justify-center text-center px-6 pt-24">
+    <main className="min-h-screen bg-[#FAF8F5] flex flex-col items-center justify-center text-center px-6 pt-24">
+      <Confetti />
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -96,7 +98,21 @@ export default function SuccessPage() {
           transition={{ duration: 0.4, ease: "easeOut" }}
           className="mb-6 flex justify-center"
         >
-          <CheckCircle2 className="w-16 h-16 text-[#C7A451]" strokeWidth={1.5} />
+          <motion.div
+            animate={{ 
+              scale: [1, 1.1, 1],
+              rotate: [0, 5, -5, 0]
+            }}
+            transition={{ 
+              duration: 0.6,
+              ease: "easeInOut"
+            }}
+          >
+            <div className="relative">
+              <div className="absolute inset-0 bg-[#C7A451]/20 rounded-full blur-xl animate-pulse" />
+              <CheckCircle2 className="relative w-20 h-20 text-[#C7A451]" strokeWidth={2} />
+            </div>
+          </motion.div>
         </motion.div>
         
         <motion.h1
