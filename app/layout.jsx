@@ -47,16 +47,52 @@ import { ToastProvider } from "../components/toast/ToastProvider";
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="fr">
+    <html lang="fr" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preload" href="/creations" as="document" />
+        <link rel="preload" href="/produits" as="document" />
+        <link rel="preload" href="/notre-histoire" as="document" />
+        <link rel="preload" href="/contact" as="document" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="icon" href="/favicon.ico" />
         <meta name="theme-color" content="#C7A451" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                if (typeof window === 'undefined') return;
+                const cleanup = () => {
+                  const allElements = document.querySelectorAll('*');
+                  allElements.forEach((el) => {
+                    Array.from(el.attributes).forEach((attr) => {
+                      if (
+                        attr.name.startsWith('bis_') ||
+                        attr.name.startsWith('__processed_') ||
+                        attr.name.startsWith('data-new-gr-c-s-')
+                      ) {
+                        el.removeAttribute(attr.name);
+                      }
+                    });
+                  });
+                };
+                // Nettoyer immédiatement
+                if (document.readyState === 'loading') {
+                  document.addEventListener('DOMContentLoaded', cleanup);
+                } else {
+                  cleanup();
+                }
+                // Nettoyer aussi après un court délai pour les extensions qui s'exécutent plus tard
+                setTimeout(cleanup, 0);
+                setTimeout(cleanup, 50);
+              })();
+            `,
+          }}
+        />
       </head>
-      <body className="bg-[#FAF8F5]">
+      <body className="bg-[#FAF8F5]" suppressHydrationWarning>
         <ToastProvider>
           <CartProvider>
             <LayoutClient>{children}</LayoutClient>

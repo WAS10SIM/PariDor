@@ -22,7 +22,6 @@ export async function POST(req) {
     const orderIndex = orders.findIndex(order => order.sessionId === sessionId);
 
     if (orderIndex === -1) {
-      console.log("⚠️ Commande non trouvée pour sessionId:", sessionId);
       return NextResponse.json(
         { success: false, message: "Commande non trouvée" },
         { status: 404 }
@@ -34,8 +33,6 @@ export async function POST(req) {
 
     // Sauvegarder dans le fichier
     await fs.writeFile(filePath, JSON.stringify(orders, null, 2), "utf8");
-
-    console.log("✅ Statut de commande mis à jour:", sessionId, "→ payée");
 
     return NextResponse.json({
       success: true,

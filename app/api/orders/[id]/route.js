@@ -37,8 +37,6 @@ export async function PUT(request, { params }) {
     // Sauvegarder dans le fichier
     await fs.writeFile(filePath, JSON.stringify(orders, null, 2), "utf8");
 
-    console.log(`✅ Statut de commande ${id} mis à jour → ${status}`);
-
     return NextResponse.json({
       success: true,
       message: "Statut mis à jour",

@@ -1,9 +1,15 @@
-import Hero from "../components/Hero";
-import OurStory from "../components/OurStory";
-import ChoisirNous from "../components/ChoisirNous";
-import Showroom from "../components/Showroom";
-import Testimonials from "../components/Testimonials";
-import Contact from "../components/Contact";
+import dynamic from "next/dynamic";
+
+// Dynamic imports pour code-splitting - composants lourds chargés à la demande
+const Hero = dynamic(() => import("../components/Hero"), { ssr: true });
+const OurStory = dynamic(() => import("../components/OurStory"), { ssr: true });
+const ChoisirNous = dynamic(() => import("../components/ChoisirNous"), { ssr: true });
+const Showroom = dynamic(() => import("../components/Showroom"), { ssr: true });
+const Testimonials = dynamic(() => import("../components/Testimonials"), { ssr: true });
+const Contact = dynamic(() => import("../components/Contact"), { ssr: true });
+
+// Revalidation pour mise à jour périodique du contenu statique
+export const revalidate = 3600; // 1 heure
 
 export default function Home() {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://paridor.vercel.app";

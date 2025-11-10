@@ -101,7 +101,6 @@ function Showroom() {
                         fill
                         className="object-cover transition-transform duration-700 group-hover:scale-110"
                         priority={index < 3}
-                        loading={index >= 3 ? "lazy" : undefined}
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       />
                     </motion.div>

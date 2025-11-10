@@ -5,6 +5,8 @@ import products from "../../../data/products.json";
 import variants from "../../../data/productVariants.json";
 import { enrichProductsWithVariants } from "../../../lib/mergeProducts";
 
+export const revalidate = 3600; // 1 heure
+
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
 }

@@ -40,8 +40,6 @@ export async function GET(request) {
       items: order.articles || []
     }));
 
-    console.log(`✅ ${formattedOrders.length} commandes chargées depuis orders.json`);
-
     return NextResponse.json({
       success: true,
       orders: formattedOrders,

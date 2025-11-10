@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import dynamic from "next/dynamic";
 import { AnimatePresence, motion } from "framer-motion";
 import NavbarPublic from "../components/NavbarPublic";
+import HydrationFix from "../components/HydrationFix";
 
 // Code-splitting pour les composants lourds
 const Footer = dynamic(() => import("../components/Footer"), { ssr: true });
@@ -26,6 +27,7 @@ export default function LayoutClient({ children }) {
 
   return (
     <>
+      <HydrationFix />
       <Preloader />
       
       {/* Navbar publique (masquée sur pages admin) */}
