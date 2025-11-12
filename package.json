@@ -4,9 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "set NEXT_DISABLE_SOURCEMAPS=1 && next dev",
+    "dev:memory": "set NODE_OPTIONS=--max-old-space-size=4096 && set NEXT_DISABLE_SOURCEMAPS=1 && next dev",
     "build": "next build",
+    "build:memory": "set NODE_OPTIONS=--max-old-space-size=4096 && next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "clean": "if exist .next rmdir /s /q .next && if exist node_modules\\.cache rmdir /s /q node_modules\\.cache"
   },
   "dependencies": {
     "@stripe/stripe-js": "^8.1.0",

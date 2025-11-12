@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Package, DollarSign, Calendar, User } from "lucide-react";
 import NavbarAdmin from "../../components/NavbarAdmin";
@@ -7,6 +7,7 @@ import NavbarAdmin from "../../components/NavbarAdmin";
 export default function AdminSecretPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [ordersLoading, setOrdersLoading] = useState(false);
   const [orders, setOrders] = useState([]);
   const [token, setToken] = useState("");
   const [error, setError] = useState("");
@@ -21,7 +22,10 @@ export default function AdminSecretPage() {
     if (savedToken) {
       setToken(savedToken);
       setIsAuthenticated(true);
-      fetchOrders(savedToken);
+      // Chargement différé des commandes après un court délai pour ne pas bloquer le rendu
+      setTimeout(() => {
+        fetchOrders(savedToken);
+      }, 100);
     }
   }, []);
 
@@ -55,7 +59,10 @@ export default function AdminSecretPage() {
         setToken(data.token);
         setIsAuthenticated(true);
         localStorage.setItem("admin_token", data.token);
-        fetchOrders(data.token);
+        // Chargement différé après connexion
+        setTimeout(() => {
+          fetchOrders(data.token);
+        }, 100);
       } else {
         setError(data.message || "Identifiants incorrects");
       }
@@ -66,9 +73,9 @@ export default function AdminSecretPage() {
     }
   };
 
-  // Récupérer les commandes
+  // Récupérer les commandes (chargement différé)
   const fetchOrders = async (authToken) => {
-    setLoading(true);
+    setOrdersLoading(true);
     try {
       const res = await fetch("/api/admin/orders", {
         headers: {
@@ -86,7 +93,7 @@ export default function AdminSecretPage() {
     } catch (err) {
       setError("Erreur de connexion au serveur");
     } finally {
-      setLoading(false);
+      setOrdersLoading(false);
     }
   };
 
@@ -247,17 +254,32 @@ export default function AdminSecretPage() {
     return colors[status] || "bg-gray-100 text-gray-700 border-gray-300";
   };
 
+  // Calculer les stats avec useMemo pour optimiser les performances
+  const stats = useMemo(() => {
+    if (!orders.length) {
+      return {
+        total: 0,
+        paid: 0,
+        pending: 0,
+        clients: 0,
+        totalSales: 0,
+      };
+    }
+    return {
+      total: orders.length,
+      paid: orders.filter((o) => o.status === "paid" || o.status === "payée").length,
+      pending: orders.filter((o) => o.status === "pending" || o.status === "en attente").length,
+      clients: new Set(orders.map((o) => o.customerEmail || o.customer?.email).filter(Boolean)).size,
+      totalSales: orders.reduce((sum, o) => sum + (o.totalAmount || o.amount_total || o.amount || 0), 0),
+    };
+  }, [orders]);
+
   // Si pas authentifié, afficher formulaire de connexion
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-[#F5F0E9] flex items-center justify-center p-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="w-full max-w-md"
-        >
-          <div className="bg-white rounded-3xl shadow-2xl p-8 sm:p-10">
+      <div className="min-h-screen bg-[#F5F0E9] flex items-center justify-center p-4 sm:p-6">
+        <div className="w-full max-w-md">
+          <div className="bg-white rounded-2xl shadow-sm p-6 sm:p-8 sm:p-10">
             {/* Logo */}
             <div className="text-center mb-8">
               <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-r from-[#C6A34F] to-[#E3C97F] mb-4">
@@ -302,25 +324,21 @@ export default function AdminSecretPage() {
               </div>
 
               {error && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="p-4 rounded-xl bg-red-50 border border-red-200"
-                >
+                <div className="p-4 rounded-xl bg-red-50 border border-red-200">
                   <p className="text-sm text-red-800">{error}</p>
-                </motion.div>
+                </div>
               )}
 
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-4 rounded-full bg-gradient-to-r from-[#C7A451] to-[#D4B975] text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="btn-luxury w-full disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? "Connexion..." : "Se connecter"}
               </button>
             </form>
           </div>
-        </motion.div>
+        </div>
       </div>
     );
   }
@@ -330,19 +348,10 @@ export default function AdminSecretPage() {
     <>
       <NavbarAdmin onRefresh={handleRefresh} />
       
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.3 }}
-        className="min-h-screen bg-[#FAF8F5] pt-24 pb-8 px-4 sm:px-6 lg:px-8"
-      >
+      <div className="min-h-screen bg-[#FAF8F5] pt-20 sm:pt-24 pb-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
-          >
+          <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
               <h1 className="text-3xl sm:text-4xl font-playfair font-bold text-[#1E1E1E] mb-2">
                 Gestion des Commandes
@@ -351,62 +360,60 @@ export default function AdminSecretPage() {
                 {orders.length} commande{orders.length !== 1 ? "s" : ""} enregistrée{orders.length !== 1 ? "s" : ""}
               </p>
             </div>
-            <motion.button
+            <button
               onClick={handleExportCSV}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              disabled={orders.length === 0}
-              className="btn-luxury-outline flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={orders.length === 0 || ordersLoading}
+              className="btn-luxury-outline flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
               Exporter CSV
-            </motion.button>
-          </motion.div>
+            </button>
+          </div>
 
         {/* Stats rapides */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 mb-8">
+        <div className="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4 mb-8">
           {[
             {
               label: "Total commandes",
-              value: orders.length,
+              value: stats.total,
               icon: Package,
               color: "from-blue-500 to-blue-600",
             },
             {
-              label: "Payées",
-              value: orders.filter((o) => o.status === "paid").length,
+              label: "Total ventes",
+              value: `${(stats.totalSales / 1000).toFixed(1)}k MAD`,
               icon: DollarSign,
               color: "from-green-500 to-green-600",
             },
             {
               label: "En attente",
-              value: orders.filter((o) => o.status === "pending").length,
+              value: stats.pending,
               icon: Calendar,
               color: "from-yellow-500 to-yellow-600",
             },
             {
               label: "Clients",
-              value: new Set(orders.map((o) => o.customerEmail)).size,
+              value: stats.clients,
               icon: User,
               color: "from-purple-500 to-purple-600",
             },
           ].map((stat, index) => (
             <motion.div
               key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow"
+              transition={{ duration: 0.2, delay: index * 0.05 }}
+              className="bg-white rounded-2xl p-5 sm:p-6 shadow-sm hover:shadow-md transition-shadow duration-200"
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-[#1E1E1E]/60 mb-1">{stat.label}</p>
-                  <p className="text-3xl font-bold text-[#1E1E1E]">{stat.value}</p>
+                  <p className="text-xs sm:text-sm text-[#1E1E1E]/60 mb-1">{stat.label}</p>
+                  <p className="text-2xl sm:text-3xl font-bold text-[#1E1E1E]">{stat.value}</p>
                 </div>
-                <div className={`p-3 rounded-xl bg-gradient-to-br ${stat.color}`}>
-                  <stat.icon className="w-6 h-6 text-white" />
+                <div className={`p-2.5 sm:p-3 rounded-xl bg-gradient-to-br ${stat.color}`}>
+                  <stat.icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                 </div>
               </div>
             </motion.div>
@@ -414,148 +421,147 @@ export default function AdminSecretPage() {
         </div>
 
         {/* Tableau des commandes */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="bg-white rounded-3xl shadow-xl overflow-hidden"
-        >
-          {/* Tableau desktop */}
-          <div className="hidden lg:block overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="bg-gradient-to-r from-[#C7A451] to-[#D4B975]">
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-white">
-                    ID
-                  </th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-white">
-                    Client
-                  </th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-white">
-                    Montant
-                  </th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-white">
-                    Paiement
-                  </th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-white">
-                    Statut
-                  </th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-white">
-                    Date
-                  </th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-white">
-                    Articles
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <AnimatePresence>
-                  {orders.length === 0 ? (
-                    <tr>
-                      <td colSpan="7" className="px-6 py-12 text-center text-[#1E1E1E]/60">
-                        Aucune commande pour le moment
-                      </td>
+        <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
+          {/* Skeleton loader pendant le chargement */}
+          {ordersLoading && orders.length === 0 ? (
+            <div className="p-8 space-y-4">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="animate-pulse flex space-x-4">
+                  <div className="flex-1 space-y-2">
+                    <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                    <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <>
+              {/* Tableau desktop */}
+              <div className="hidden lg:block overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="bg-gradient-to-r from-[#C7A451] to-[#D4B975]">
+                      <th className="px-4 sm:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-white">
+                        ID
+                      </th>
+                      <th className="px-4 sm:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-white">
+                        Client
+                      </th>
+                      <th className="px-4 sm:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-white">
+                        Montant
+                      </th>
+                      <th className="px-4 sm:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-white">
+                        Paiement
+                      </th>
+                      <th className="px-4 sm:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-white">
+                        Statut
+                      </th>
+                      <th className="px-4 sm:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-white">
+                        Date
+                      </th>
+                      <th className="px-4 sm:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-white">
+                        Articles
+                      </th>
                     </tr>
-                  ) : (
-                    orders.map((order, index) => (
-                      <motion.tr
-                        key={order._id || order.sessionId}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: index * 0.05 }}
-                        className={`border-b border-[#1E1E1E]/5 hover:bg-[#fafafa] transition-colors ${
-                          index % 2 === 0 ? "bg-white" : "bg-white"
-                        }`}
-                      >
-                        <td className="px-6 py-4">
-                          <p className="text-xs font-mono text-[#1E1E1E]/60">
-                            #{(order._id || order.sessionId || order.id || "N/A").slice(-8)}
-                          </p>
+                  </thead>
+                  <tbody>
+                    {orders.length === 0 ? (
+                      <tr>
+                        <td colSpan="7" className="px-6 py-12 text-center text-[#1E1E1E]/60">
+                          Aucune commande pour le moment
                         </td>
-                        <td className="px-6 py-4">
-                          <div>
-                            <p className="font-medium text-[#1E1E1E]">
-                              {order.customerName || order.customer?.name || "N/A"}
+                      </tr>
+                    ) : (
+                      orders.map((order, index) => (
+                        <tr
+                          key={order._id || order.sessionId || index}
+                          className="border-b border-[#1E1E1E]/5 hover:bg-[#fafafa] transition-colors duration-200"
+                        >
+                          <td className="px-4 sm:px-6 py-3 sm:py-4">
+                            <p className="text-xs font-mono text-[#1E1E1E]/60">
+                              #{(order._id || order.sessionId || order.id || "N/A").toString().slice(-8)}
                             </p>
-                            <p className="text-sm text-[#1E1E1E]/60">
-                              {order.customerEmail || order.customer?.email || "N/A"}
-                            </p>
-                            {(order.customerPhone || order.customer?.phone) && (
-                              <p className="text-sm text-[#1E1E1E]/60">
-                                {order.customerPhone || order.customer?.phone}
+                          </td>
+                          <td className="px-4 sm:px-6 py-3 sm:py-4">
+                            <div>
+                              <p className="text-sm sm:text-base font-medium text-[#1E1E1E]">
+                                {order.customerName || order.customer?.name || "N/A"}
                               </p>
-                            )}
-                          </div>
-                        </td>
-                        <td className="px-6 py-4">
-                          <span className="text-lg font-bold text-[#C7A451]">
-                            {(order.totalAmount || order.amount_total || order.amount || 0).toLocaleString("fr-MA")} MAD
-                          </span>
-                        </td>
-                        <td className="px-6 py-4">
-                          <span className="capitalize">
-                            {order.paymentMethod === "carte" ? "💳 Carte bancaire" : 
-                             order.paymentMethod === "stripe" ? "💳 Stripe" : 
-                             "💬 WhatsApp"}
-                          </span>
-                        </td>
-                        <td className="px-6 py-4">
-                          <select
-                            value={order.status}
-                            onChange={(e) => handleStatusChange(order._id, e.target.value)}
-                            className={`px-3 py-2 rounded-lg text-xs font-semibold border-2 cursor-pointer transition-all duration-300 ${getStatusColor(
-                              order.status
-                            )} hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-[#C7A451]`}
-                          >
-                            <option value="pending">En attente</option>
-                            <option value="paid">Payée</option>
-                            <option value="completed">Livrée</option>
-                            <option value="cancelled">Annulée</option>
-                          </select>
-                        </td>
-                        <td className="px-6 py-4 text-sm text-[#1E1E1E]/80">
-                          {formatDate(order.createdAt || order.when)}
-                        </td>
-                        <td className="px-6 py-4">
-                          <div className="text-sm">
-                            {order.items?.slice(0, 2).map((item, i) => (
-                              <div key={i} className="text-[#1E1E1E]/80">
-                                {item.quantity}x {item.name || item.productName || "N/A"}
-                              </div>
-                            ))}
-                            {order.items?.length > 2 && (
-                              <div className="text-[#C7A451] font-medium">
-                                +{order.items.length - 2} autre(s)
-                              </div>
-                            )}
-                            {(!order.items || order.items.length === 0) && (
-                              <div className="text-[#1E1E1E]/40 italic">Aucun article</div>
-                            )}
-                          </div>
-                        </td>
-                      </motion.tr>
-                    ))
-                  )}
-                </AnimatePresence>
-              </tbody>
-            </table>
-          </div>
+                              <p className="text-xs sm:text-sm text-[#1E1E1E]/60">
+                                {order.customerEmail || order.customer?.email || "N/A"}
+                              </p>
+                              {(order.customerPhone || order.customer?.phone) && (
+                                <p className="text-xs sm:text-sm text-[#1E1E1E]/60">
+                                  {order.customerPhone || order.customer?.phone}
+                                </p>
+                              )}
+                            </div>
+                          </td>
+                          <td className="px-4 sm:px-6 py-3 sm:py-4">
+                            <span className="text-base sm:text-lg font-bold text-[#C7A451]">
+                              {(order.totalAmount || order.amount_total || order.amount || 0).toLocaleString("fr-MA")} MAD
+                            </span>
+                          </td>
+                          <td className="px-4 sm:px-6 py-3 sm:py-4">
+                            <span className="text-xs sm:text-sm capitalize">
+                              {order.paymentMethod === "carte" ? "💳 Carte" : 
+                               order.paymentMethod === "stripe" ? "💳 Stripe" : 
+                               "💬 WhatsApp"}
+                            </span>
+                          </td>
+                          <td className="px-4 sm:px-6 py-3 sm:py-4">
+                            <select
+                              value={order.status}
+                              onChange={(e) => handleStatusChange(order._id || order.sessionId || order.id, e.target.value)}
+                              className={`px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs font-semibold border-2 cursor-pointer transition-all duration-200 ${getStatusColor(
+                                order.status
+                              )} hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-[#C7A451]`}
+                            >
+                              <option value="pending">En attente</option>
+                              <option value="paid">Payée</option>
+                              <option value="completed">Livrée</option>
+                              <option value="cancelled">Annulée</option>
+                            </select>
+                          </td>
+                          <td className="px-4 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm text-[#1E1E1E]/80">
+                            {formatDate(order.createdAt || order.date || order.when)}
+                          </td>
+                          <td className="px-4 sm:px-6 py-3 sm:py-4">
+                            <div className="text-xs sm:text-sm">
+                              {order.items?.slice(0, 2).map((item, i) => (
+                                <div key={i} className="text-[#1E1E1E]/80">
+                                  {item.quantity}x {item.name || item.productName || "N/A"}
+                                </div>
+                              ))}
+                              {order.items?.length > 2 && (
+                                <div className="text-[#C7A451] font-medium">
+                                  +{order.items.length - 2} autre(s)
+                                </div>
+                              )}
+                              {(!order.items || order.items.length === 0) && (
+                                <div className="text-[#1E1E1E]/40 italic">Aucun article</div>
+                              )}
+                            </div>
+                          </td>
+                        </tr>
+                      ))
+                    )}
+                  </tbody>
+                </table>
+              </div>
 
-          {/* Vue mobile */}
-          <div className="lg:hidden p-4 space-y-4">
-            {orders.length === 0 ? (
-              <p className="text-center text-[#1a1a1a]/60 py-12">
-                Aucune commande pour le moment
-              </p>
-            ) : (
-              orders.map((order, index) => (
-                <motion.div
-                  key={order._id || order.sessionId}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.05 }}
-                  className="bg-[#FAF7F3] rounded-2xl p-4 space-y-3"
-                >
+              {/* Vue mobile */}
+              <div className="lg:hidden p-4 space-y-4">
+                {orders.length === 0 ? (
+                  <p className="text-center text-[#1a1a1a]/60 py-12">
+                    Aucune commande pour le moment
+                  </p>
+                ) : (
+                  orders.map((order, index) => (
+                    <div
+                      key={order._id || order.sessionId || index}
+                      className="bg-[#FAF7F3] rounded-2xl p-4 space-y-3"
+                    >
                   <div className="flex justify-between items-start gap-2">
                     <div className="flex-1">
                       <p className="font-semibold text-[#1a1a1a]">
@@ -567,8 +573,8 @@ export default function AdminSecretPage() {
                     </div>
                     <select
                       value={order.status}
-                      onChange={(e) => handleStatusChange(order._id, e.target.value)}
-                      className={`px-2 py-1 rounded-lg text-xs font-semibold border-2 cursor-pointer transition-all duration-300 ${getStatusColor(
+                      onChange={(e) => handleStatusChange(order._id || order.sessionId || order.id, e.target.value)}
+                      className={`px-2 py-1 rounded-lg text-xs font-semibold border-2 cursor-pointer transition-all duration-200 ${getStatusColor(
                         order.status
                       )} hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-[#C7A451]`}
                     >
@@ -580,7 +586,7 @@ export default function AdminSecretPage() {
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-xl font-bold text-[#C7A451]">
-                      {order.totalAmount} MAD
+                      {(order.totalAmount || order.amount_total || order.amount || 0).toLocaleString("fr-MA")} MAD
                     </span>
                     <span className="text-sm">
                       {order.paymentMethod === "carte" ? "💳 Carte bancaire" : 
@@ -589,22 +595,24 @@ export default function AdminSecretPage() {
                     </span>
                   </div>
                   <div className="text-sm text-[#1a1a1a]/60">
-                    {formatDate(order.createdAt)}
+                    {formatDate(order.createdAt || order.date || order.when)}
                   </div>
                   <div className="text-sm border-t border-[#1a1a1a]/10 pt-3">
                     {order.items?.map((item, i) => (
                       <div key={i} className="text-[#1a1a1a]/80">
-                        {item.quantity}x {item.name}
+                        {item.quantity}x {item.name || item.productName || "N/A"}
                       </div>
                     ))}
                   </div>
-                </motion.div>
-              ))
-            )}
-          </div>
-        </motion.div>
+                </div>
+                  ))
+                )}
+              </div>
+            </>
+          )}
         </div>
-      </motion.div>
+        </div>
+      </div>
     </>
   );
 }

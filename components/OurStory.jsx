@@ -13,31 +13,30 @@ export default function OurStory() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1,
+        staggerChildren: 0.1,
+        delayChildren: 0.05,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.8,
-        ease: [0.25, 0.46, 0.45, 0.94],
+        duration: 0.3,
+        ease: "easeOut",
       },
     },
   };
 
   const imageVariants = {
-    hidden: { opacity: 0, scale: 0.95 },
+    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      scale: 1,
       transition: {
-        duration: 1,
+        duration: 0.3,
         ease: "easeOut",
       },
     },
@@ -48,17 +47,19 @@ export default function OurStory() {
       id="notre-histoire"
       ref={ref}
       className="relative py-12 sm:py-20 md:py-28 bg-[#FAF8F5] overflow-hidden"
+      suppressHydrationWarning
     >
       {/* Décorations subtiles */}
-      <div className="absolute top-0 left-0 w-64 h-64 bg-[#C7A451]/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#C7A451]/5 rounded-full blur-3xl" />
+      <div className="absolute top-0 left-0 w-64 h-64 bg-[#C7A451]/5 rounded-full blur-3xl" suppressHydrationWarning />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#C7A451]/5 rounded-full blur-3xl" suppressHydrationWarning />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" suppressHydrationWarning>
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center"
+          suppressHydrationWarning
         >
           {/* Contenu texte */}
           <div className="space-y-4 sm:space-y-6 order-2 lg:order-1">
@@ -92,10 +93,11 @@ export default function OurStory() {
             <motion.div variants={itemVariants} className="pt-6">
               <Link
                 href="/notre-histoire"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#C7A451] to-[#D4B975] text-[#111] font-semibold rounded-full shadow-xl transition-all duration-300 hover:shadow-[0_0_30px_rgba(199,164,81,0.5)] hover:scale-105"
+                prefetch
+                className="btn-luxury inline-flex items-center"
               >
-                <span>Découvrir notre histoire</span>
-                <span>→</span>
+                Découvrir notre histoire
+                <span className="ml-2">→</span>
               </Link>
             </motion.div>
           </div>

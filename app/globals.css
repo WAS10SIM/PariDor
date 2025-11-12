@@ -9,6 +9,9 @@ html {
 
 body {
   scroll-behavior: smooth;
+  /* Supprimer les attributs injectés par les extensions avant l'hydratation */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Custom scrollbar */
@@ -38,20 +41,60 @@ body {
     @apply bg-[#FAF8F5] text-coal antialiased;
     letter-spacing: 0.3px;
     font-family: 'Inter', sans-serif;
+    line-height: 1.6;
   }
   
-  h1, h2, h3, h4, h5, h6 {
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+  }
+  
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.3px;
+  }
+  
+  h3 {
     font-family: 'Playfair Display', serif;
     font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: -0.2px;
+  }
+  
+  h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+  
+  p {
+    line-height: 1.7;
+  }
+  
+  @media (max-width: 768px) {
+    body {
+      line-height: 1.65;
+    }
+    h1, h2, h3 {
+      line-height: 1.25;
+    }
+    p {
+      line-height: 1.75;
+    }
   }
 }
 
 @layer components {
   .btn-luxury {
-    @apply relative inline-flex items-center justify-center rounded-2xl px-6 py-3 font-semibold transition-all duration-200 ease-in-out overflow-hidden;
+    @apply relative inline-flex items-center justify-center h-12 px-8 rounded-2xl font-semibold transition-all ease-in-out overflow-hidden;
     @apply bg-gradient-to-r from-[#C7A451] to-[#D4B975] text-[#111];
-    @apply shadow-md hover:shadow-lg hover:shadow-[#C7A451]/40;
-    @apply hover:scale-[1.03] active:scale-95;
+    @apply shadow-md hover:shadow-[0_0_15px_rgba(199,164,81,0.3)] hover:scale-105;
+    @apply active:scale-95;
+    transition-duration: 250ms;
     letter-spacing: 0.3px;
   }
 
@@ -66,11 +109,13 @@ body {
   }
   
   .btn-luxury-outline {
-    @apply relative inline-flex items-center justify-center rounded-2xl px-6 py-3 font-semibold transition-all duration-200 ease-in-out overflow-hidden;
+    @apply relative inline-flex items-center justify-center h-12 px-8 rounded-2xl font-semibold transition-all ease-in-out overflow-hidden;
     @apply border-2 border-[#C7A451] text-[#C7A451] bg-transparent;
     @apply hover:bg-[#C7A451] hover:text-white;
-    @apply hover:scale-[1.03] active:scale-95;
-    @apply shadow-md hover:shadow-lg;
+    @apply hover:shadow-[0_0_15px_rgba(199,164,81,0.3)] hover:scale-105;
+    @apply active:scale-95;
+    @apply shadow-md;
+    transition-duration: 250ms;
   }
   
   .btn-ghost-luxury {
@@ -147,7 +192,7 @@ body {
 }
 
 body {
-  animation: fadeIn 0.8s ease-in-out;
+  animation: fadeIn 0.3s ease-out;
 }
 
 /* Animation glow doré */
@@ -197,6 +242,105 @@ body {
 
 .bounce-in {
   animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Shimmer effect pour les skeletons */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+  background: linear-gradient(
+    90deg,
+    rgba(199, 164, 81, 0.1) 0%,
+    rgba(212, 185, 117, 0.2) 50%,
+    rgba(199, 164, 81, 0.1) 100%
+  );
+  background-size: 200% 100%;
+}
+
+/* Optimisation GPU pour les animations */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+/* Réduction des animations pour les utilisateurs préférant moins de mouvement */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Optimisation GPU pour le loader */
+.loader-container {
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* Animation favicon pulse */
+@keyframes favicon-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+/* Transition de page fade */
+.page-transition {
+  animation: pageFadeIn 0.4s ease-in-out;
+}
+
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Shimmer animation pour skeletons */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+  background: linear-gradient(
+    90deg,
+    rgba(199, 164, 81, 0.1) 0%,
+    rgba(199, 164, 81, 0.2) 50%,
+    rgba(199, 164, 81, 0.1) 100%
+  );
+  background-size: 200% 100%;
 }
 
 

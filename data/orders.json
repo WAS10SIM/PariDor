@@ -1,5 +1,26 @@
 [
   {
+    "id": "CMD-1762822064684",
+    "sessionId": "cs_test_a1wqW5k2rWUzt3kViVZbfwWAJcQkMiBt9qhI5thiS5s5oEfjR9fUxqh9ZT",
+    "customerName": "Wassim Leo",
+    "customerEmail": "lnl@gag.com",
+    "customerPhone": "0616779849",
+    "customerAddress": "Hhhh, Dgkvfgj",
+    "totalAmount": 7050,
+    "paymentMethod": "carte",
+    "status": "payée",
+    "date": "2025-11-11T00:47:44.684Z",
+    "articles": [
+      {
+        "name": "Banquette Marocain Classique",
+        "price": 7050,
+        "quantity": 1,
+        "size": "",
+        "color": "Bleu roi"
+      }
+    ]
+  },
+  {
     "id": "CMD-1762618072162",
     "sessionId": "cs_test_b1VKAAIaviVcxeiqRW0T7gPYSbMTr4xsEtgnDPT0D5mRbTfCrfyFPoQ1wA",
     "customerName": "Wassim Leo",

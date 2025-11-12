@@ -141,27 +141,27 @@ Merci de me contacter pour finaliser la commande.`;
   };
 
   return (
-    <div className="bg-[#FAF8F5] py-24 pb-32 md:pb-24">
-      <div className="mx-auto max-w-7xl px-6">
+    <div className="bg-[#FAF8F5] py-6 sm:py-12 md:py-24 pb-32 md:pb-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="mb-12 text-center text-5xl font-light text-coal md:text-6xl"
+          transition={{ duration: 0.3 }}
+          className="mb-8 sm:mb-12 text-center text-3xl sm:text-4xl md:text-5xl font-light text-coal"
         >
           Finaliser ma commande
         </motion.h1>
 
-        <div className="grid gap-10 lg:grid-cols-2">
+        <div className="grid gap-6 sm:gap-10 lg:grid-cols-2">
           {/* Left Column: Customer Form */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7 }}
-            className="rounded-3xl bg-white p-8 shadow-lg"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            className="rounded-2xl bg-white p-6 sm:p-8 shadow-sm"
           >
-            <h2 className="mb-6 text-3xl font-light text-coal">Vos coordonnées</h2>
-            <form className="space-y-8">
+            <h2 className="mb-6 text-2xl sm:text-3xl font-light text-coal">Vos coordonnées</h2>
+            <form className="space-y-6 sm:space-y-8">
               <div>
                 <label htmlFor="fullName" className="block text-sm font-medium text-coal/70 mb-2">Nom complet*</label>
                 <input
@@ -236,12 +236,12 @@ Merci de me contacter pour finaliser la commande.`;
 
           {/* Right Column: Cart Summary */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7 }}
-            className="rounded-3xl bg-white p-8 shadow-lg sticky top-28 h-fit"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            className="rounded-2xl bg-white p-6 sm:p-8 shadow-sm sticky top-24 h-fit"
           >
-            <h2 className="mb-6 text-3xl font-light text-coal">Résumé de la commande</h2>
+            <h2 className="mb-6 text-2xl sm:text-3xl font-light text-coal">Résumé de la commande</h2>
             
             {/* Articles */}
             <div className="mb-6 space-y-4">
@@ -346,7 +346,7 @@ Merci de me contacter pour finaliser la commande.`;
               <button
                 onClick={handleWhatsAppOrder}
                 disabled={isStripeLoading || isWhatsAppLoading}
-                className="hidden md:flex w-full rounded-xl bg-green-500 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:bg-green-600 hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed items-center justify-center gap-2"
+                className="hidden md:flex w-full rounded-xl bg-green-500 px-6 py-3 font-semibold text-white shadow-md transition-all duration-200 hover:bg-green-600 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed items-center justify-center gap-2"
                 aria-label="Commander via WhatsApp"
                 style={{ letterSpacing: "0.3px" }}
               >
@@ -375,14 +375,14 @@ Merci de me contacter pour finaliser la commande.`;
       <motion.div
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.3 }}
-        className="fixed inset-x-0 bottom-0 z-30 md:hidden bg-white border-t border-coal/10 shadow-2xl pb-[env(safe-area-inset-bottom)]"
+        transition={{ duration: 0.2 }}
+        className="fixed inset-x-0 bottom-0 z-30 md:hidden bg-white/95 backdrop-blur-md border-t border-coal/10 shadow-lg pb-[env(safe-area-inset-bottom)]"
       >
         <div className="px-4 py-3">
           <button
             onClick={handleWhatsAppOrder}
             disabled={isStripeLoading || isWhatsAppLoading}
-            className="w-full rounded-xl bg-green-500 px-6 py-4 font-semibold text-white shadow-lg transition-all duration-300 hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            className="w-full rounded-xl bg-green-500 px-6 py-4 font-semibold text-white shadow-md transition-all duration-200 hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             aria-label="Commander via WhatsApp"
             style={{ letterSpacing: "0.3px" }}
           >

@@ -8,20 +8,17 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <motion.footer 
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
+    <footer 
       className="bg-[#1E1E1E] text-white"
+      suppressHydrationWarning
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12" suppressHydrationWarning>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Logo & Description */}
           <div className="flex flex-col items-center md:items-start">
             <Image
               src="/logo.png"
-              alt="Pari D'Or"
+              alt="Pari D'Or - Logo - Fabricant de meubles haut de gamme marocains"
               width={160}
               height={70}
               className="h-16 w-auto object-contain mb-4"
@@ -148,6 +145,6 @@ export default function Footer() {
           </div>
         </div>
       </div>
-    </motion.footer>
+    </footer>
   );
 }

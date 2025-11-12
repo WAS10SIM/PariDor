@@ -85,7 +85,7 @@ export default function ProduitsPage() {
           Nos Créations
         </motion.h1>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 items-stretch">
+        <div className="grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3 items-stretch">
           {enriched.map((product, index) => {
             const variant = getSelectedVariant(product);
             const displayImage = variant?.image || product.image;
@@ -93,102 +93,104 @@ export default function ProduitsPage() {
             return (
             <motion.div
               key={product.slug}
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{ 
-                scale: 1.03, 
-                y: -8,
-                boxShadow: "0 8px 24px rgba(199, 164, 81, 0.15)",
-                transition: { duration: 0.3 }
-              }}
-              className="rounded-3xl bg-white p-6 shadow-md h-full flex flex-col min-h-[520px] w-full"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.3, delay: index * 0.05 }}
+              className="h-full flex"
             >
-              <div className="relative h-64 w-full overflow-hidden rounded-2xl mb-4 shadow-md flex-shrink-0">
-                <AnimatePresence mode="wait">
-                  <motion.div 
-                    key={displayImage} 
-                    initial={{ opacity: 0, scale: 0.98 }} 
-                    animate={{ opacity: 1, scale: 1 }} 
-                    exit={{ opacity: 0, scale: 1.02 }}
-                    transition={{ duration: 0.35, ease: "easeInOut" }} 
-                    className="absolute inset-0"
-                  >
-                    <Image
-                      src={displayImage}
-                      alt={product.title}
-                      fill
-                      className="object-cover"
-                      loading="lazy"
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                    />
-                  </motion.div>
-                </AnimatePresence>
-              </div>
+              <div className="flex flex-col justify-between h-full w-full bg-white rounded-2xl shadow-sm p-5 hover:shadow-lg transition-all duration-200 group">
+                {/* Content Section */}
+                <div className="flex flex-col gap-2 flex-grow">
+                  {/* Image Container - Fixed Height */}
+                  <div className="relative w-full h-[280px] overflow-hidden rounded-xl mb-3 flex-shrink-0">
+                    <AnimatePresence mode="wait">
+                      <motion.div 
+                        key={displayImage} 
+                        initial={{ opacity: 0 }} 
+                        animate={{ opacity: 1 }} 
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.4 }} 
+                        className="absolute inset-0"
+                      >
+                        <Image
+                          src={displayImage}
+                          alt={`${product.title} - ${product.category} - Pari D'Or - Meubles haut de gamme marocains`}
+                          fill
+                          className="object-cover transition-transform duration-500 group-hover:scale-110"
+                          loading="lazy"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        />
+                      </motion.div>
+                    </AnimatePresence>
+                    
+                    {/* Category Badge */}
+                    <div className="absolute top-3 left-3">
+                      <span className="rounded-full bg-gradient-to-r from-[#C7A451] to-[#D4B975] px-3 py-1 text-xs font-semibold text-[#111] shadow-md">
+                        {product.category}
+                      </span>
+                    </div>
+                  </div>
 
-              <h3 className="mb-2 text-2xl font-light text-coal">{product.title}</h3>
-              <p className="mb-4 text-sm text-coal/60">{product.excerpt || "Confectionné avec soin pour allier élégance et confort incomparable."}</p>
+                  {/* Title - Fixed Height */}
+                  <h3 className="font-playfair text-lg font-semibold text-coal min-h-[56px] line-clamp-2">
+                    {product.title}
+                  </h3>
+                  
+                  {/* Description - Fixed Height */}
+                  <p className="text-sm text-gray-500 min-h-[48px] line-clamp-2">
+                    {product.excerpt || "Confectionné avec soin pour allier élégance et confort incomparable."}
+                  </p>
+                  
+                  {/* Price */}
+                  <div className="text-lg font-semibold text-[#C7A451] mb-2">
+                    {displayPrice.toLocaleString("fr-MA")} MAD
+                  </div>
 
-              <motion.div 
-                key={`price-${product.id}-${variant?.key || 'default'}`}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.2 }}
-                className="mb-6 flex items-center justify-between"
-              >
-                <span className="text-2xl font-bold text-[#C7A451]">{displayPrice.toLocaleString("fr-MA")} MAD</span>
-              </motion.div>
-
-              {product.variants && (
-                <div className="mb-5 flex flex-wrap gap-2">
-                  {product.variants.map((c) => (
-                    <motion.button
-                      key={c.key}
-                      onClick={() => setSelectedBySlug((s) => ({ ...s, [product.slug || product.id]: c }))}
-                      aria-label={c.name}
-                      title={c.name}
-                      whileHover={{ scale: 1.15 }}
-                      whileTap={{ scale: 0.95 }}
-                      animate={{
-                        scale: (variant?.key || '') === c.key ? 1.1 : 1,
-                      }}
-                      transition={{ duration: 0.2 }}
-                      className={`h-8 w-8 rounded-full border-2 transition-all ${
-                        (variant?.key || '') === c.key ? 'border-gold ring-2 ring-gold/30' : 'border-white'
-                      }`}
-                      style={{ backgroundColor: c.code }}
-                    />
-                  ))}
-                </div>
-              )}
-
-              <div className="mt-auto flex gap-3 pt-4">
-                <Link
-                  href={`/products/${product.slug}`}
-                  className="btn-luxury-outline flex-1 inline-flex items-center justify-center"
-                >
-                  Découvrir
-                </Link>
-                <motion.button
-                  onClick={() => handleAddToCart(product)}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="btn-luxury flex-1"
-                >
-                  {addedProducts[product.id || product.slug] ? (
-                    <motion.span
-                      initial={{ scale: 0, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      exit={{ scale: 0, opacity: 0 }}
-                      className="flex items-center justify-center gap-2"
-                    >
-                      <CheckCircle2 className="w-5 h-5" />
-                      <span>Ajouté</span>
-                    </motion.span>
-                  ) : (
-                    "Ajouter au panier"
+                  {/* Color Variants */}
+                  {product.variants && product.variants.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mb-3">
+                      {product.variants.map((c) => (
+                        <button
+                          key={c.key}
+                          onClick={() => setSelectedBySlug((s) => ({ ...s, [product.slug || product.id]: c }))}
+                          aria-label={c.name}
+                          title={c.name}
+                          className={`h-8 w-8 rounded-full border-2 transition-all duration-200 ${
+                            (variant?.key || '') === c.key 
+                              ? 'border-[#C7A451] ring-2 ring-[#C7A451]/30 shadow-md scale-110' 
+                              : 'border-gray-200 hover:border-[#C7A451]/50'
+                          }`}
+                          style={{ backgroundColor: c.code }}
+                        />
+                      ))}
+                    </div>
                   )}
-                </motion.button>
+                </div>
+
+                {/* Actions - Fixed at Bottom */}
+                <div className="mt-auto flex gap-3 pt-4 border-t border-gray-100">
+                  <Link
+                    href={`/products/${product.slug}`}
+                    prefetch
+                    className="btn-luxury-outline flex-1 text-center"
+                  >
+                    Découvrir
+                  </Link>
+                  <button
+                    onClick={() => handleAddToCart(product)}
+                    className="btn-luxury flex-1"
+                  >
+                    {addedProducts[product.id || product.slug] ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <CheckCircle2 className="w-5 h-5" />
+                        <span>Ajouté</span>
+                      </span>
+                    ) : (
+                      "Ajouter"
+                    )}
+                  </button>
+                </div>
               </div>
             </motion.div>
             );

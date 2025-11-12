@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 
 // Dynamic imports pour code-splitting - composants lourds chargés à la demande
+// SSR activé pour un rendu serveur optimisé et un meilleur SEO
 const Hero = dynamic(() => import("../components/Hero"), { ssr: true });
 const OurStory = dynamic(() => import("../components/OurStory"), { ssr: true });
 const ChoisirNous = dynamic(() => import("../components/ChoisirNous"), { ssr: true });
@@ -56,7 +57,10 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
+      {/* Hero - Rendu immédiat (above the fold) - Pas de Suspense pour éviter le flash */}
       <Hero />
+      
+      {/* Sections chargées progressivement - dynamic imports gèrent déjà le chargement */}
       <OurStory />
       <ChoisirNous />
       <Showroom />

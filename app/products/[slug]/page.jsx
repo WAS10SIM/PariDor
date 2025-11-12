@@ -85,12 +85,7 @@ export default function ProductPage({ params }) {
         
         <div className="relative z-10 flex h-full items-end">
           <div className="mx-auto max-w-7xl px-6 pb-16">
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-white"
-            >
+            <div className="text-white">
               <div className="mb-2 text-sm font-medium text-gold">
                 {product.category}
               </div>
@@ -100,7 +95,7 @@ export default function ProductPage({ params }) {
               <p className="max-w-2xl text-lg font-light leading-relaxed text-white/90">
                 {product.description}
               </p>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -110,12 +105,7 @@ export default function ProductPage({ params }) {
         <div className="mx-auto max-w-4xl px-6">
           <div className="grid gap-12 lg:grid-cols-2">
             {/* Product Image */}
-            <motion.div
-              initial={{ opacity: 0, x: -40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              className="relative h-96 overflow-hidden rounded-3xl"
-            >
+            <div className="relative h-96 overflow-hidden rounded-3xl">
               <AnimatePresence mode="wait">
                 <motion.div 
                   key={displayImage} 
@@ -127,7 +117,7 @@ export default function ProductPage({ params }) {
                 >
                   <Image
                     src={displayImage}
-                    alt={product.title}
+                    alt={`${product.title || 'Produit'} - ${product.category} - Pari D'Or - Meubles haut de gamme marocains - Agadir`}
                     fill
                     className="object-cover"
                     priority
@@ -135,15 +125,10 @@ export default function ProductPage({ params }) {
                   />
                 </motion.div>
               </AnimatePresence>
-            </motion.div>
+            </div>
 
             {/* Product Configuration */}
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="space-y-8"
-            >
+            <div className="space-y-8">
               {/* Price */}
               <div className="text-3xl font-light text-gold">
                 {calculatePrice().toLocaleString("fr-MA")} MAD
@@ -157,17 +142,11 @@ export default function ProductPage({ params }) {
                   </label>
                   <div className="flex flex-wrap gap-3">
                     {product.variants.map((v) => (
-                      <motion.button
+                      <button
                         key={v.key}
                         onClick={() => setSelectedVariant(v)}
-                        whileHover={{ scale: 1.15 }}
-                        whileTap={{ scale: 0.95 }}
-                        animate={{
-                          scale: selectedVariant?.key === v.key ? 1.1 : 1,
-                        }}
-                        transition={{ duration: 0.2 }}
-                        className={`h-12 w-12 rounded-full border-2 transition-all ${
-                          selectedVariant?.key === v.key ? 'border-gold ring-2 ring-gold/30' : 'border-coal/20'
+                        className={`h-12 w-12 rounded-full border-2 transition-all duration-200 hover:scale-110 active:scale-95 ${
+                          selectedVariant?.key === v.key ? 'border-[#C7A451] ring-2 ring-[#C7A451]/30 scale-110 shadow-md' : 'border-coal/20 hover:border-[#C7A451]/50'
                         }`}
                         style={{ backgroundColor: v.code }}
                         title={v.name}
@@ -233,23 +212,22 @@ export default function ProductPage({ params }) {
               </div>
 
               {/* Add to Cart Button */}
-              <motion.button
-                whileHover={{ y: -2, scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+              <button
                 onClick={handleAddToCart}
                 className="btn-luxury w-full"
               >
                 Ajouter au panier
-              </motion.button>
+              </button>
 
               {/* Back to Catalog */}
               <Link
                 href="/produits"
-                className="block text-center text-coal/60 transition-colors hover:text-gold"
+                prefetch
+                className="block text-center text-coal/60 transition-colors duration-200 hover:text-[#C7A451]"
               >
                 ← Retour au catalogue
               </Link>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>

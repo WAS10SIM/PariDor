@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { Calendar, Package, MapPin } from "lucide-react";
 
@@ -12,7 +12,7 @@ function readOrders() {
     const saved = localStorage.getItem(ORDERS_KEY);
     return saved ? JSON.parse(saved) : [];
   } catch (error) {
-    console.error("Erreur lecture commandes:", error);
+    // console.error("Erreur lecture commandes:", error); // Removed for production optimization
     return [];
   }
 }
@@ -42,22 +42,17 @@ export default function MesCommandesPage() {
     return (
       <div className="min-h-screen bg-[#FAF8F5] py-24">
         <div className="mx-auto max-w-4xl px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center"
-          >
+          <div className="text-center">
             <h1 className="mb-8 text-4xl font-light text-coal">Mes commandes</h1>
             <div className="rounded-3xl bg-white p-12 shadow-lg">
               <Package className="mx-auto h-16 w-16 text-coal/30 mb-4" />
               <h2 className="mb-4 text-2xl font-medium text-coal">Aucune commande</h2>
               <p className="mb-8 text-coal/60">Vous n'avez pas encore passé de commande.</p>
-              <Link href="/#creations" className="btn-luxury inline-flex items-center">
+              <Link href="/#creations" prefetch className="btn-luxury inline-flex items-center">
                 Découvrir nos créations
               </Link>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     );
@@ -66,22 +61,14 @@ export default function MesCommandesPage() {
   return (
       <div className="min-h-screen bg-[#FAF8F5] py-24">
       <div className="mx-auto max-w-4xl px-6">
-        <motion.h1
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="mb-12 text-center text-4xl font-light text-coal"
-        >
+        <h1 className="mb-12 text-center text-4xl font-light text-coal">
           Mes commandes
-        </motion.h1>
+        </h1>
 
         <div className="space-y-6">
           {orders.map((order, index) => (
-            <motion.div
+            <div
               key={order.id || index}
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.1 }}
               className="rounded-3xl bg-white p-6 shadow-lg"
             >
               <div className="flex items-start justify-between mb-4">
@@ -112,10 +99,7 @@ export default function MesCommandesPage() {
                   <p className="text-2xl font-bold text-[#C7A451] mb-2">
                     {order.amount_total || order.amount || 0} MAD
                   </p>
-                  <motion.span
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: index * 0.1 + 0.2 }}
+                  <span
                     className={`inline-block px-3 py-1 rounded-full text-xs font-semibold border ${
                       order.status === "paid" || order.status === "complete"
                         ? "bg-green-100 text-green-700 border-green-300"
@@ -133,7 +117,7 @@ export default function MesCommandesPage() {
                       : order.status === "delivered" || order.status === "livree"
                       ? "Livrée"
                       : order.status || "En attente"}
-                  </motion.span>
+                  </span>
                 </div>
               </div>
 
@@ -152,11 +136,8 @@ export default function MesCommandesPage() {
                   <h3 className="mb-4 font-medium text-coal">Articles commandés :</h3>
                   <ul className="space-y-4">
                     {order.items.map((item, idx) => (
-                      <motion.li
+                      <li
                         key={idx}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: index * 0.1 + idx * 0.05 }}
                         className="flex items-center justify-between gap-4 text-sm text-coal/70 bg-[#FAF7F3]/50 rounded-lg p-3"
                       >
                         <div className="flex items-center gap-4 flex-1">
@@ -191,25 +172,20 @@ export default function MesCommandesPage() {
                           </div>
                         </div>
                         <span className="font-semibold text-coal">{(item.unitPrice || item.price || 0) * (item.quantity || 1)} MAD</span>
-                      </motion.li>
+                      </li>
                     ))}
                   </ul>
                 </div>
               )}
-            </motion.div>
+            </div>
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="mt-12 text-center"
-        >
-          <Link href="/#creations" className="btn-luxury-outline inline-flex items-center">
+        <div className="mt-12 text-center">
+          <Link href="/#creations" prefetch className="btn-luxury-outline inline-flex items-center">
             Continuer mes achats
           </Link>
-        </motion.div>
+        </div>
       </div>
     </div>
   );

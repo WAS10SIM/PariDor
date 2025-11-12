@@ -22,23 +22,24 @@ export default function PanierPage() {
       <div className="min-h-screen bg-[#FAF8F5] py-24">
         <div className="mx-auto max-w-4xl px-6">
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.3 }}
             className="text-center"
           >
-            <h1 className="mb-8 text-4xl font-light text-coal">Votre panier</h1>
-            <div className="rounded-3xl bg-white p-12 shadow-lg">
+            <h1 className="mb-6 sm:mb-8 text-3xl sm:text-4xl font-light text-coal">Votre panier</h1>
+            <div className="rounded-2xl bg-white p-6 sm:p-12 shadow-sm">
               <div className="mb-6 flex justify-center">
-                <ShoppingBag className="h-16 w-16 text-[#C7A451]/30" />
+                <ShoppingBag className="h-12 w-12 sm:h-16 sm:w-16 text-[#C7A451]/30" />
               </div>
-              <h2 className="mb-4 text-2xl font-medium text-coal">Votre panier est vide</h2>
-              <p className="mb-8 text-coal/60">Découvrez nos créations et ajoutez vos articles préférés.</p>
+              <h2 className="mb-4 text-xl sm:text-2xl font-medium text-coal">Votre panier est vide</h2>
+              <p className="mb-6 sm:mb-8 text-coal/60 text-sm sm:text-base">Découvrez nos créations et ajoutez vos articles préférés.</p>
               <Link
                 href="/#creations"
-                className="inline-flex items-center rounded-full bg-gradient-to-r from-gold to-lightGold px-8 py-4 font-medium text-coal shadow-lg transition-all duration-300 hover:shadow-xl"
+                prefetch
+                className="btn-luxury inline-flex items-center"
               >
-                Découvrir nos créations
+                Explorer le catalogue
               </Link>
             </div>
           </motion.div>
@@ -48,14 +49,14 @@ export default function PanierPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#FAF8F5] py-24">
-      <div className="mx-auto max-w-4xl px-6">
+    <div className="min-h-screen bg-[#FAF8F5] py-6 sm:py-12 md:py-24">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.3 }}
         >
-          <h1 className="mb-8 text-4xl font-light text-coal">Votre panier</h1>
+          <h1 className="mb-6 sm:mb-8 text-3xl sm:text-4xl font-light text-coal">Votre panier</h1>
           
           <div className="space-y-6">
             {items.map((item, index) => {
@@ -66,10 +67,10 @@ export default function PanierPage() {
               return (
                 <motion.div
                   key={itemKey}
-                  initial={{ opacity: 0, x: -40 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 rounded-3xl bg-white p-4 sm:p-6 shadow-lg"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: index * 0.05 }}
+                  className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 rounded-2xl bg-white p-4 sm:p-6 shadow-sm hover:shadow-md transition-shadow duration-200"
                 >
                   <div className="relative h-20 w-20 sm:h-24 sm:w-24 overflow-hidden rounded-2xl flex-shrink-0">
                     <Image
@@ -146,48 +147,33 @@ export default function PanierPage() {
             })}
           </div>
           
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="mt-8 rounded-3xl bg-white/60 p-8 shadow-md border border-[#C7A451]/10"
-          >
-            <div className="flex items-center justify-between mb-6">
+          <div className="mt-6 sm:mt-8 rounded-2xl bg-white p-6 sm:p-8 shadow-sm border border-[#C7A451]/10">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
               <div>
-                <h2 className="text-2xl font-medium text-coal mb-1">Total TTC</h2>
+                <h2 className="text-xl sm:text-2xl font-medium text-coal mb-1">Total TTC</h2>
                 <p className="text-sm text-coal/60">Toutes taxes comprises</p>
               </div>
-              <div className="text-3xl font-bold text-[#C7A451]">
+              <div className="text-2xl sm:text-3xl font-bold text-[#C7A451]">
                 {subtotal.toLocaleString("fr-MA")} MAD
               </div>
             </div>
             
-            <div className="flex gap-4">
-              <motion.button
+            <div className="flex flex-col sm:flex-row gap-3">
+              <button
                 onClick={clear}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="btn-luxury-outline flex-1"
-                style={{ letterSpacing: "0.3px" }}
+                className="btn-luxury-outline w-full sm:flex-1 text-center"
               >
                 Vider le panier
-              </motion.button>
-              
-              <motion.div
-                className="flex-1"
-                animate={items.length > 0 ? { scale: [1, 1.02, 1] } : {}}
-                transition={{ duration: 2, repeat: Infinity }}
+              </button>
+              <Link
+                href="/checkout"
+                prefetch
+                className="btn-luxury w-full sm:flex-1 text-center"
               >
-                <Link
-                  href="/checkout"
-                  className="btn-luxury block w-full text-center"
-                  style={{ letterSpacing: "0.3px" }}
-                >
-                  Passer à la commande
-                </Link>
-              </motion.div>
+                Passer à la commande
+              </Link>
             </div>
-          </motion.div>
+          </div>
         </motion.div>
       </div>
     </div>

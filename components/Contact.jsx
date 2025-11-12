@@ -4,17 +4,17 @@ import { MapPin, Phone, MessageCircle, Mail, Globe } from "lucide-react";
 
 export default function Contact() {
   return (
-    <section id="contact" className="relative bg-coal py-20 md:py-28 overflow-hidden">
+    <section id="contact" className="relative bg-coal py-20 md:py-28 overflow-hidden" suppressHydrationWarning>
       {/* Gradient overlay top */}
-      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black/20 to-transparent pointer-events-none" />
+      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black/20 to-transparent pointer-events-none" suppressHydrationWarning />
       
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8 relative z-10" suppressHydrationWarning>
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.3 }}
           className="mb-12 sm:mb-16 text-center"
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-white mb-4">
@@ -30,10 +30,10 @@ export default function Contact() {
         <div className="grid gap-12 lg:grid-cols-2">
           {/* Contact Info */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ type: "spring", damping: 18, stiffness: 160, delay: 0.2 }}
+            transition={{ duration: 0.3 }}
             className="space-y-8"
           >
             <div className="rounded-3xl bg-white/5 p-8 backdrop-blur-sm">
@@ -106,10 +106,10 @@ export default function Contact() {
 
           {/* Google Maps */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ type: "spring", damping: 18, stiffness: 160, delay: 0.4 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
             className="space-y-6"
           >
             <div>

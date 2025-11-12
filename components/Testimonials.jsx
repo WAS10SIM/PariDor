@@ -62,14 +62,15 @@ function Testimonials() {
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       aria-label="Témoignages clients"
+      suppressHydrationWarning
     >
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8" suppressHydrationWarning>
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.3 }}
           className="mb-12 sm:mb-16 text-center"
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-coal mb-4">
@@ -87,41 +88,32 @@ function Testimonials() {
 
         {/* Testimonial Carousel */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ 
-            type: "spring", 
-            damping: 18, 
-            stiffness: 160,
-            delay: 0.2
-          }}
+          transition={{ duration: 0.3 }}
           className="relative mx-auto max-w-4xl"
           aria-roledescription="carousel"
           aria-live="polite"
         >
           {/* Navigation Arrows */}
           <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 hidden md:block">
-            <motion.button
+            <button
               onClick={() => setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className="rounded-full bg-white/90 backdrop-blur-sm p-2 shadow-md hover:bg-white transition-colors border border-[#C7A451]/20"
+              className="rounded-full bg-white/90 backdrop-blur-sm p-2 shadow-md hover:bg-white hover:scale-110 active:scale-95 transition-all duration-200 border border-[#C7A451]/20"
               aria-label="Témoignage précédent"
             >
               <ChevronLeft className="h-5 w-5 text-[#C7A451]" />
-            </motion.button>
+            </button>
           </div>
           <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 hidden md:block">
-            <motion.button
+            <button
               onClick={() => setCurrentIndex((prev) => (prev + 1) % testimonials.length)}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className="rounded-full bg-white/90 backdrop-blur-sm p-2 shadow-md hover:bg-white transition-colors border border-[#C7A451]/20"
+              className="rounded-full bg-white/90 backdrop-blur-sm p-2 shadow-md hover:bg-white hover:scale-110 active:scale-95 transition-all duration-200 border border-[#C7A451]/20"
               aria-label="Témoignage suivant"
             >
               <ChevronRight className="h-5 w-5 text-[#C7A451]" />
-            </motion.button>
+            </button>
           </div>
 
           <AnimatePresence mode="wait">
@@ -143,18 +135,13 @@ function Testimonials() {
                 scale: 0.95
               }}
               transition={{ 
-                duration: 0.6, 
-                ease: "easeInOut" 
+                duration: 0.3, 
+                ease: "easeOut" 
               }}
               className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white to-[#F8F4EC] p-12 shadow-md"
             >
               {/* Stars */}
-              <motion.div 
-                className="mb-6 flex justify-center gap-1"
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: 0.2, type: "spring", damping: 18, stiffness: 160 }}
-              >
+              <div className="mb-6 flex justify-center gap-1">
                 {[...Array(5)].map((_, i) => (
                   <Star
                     key={i}
@@ -166,45 +153,35 @@ function Testimonials() {
                     strokeWidth={1.5}
                   />
                 ))}
-              </motion.div>
+              </div>
 
               {/* Quote */}
-              <motion.blockquote 
+              <blockquote 
                 className="mb-8 text-xl md:text-2xl font-light italic text-coal leading-relaxed"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
                 style={{ letterSpacing: "0.3px" }}
               >
                 "{testimonials[currentIndex].text}"
-              </motion.blockquote>
+              </blockquote>
 
               {/* Author */}
-              <motion.div 
-                className="text-center"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-              >
+              <div className="text-center">
                 <div className="text-lg md:text-xl font-medium text-coal mb-1">
                   {testimonials[currentIndex].name}
                 </div>
                 <div className="text-[#C7A451] font-medium">
                   {testimonials[currentIndex].city}
                 </div>
-              </motion.div>
+              </div>
             </motion.div>
           </AnimatePresence>
 
           {/* Navigation Dots */}
           <div className="mt-8 flex items-center justify-center gap-2">
             {testimonials.map((_, index) => (
-              <motion.button
+              <button
                 key={index}
                 onClick={() => handleDotClick(index)}
-                whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 0.9 }}
-                className={`h-2.5 w-2.5 rounded-full transition-all duration-300 ${
+                className={`h-2.5 w-2.5 rounded-full transition-all duration-200 hover:scale-110 active:scale-95 ${
                   currentIndex === index 
                     ? "bg-[#C7A451] scale-125 shadow-md" 
                     : "bg-coal/30 hover:bg-coal/50"

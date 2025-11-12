@@ -25,7 +25,7 @@ export function CartProvider({ children }) {
       try {
         setItems(JSON.parse(savedItems));
       } catch (error) {
-        console.error("Erreur lors du chargement du panier:", error);
+        // console.error("Erreur lors du chargement du panier:", error); // Removed for production optimization
       }
     }
     
@@ -33,7 +33,7 @@ export function CartProvider({ children }) {
       try {
         setCustomer(JSON.parse(savedCustomer));
       } catch (error) {
-        console.error("Erreur lors du chargement des données client:", error);
+        // console.error("Erreur lors du chargement des données client:", error); // Removed for production optimization
       }
     }
     
@@ -112,12 +112,15 @@ export function CartProvider({ children }) {
 
   // Calculs avec useMemo pour éviter les re-renders inutiles
   const totalItems = useMemo(() => {
-    return items.reduce((total, item) => total + item.quantity, 0);
+    return items.reduce((total, item) => total + (item.quantity || 0), 0);
   }, [items]);
 
   const subtotal = useMemo(() => {
-    return items.reduce((total, item) => total + (item.price * item.quantity), 0);
+    return items.reduce((total, item) => total + ((item.price || 0) * (item.quantity || 0)), 0);
   }, [items]);
+  
+  // Alias pour compatibilité
+  const getTotal = () => subtotal;
 
   const value = {
     mounted,
@@ -126,6 +129,7 @@ export function CartProvider({ children }) {
     customer,
     totalItems,
     subtotal,
+    getTotal, // Alias pour compatibilité
     addItem,
     updateQty,
     removeItem,
